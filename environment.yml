@@ -1,0 +1,10 @@
+name: computo
+channels:
+  - conda-forge
+dependencies:
+  - jupyter
+  - matplotlib
+  - numpy
+  - scipy
+  - tabulate
+ 
