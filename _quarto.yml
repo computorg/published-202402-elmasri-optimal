@@ -1,0 +1,6 @@
+project:
+  title: "optimal-projection-IS"
+
+format:
+  computo-html:
+    code-fold: true

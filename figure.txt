@@ -1,0 +1,37 @@
+plot(range(5,105,5),DKL,'rs',label=r"$D'(\hat{\Sigma}^*)$")
+plot(range(5,105,5),DKLp,'k^',label=r"$D'(\hat{\Sigma}^*_k)$")
+#plot(range(5,105,5),DKLm,'m^',label='projected m* parameters')
+plot(range(5,105,5),DKLstar,'bo',label=r"$D'(\Sigma^*)$")
+#plot(range(5,105,5),DKLr,'co',label='projrand covar')
+#plot(range(5,105,5),DKLd,'m^',label='diag covar')
+
+grid()
+xlabel('Dimension',fontsize=16)
+ylabel(r"Partial KL divergence $D'$",fontsize=16)
+legend(fontsize=16)
+#plt.ylabel('',fontsize=16)
+for tickLabel in gca().get_xticklabels() + gca().get_yticklabels():
+    tickLabel.set_fontsize(16)
+plt.show()
+
+
+Ei=eigh(si)
+logvp=log(Ei[0])-Ei[0]+1
+Tvp=zeros((n,2))
+Tvp[:,0]=Ei[0]
+Tvp[:,1]=-logvp
+Eist=eigh(Sigstar)
+logvpst=log(Eist[0])-Eist[0]+1
+Tvpst=zeros((n,2))
+Tvpst[:,0]=Eist[0]
+Tvpst[:,1]=-logvpst
+grid()
+xlabel(r"Eigenvalues $\lambda_i$",fontsize=16)
+ylabel(r"$\ell(\lambda_i)$",fontsize=16)
+for tickLabel in gca().get_xticklabels() + gca().get_yticklabels():
+    tickLabel.set_fontsize(16)
+
+plot(Tvp[:,0],Tvp[:,1],'bx',label=r"Eigenvalues of $\Sigma^*$")
+plot(Tvpst[:,0],Tvpst[:,1],'rs',label=r"Eigenvalues of $\hat{\Sigma}^*$")
+legend(fontsize=16)
+plt.show()
