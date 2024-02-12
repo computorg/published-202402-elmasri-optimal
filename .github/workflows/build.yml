@@ -8,7 +8,7 @@ on:
       - main
 
 env: # Change this if needed
-  quarto_file: published-morio-optiomal
+  quarto_file: published-elmasri-optimal
   GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
