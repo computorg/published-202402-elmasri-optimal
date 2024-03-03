@@ -9,7 +9,7 @@
 <meta name="author" content="Maxime El Masri">
 <meta name="author" content="Jérôme Morio">
 <meta name="author" content="Florian Simatos">
-<meta name="dcterms.date" content="2024-02-25">
+<meta name="dcterms.date" content="2024-03-03">
 <meta name="keywords" content="Rare event simulation, Parameter estimation, Importance sampling, Dimension reduction, Kullback–Leibler divergence, Projection">
 <meta name="description" content="This document provides a dimension-reduction strategy in order to improve the performance of importance sampling in high dimensions.">
 
@@ -216,7 +216,7 @@ ISSN 2824-7795</p>
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">February 25, 2024</p>
+        <p class="date">March 3, 2024</p>
       </div>
     </div>
                                     
@@ -405,7 +405,7 @@ Figure&nbsp;1: Plot of the function <span class="math inline">\ell</span> given 
 </div>
 <p>The proof of <a href="#thm-thm1" class="quarto-xref">Theorem&nbsp;1</a> is detailed in <a href="#sec-proof">Appendix A</a>. For <span class="math inline">k = 1</span> for instance, the matrix <span class="math inline">\mathbf{\Sigma}^*_1 = I_n + (\lambda_1^*-1) \mathbf{d}_1^* (\mathbf{d}_1^*)^\top</span> with <span class="math inline">(\lambda_1^*, \mathbf{d}_1^*)</span> the eigenpair of <span class="math inline">\mathbf{\Sigma}^*</span> such as <span class="math inline">\lambda_1^*</span> is either the largest or the smallest eigenvalue of <span class="math inline">\mathbf{\Sigma}^*</span>, depending on which one maximizes <span class="math inline">\ell</span>.</p>
 <p>This theoretical result therefore suggests to reduce dimension by computing the covariance matrix <span class="math inline">\widehat{\mathbf{\Sigma}}^*</span> and its eigenpairs, rank them in decreasing <span class="math inline">\ell</span>-order and then use the <span class="math inline">k</span> first eigenpairs <span class="math inline">(({\widehat{\lambda}}^*_i, {\widehat{\mathbf{d}}}^*_i), i = 1, \ldots, k)</span> to build the covariance matrix <span class="math inline">\widehat{\mathbf{\Sigma}}^*_k = \sum_{i=1}^k ({\widehat{\lambda}}^*_i-1) {\widehat{\mathbf{d}}}^*_i ({{\widehat{\mathbf{d}}}^*}_i)^\top + I_n</span> and the corresponding auxiliary density. This scheme is summarized in Algorithm 1. The effective dimension <span class="math inline">k</span> is obtained by Algorithm 2, see <a href="#sec-choicek" class="quarto-xref">Section&nbsp;3.4</a> below. The proof of the theorem is shown in <a href="#sec-proof">Appendix A</a>.</p>
-<div class="pseudocode-container" data-pseudocode-index="1" data-alg-title="Algorithm">
+<div class="pseudocode-container" data-alg-title="Algorithm" data-pseudocode-index="1">
 <div class="pseudocode">
 \begin{algorithm} \caption{Algorithm suggested by Theorem 1.} \begin{algorithmic} \State \textbf{Data}: Sample sizes $N$ and $M$ \State \textbf{Result}: Estimation $\widehat{\mathcal{E}_N}$ of integral $\mathcal{E}$ \State - Generate a sample $\mathbf{X}^*_1,\ldots,\mathbf{X}^*_M$ on $\mathbb{R}^n$ independently according to $g^*$ \State - Estimate $\widehat{\mathbf{m}}^*$ and $\widehat{\mathbf{\Sigma}}^*$ defined in Equation 8 and Equation 9 with this sample \State - Compute the eigenpairs $(\widehat{\lambda}^*_i, \widehat{\mathbf{d}}^*_i)$ of $\widehat{\mathbf{\Sigma}}^*$ ranked in decreasing $\ell$-order \State - Compute the matrix $\widehat{\mathbf{\Sigma}}^*_k = \sum_{i=1}^k ({\widehat{\lambda}}^*_i-1) {\widehat{\mathbf{d}}}^*_i ({{\widehat{\mathbf{d}}}^*}_i)^\top + I_n$ with $k$ obtained by applying Algorithm 2 with input $({\widehat{\lambda}}^*_1, \ldots, {\widehat{\lambda}}^*_n)$ \State - Generate a new sample $\mathbf{X}_1,\ldots,\mathbf{X}_N$ independently from $g' = g_{\widehat{\mathbf{m}}^*,\widehat{\mathbf{\Sigma}}^*_k}$ \State - Return $\displaystyle \widehat{\mathcal{E}_N}=\frac{1}{N}\underset{i=1}{\overset{N}{\sum}} \phi(\mathbf{X}_i)\frac{f(\mathbf{X}_i)}{g'(\mathbf{X}_i)}$ \end{algorithmic} \end{algorithm}
 </div>
@@ -418,7 +418,7 @@ Figure&nbsp;1: Plot of the function <span class="math inline">\ell</span> given 
 <section id="sec-choicek" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="sec-choicek"><span class="header-section-number">3.4</span> Choice of the number of dimensions <span class="math inline">k</span></h2>
 <p>The choice of the effective dimension <span class="math inline">k</span>, i.e., the number of projection directions considered, is important. If it is close to <span class="math inline">n</span>, then the matrix <span class="math inline">\widehat{\mathbf{\Sigma}}^*_k</span> will be close to <span class="math inline">\widehat{\mathbf{\Sigma}}^*</span> which is the situation we want to avoid in the first place. On the other hand, setting <span class="math inline">k=1</span> in all cases may be too simple and lead to suboptimal results. In practice, however this is often a good choice. In order to adapt <span class="math inline">k</span> dynamically, we consider a simple method based on the value of the KL divergence. Given the eigenvalues <span class="math inline">\lambda_1, \ldots, \lambda_n</span> ranked in decreasing <span class="math inline">\ell</span>-order, we look for the maximal gap between two consecutive eigenvalues of the sequence <span class="math inline">(\ell(\lambda_1), \ldots, \ell(\lambda_n))</span>. This allows to choose <span class="math inline">k</span> such that <span class="math inline">\sum_{i=1}^k \ell(\lambda_i)</span> is close to <span class="math inline">\sum_{i=1}^n \ell(\lambda_i)</span> which is equal, up to an additive constant, to the minimal KL divergence (shown in <a href="#lem-D" class="quarto-xref">Lemma&nbsp;1</a>). The precise method is described in Algorithm 2.</p>
-<div class="pseudocode-container" data-pseudocode-index="2" data-alg-title="Algorithm">
+<div class="pseudocode-container" data-alg-title="Algorithm" data-pseudocode-index="2">
 <div class="pseudocode">
 \begin{algorithm} \caption{Choice of the number of dimensions} \begin{algorithmic} \State \textbf{Data}: Sequence of positive numbers $\lambda_1, \ldots, \lambda_n$ in decreasing $\ell$-order \State \textbf{Result}: Number of selected dimensions $k$ \State - Compute the increments $\delta_i = \ell(\lambda_{i+1}) - \ell(\lambda_i)$ for $i=1\ldots n-1$ \State - Return $k=\arg\max \delta_i$, the index of the maximum of the differences. \end{algorithmic} \end{algorithm}
 </div>
@@ -967,21 +967,21 @@ Figure&nbsp;2: Partial KL divergence and spectrum for the function <span class="
 &lt;&gt;:222: SyntaxWarning: invalid escape sequence '\w'
 &lt;&gt;:222: SyntaxWarning: invalid escape sequence '\w'
 &lt;&gt;:223: SyntaxWarning: invalid escape sequence '\w'
-/tmp/ipykernel_3339/4266669899.py:214: SyntaxWarning: invalid escape sequence '\%'
+/tmp/ipykernel_3442/4266669899.py:214: SyntaxWarning: invalid escape sequence '\%'
   ["Relative error (\%)",Tabresult[1,0],Tabresult[1,1],
-/tmp/ipykernel_3339/4266669899.py:216: SyntaxWarning: invalid escape sequence '\%'
+/tmp/ipykernel_3442/4266669899.py:216: SyntaxWarning: invalid escape sequence '\%'
   ["Coefficient of variation (\%)",Tabresult[2,0],Tabresult[2,1],
-/tmp/ipykernel_3339/4266669899.py:221: SyntaxWarning: invalid escape sequence '\m'
+/tmp/ipykernel_3442/4266669899.py:221: SyntaxWarning: invalid escape sequence '\m'
   headers=["","$\mathbf{\Sigma}^*$", "$\widehat{\mathbf{\Sigma}}^*$", "$\widehat{\mathbf{\Sigma}}_{opt}$",\
-/tmp/ipykernel_3339/4266669899.py:221: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/4266669899.py:221: SyntaxWarning: invalid escape sequence '\w'
   headers=["","$\mathbf{\Sigma}^*$", "$\widehat{\mathbf{\Sigma}}^*$", "$\widehat{\mathbf{\Sigma}}_{opt}$",\
-/tmp/ipykernel_3339/4266669899.py:221: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/4266669899.py:221: SyntaxWarning: invalid escape sequence '\w'
   headers=["","$\mathbf{\Sigma}^*$", "$\widehat{\mathbf{\Sigma}}^*$", "$\widehat{\mathbf{\Sigma}}_{opt}$",\
-/tmp/ipykernel_3339/4266669899.py:222: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/4266669899.py:222: SyntaxWarning: invalid escape sequence '\w'
   "$\widehat{\mathbf{\Sigma}}_{mean}$", "${\widehat{\mathbf{\Sigma}}^{+d}_{opt}}$",\
-/tmp/ipykernel_3339/4266669899.py:222: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/4266669899.py:222: SyntaxWarning: invalid escape sequence '\w'
   "$\widehat{\mathbf{\Sigma}}_{mean}$", "${\widehat{\mathbf{\Sigma}}^{+d}_{opt}}$",\
-/tmp/ipykernel_3339/4266669899.py:223: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/4266669899.py:223: SyntaxWarning: invalid escape sequence '\w'
   "$\widehat{\mathbf{\Sigma}}^{+d}_{mean}$", "vMFN"],</code></pre>
 </div>
 <div id="tbl-sum" class="cell quarto-float anchored" data-execution_count="3">
@@ -1521,21 +1521,21 @@ Figure&nbsp;3: Partial KL divergence and spectrum for the function <span class="
 &lt;&gt;:251: SyntaxWarning: invalid escape sequence '\w'
 &lt;&gt;:251: SyntaxWarning: invalid escape sequence '\w'
 &lt;&gt;:252: SyntaxWarning: invalid escape sequence '\w'
-/tmp/ipykernel_3339/1713126179.py:244: SyntaxWarning: invalid escape sequence '\%'
+/tmp/ipykernel_3442/1713126179.py:244: SyntaxWarning: invalid escape sequence '\%'
   ["Relative error (\%)",Tabresult[1,0],Tabresult[1,1],
-/tmp/ipykernel_3339/1713126179.py:246: SyntaxWarning: invalid escape sequence '\%'
+/tmp/ipykernel_3442/1713126179.py:246: SyntaxWarning: invalid escape sequence '\%'
   ["Coefficient of variation (\%)",Tabresult[2,0],Tabresult[2,1],
-/tmp/ipykernel_3339/1713126179.py:250: SyntaxWarning: invalid escape sequence '\m'
+/tmp/ipykernel_3442/1713126179.py:250: SyntaxWarning: invalid escape sequence '\m'
   headers=["","$\mathbf{\Sigma}^*$", "$\widehat{\mathbf{\Sigma}}^*$", "$\widehat{\mathbf{\Sigma}}_{opt}$",\
-/tmp/ipykernel_3339/1713126179.py:250: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/1713126179.py:250: SyntaxWarning: invalid escape sequence '\w'
   headers=["","$\mathbf{\Sigma}^*$", "$\widehat{\mathbf{\Sigma}}^*$", "$\widehat{\mathbf{\Sigma}}_{opt}$",\
-/tmp/ipykernel_3339/1713126179.py:250: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/1713126179.py:250: SyntaxWarning: invalid escape sequence '\w'
   headers=["","$\mathbf{\Sigma}^*$", "$\widehat{\mathbf{\Sigma}}^*$", "$\widehat{\mathbf{\Sigma}}_{opt}$",\
-/tmp/ipykernel_3339/1713126179.py:251: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/1713126179.py:251: SyntaxWarning: invalid escape sequence '\w'
   "$\widehat{\mathbf{\Sigma}}_{mean}$", "${\widehat{\mathbf{\Sigma}}^{+d}_{opt}}$",\
-/tmp/ipykernel_3339/1713126179.py:251: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/1713126179.py:251: SyntaxWarning: invalid escape sequence '\w'
   "$\widehat{\mathbf{\Sigma}}_{mean}$", "${\widehat{\mathbf{\Sigma}}^{+d}_{opt}}$",\
-/tmp/ipykernel_3339/1713126179.py:252: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/1713126179.py:252: SyntaxWarning: invalid escape sequence '\w'
   "$\widehat{\mathbf{\Sigma}}^{+d}_{mean}$", "vMFN"],</code></pre>
 </div>
 <div id="tbl-parabol" class="cell quarto-float anchored" data-execution_count="5">
@@ -2022,21 +2022,21 @@ Figure&nbsp;4: Partial KL divergence and spectrum for the banana shape example.
 &lt;&gt;:217: SyntaxWarning: invalid escape sequence '\w'
 &lt;&gt;:217: SyntaxWarning: invalid escape sequence '\w'
 &lt;&gt;:218: SyntaxWarning: invalid escape sequence '\w'
-/tmp/ipykernel_3339/605444355.py:210: SyntaxWarning: invalid escape sequence '\%'
+/tmp/ipykernel_3442/605444355.py:210: SyntaxWarning: invalid escape sequence '\%'
   ["Relative error (\%)",Tabresult[1,0],Tabresult[1,1],
-/tmp/ipykernel_3339/605444355.py:212: SyntaxWarning: invalid escape sequence '\%'
+/tmp/ipykernel_3442/605444355.py:212: SyntaxWarning: invalid escape sequence '\%'
   ["Coefficient of variation (\%)",Tabresult[2,0],Tabresult[2,1],
-/tmp/ipykernel_3339/605444355.py:216: SyntaxWarning: invalid escape sequence '\m'
+/tmp/ipykernel_3442/605444355.py:216: SyntaxWarning: invalid escape sequence '\m'
   headers=["","$\mathbf{\Sigma}^*$", "$\widehat{\mathbf{\Sigma}}^*$", "$\widehat{\mathbf{\Sigma}}_{opt}$",\
-/tmp/ipykernel_3339/605444355.py:216: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/605444355.py:216: SyntaxWarning: invalid escape sequence '\w'
   headers=["","$\mathbf{\Sigma}^*$", "$\widehat{\mathbf{\Sigma}}^*$", "$\widehat{\mathbf{\Sigma}}_{opt}$",\
-/tmp/ipykernel_3339/605444355.py:216: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/605444355.py:216: SyntaxWarning: invalid escape sequence '\w'
   headers=["","$\mathbf{\Sigma}^*$", "$\widehat{\mathbf{\Sigma}}^*$", "$\widehat{\mathbf{\Sigma}}_{opt}$",\
-/tmp/ipykernel_3339/605444355.py:217: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/605444355.py:217: SyntaxWarning: invalid escape sequence '\w'
   "$\widehat{\mathbf{\Sigma}}_{mean}$", "${\widehat{\mathbf{\Sigma}}^{+d}_{opt}}$",\
-/tmp/ipykernel_3339/605444355.py:217: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/605444355.py:217: SyntaxWarning: invalid escape sequence '\w'
   "$\widehat{\mathbf{\Sigma}}_{mean}$", "${\widehat{\mathbf{\Sigma}}^{+d}_{opt}}$",\
-/tmp/ipykernel_3339/605444355.py:218: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/605444355.py:218: SyntaxWarning: invalid escape sequence '\w'
   "$\widehat{\mathbf{\Sigma}}^{+d}_{mean}$", "vMFN"],</code></pre>
 </div>
 <div id="tbl-banana" class="cell quarto-float anchored" data-execution_count="7">
@@ -2578,21 +2578,21 @@ Figure&nbsp;5: Partial KL divergence and spectrum for the function <span class="
 &lt;&gt;:242: SyntaxWarning: invalid escape sequence '\w'
 &lt;&gt;:242: SyntaxWarning: invalid escape sequence '\w'
 &lt;&gt;:243: SyntaxWarning: invalid escape sequence '\w'
-/tmp/ipykernel_3339/3889756799.py:235: SyntaxWarning: invalid escape sequence '\%'
+/tmp/ipykernel_3442/3889756799.py:235: SyntaxWarning: invalid escape sequence '\%'
   ["Relative error (\%)",Tabresult[1,0],Tabresult[1,1],
-/tmp/ipykernel_3339/3889756799.py:237: SyntaxWarning: invalid escape sequence '\%'
+/tmp/ipykernel_3442/3889756799.py:237: SyntaxWarning: invalid escape sequence '\%'
   ["Coefficient of variation (\%)",Tabresult[2,0],Tabresult[2,1],
-/tmp/ipykernel_3339/3889756799.py:241: SyntaxWarning: invalid escape sequence '\m'
+/tmp/ipykernel_3442/3889756799.py:241: SyntaxWarning: invalid escape sequence '\m'
   headers=["","$\mathbf{\Sigma}^*$", "$\widehat{\mathbf{\Sigma}}^*$", "$\widehat{\mathbf{\Sigma}}_{opt}$", \
-/tmp/ipykernel_3339/3889756799.py:241: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/3889756799.py:241: SyntaxWarning: invalid escape sequence '\w'
   headers=["","$\mathbf{\Sigma}^*$", "$\widehat{\mathbf{\Sigma}}^*$", "$\widehat{\mathbf{\Sigma}}_{opt}$", \
-/tmp/ipykernel_3339/3889756799.py:241: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/3889756799.py:241: SyntaxWarning: invalid escape sequence '\w'
   headers=["","$\mathbf{\Sigma}^*$", "$\widehat{\mathbf{\Sigma}}^*$", "$\widehat{\mathbf{\Sigma}}_{opt}$", \
-/tmp/ipykernel_3339/3889756799.py:242: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/3889756799.py:242: SyntaxWarning: invalid escape sequence '\w'
   "$\widehat{\mathbf{\Sigma}}_{mean}$", "${\widehat{\mathbf{\Sigma}}^{+d}_{opt}}$",\
-/tmp/ipykernel_3339/3889756799.py:242: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/3889756799.py:242: SyntaxWarning: invalid escape sequence '\w'
   "$\widehat{\mathbf{\Sigma}}_{mean}$", "${\widehat{\mathbf{\Sigma}}^{+d}_{opt}}$",\
-/tmp/ipykernel_3339/3889756799.py:243: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/3889756799.py:243: SyntaxWarning: invalid escape sequence '\w'
   "$\widehat{\mathbf{\Sigma}}^{+d}_{mean}$", "vMFN"],</code></pre>
 </div>
 <div id="tbl-portfolio" class="cell quarto-float anchored" data-execution_count="9">
@@ -3105,21 +3105,21 @@ Figure&nbsp;6: Partial KL divergence and spectrum for the function <span class="
 &lt;&gt;:244: SyntaxWarning: invalid escape sequence '\w'
 &lt;&gt;:244: SyntaxWarning: invalid escape sequence '\w'
 &lt;&gt;:245: SyntaxWarning: invalid escape sequence '\w'
-/tmp/ipykernel_3339/842017826.py:237: SyntaxWarning: invalid escape sequence '\%'
+/tmp/ipykernel_3442/842017826.py:237: SyntaxWarning: invalid escape sequence '\%'
   ["Relative error (\%)",Tabresult[1,0],Tabresult[1,1],
-/tmp/ipykernel_3339/842017826.py:239: SyntaxWarning: invalid escape sequence '\%'
+/tmp/ipykernel_3442/842017826.py:239: SyntaxWarning: invalid escape sequence '\%'
   ["Coefficient of variation (\%)",Tabresult[2,0],Tabresult[2,1],
-/tmp/ipykernel_3339/842017826.py:243: SyntaxWarning: invalid escape sequence '\m'
+/tmp/ipykernel_3442/842017826.py:243: SyntaxWarning: invalid escape sequence '\m'
   headers=["","$\mathbf{\Sigma}^*$", "$\widehat{\mathbf{\Sigma}}^*$", "$\widehat{\mathbf{\Sigma}}_{opt}$",\
-/tmp/ipykernel_3339/842017826.py:243: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/842017826.py:243: SyntaxWarning: invalid escape sequence '\w'
   headers=["","$\mathbf{\Sigma}^*$", "$\widehat{\mathbf{\Sigma}}^*$", "$\widehat{\mathbf{\Sigma}}_{opt}$",\
-/tmp/ipykernel_3339/842017826.py:243: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/842017826.py:243: SyntaxWarning: invalid escape sequence '\w'
   headers=["","$\mathbf{\Sigma}^*$", "$\widehat{\mathbf{\Sigma}}^*$", "$\widehat{\mathbf{\Sigma}}_{opt}$",\
-/tmp/ipykernel_3339/842017826.py:244: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/842017826.py:244: SyntaxWarning: invalid escape sequence '\w'
   "$\widehat{\mathbf{\Sigma}}_{mean}$", "${\widehat{\mathbf{\Sigma}}^{+d}_{opt}}$",\
-/tmp/ipykernel_3339/842017826.py:244: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/842017826.py:244: SyntaxWarning: invalid escape sequence '\w'
   "$\widehat{\mathbf{\Sigma}}_{mean}$", "${\widehat{\mathbf{\Sigma}}^{+d}_{opt}}$",\
-/tmp/ipykernel_3339/842017826.py:245: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/842017826.py:245: SyntaxWarning: invalid escape sequence '\w'
   "$\widehat{\mathbf{\Sigma}}^{+d}_{mean}$", "vMFN"],</code></pre>
 </div>
 <div id="tbl-payoff" class="cell quarto-float anchored" data-execution_count="11">
@@ -3652,21 +3652,21 @@ g_\text{N}(\lVert {\bf x}\rVert, p, \omega) = \frac{2 p^p}{\Gamma(p) \omega^p} \
 &lt;&gt;:229: SyntaxWarning: invalid escape sequence '\w'
 &lt;&gt;:229: SyntaxWarning: invalid escape sequence '\w'
 &lt;&gt;:230: SyntaxWarning: invalid escape sequence '\w'
-/tmp/ipykernel_3339/2930059711.py:221: SyntaxWarning: invalid escape sequence '\%'
+/tmp/ipykernel_3442/2930059711.py:221: SyntaxWarning: invalid escape sequence '\%'
   ["Relative error (\%)",Tabresult[1,0],Tabresult[1,1],
-/tmp/ipykernel_3339/2930059711.py:223: SyntaxWarning: invalid escape sequence '\%'
+/tmp/ipykernel_3442/2930059711.py:223: SyntaxWarning: invalid escape sequence '\%'
   ["Coefficient of variation (\%)",Tabresult[2,0],Tabresult[2,1],
-/tmp/ipykernel_3339/2930059711.py:228: SyntaxWarning: invalid escape sequence '\m'
+/tmp/ipykernel_3442/2930059711.py:228: SyntaxWarning: invalid escape sequence '\m'
   headers=["","$\mathbf{\Sigma}^*$", "$\widehat{\mathbf{\Sigma}}^*$", "$\widehat{\mathbf{\Sigma}}_{opt}$",\
-/tmp/ipykernel_3339/2930059711.py:228: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/2930059711.py:228: SyntaxWarning: invalid escape sequence '\w'
   headers=["","$\mathbf{\Sigma}^*$", "$\widehat{\mathbf{\Sigma}}^*$", "$\widehat{\mathbf{\Sigma}}_{opt}$",\
-/tmp/ipykernel_3339/2930059711.py:228: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/2930059711.py:228: SyntaxWarning: invalid escape sequence '\w'
   headers=["","$\mathbf{\Sigma}^*$", "$\widehat{\mathbf{\Sigma}}^*$", "$\widehat{\mathbf{\Sigma}}_{opt}$",\
-/tmp/ipykernel_3339/2930059711.py:229: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/2930059711.py:229: SyntaxWarning: invalid escape sequence '\w'
   "$\widehat{\mathbf{\Sigma}}_{mean}$", "${\widehat{\mathbf{\Sigma}}^{+d}_{opt}}$",\
-/tmp/ipykernel_3339/2930059711.py:229: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/2930059711.py:229: SyntaxWarning: invalid escape sequence '\w'
   "$\widehat{\mathbf{\Sigma}}_{mean}$", "${\widehat{\mathbf{\Sigma}}^{+d}_{opt}}$",\
-/tmp/ipykernel_3339/2930059711.py:230: SyntaxWarning: invalid escape sequence '\w'
+/tmp/ipykernel_3442/2930059711.py:230: SyntaxWarning: invalid escape sequence '\w'
   "$\widehat{\mathbf{\Sigma}}^{+d}_{mean}$", "vMFN"],</code></pre>
 </div>
 <div id="tbl-mcmc" class="cell quarto-float anchored" data-execution_count="12">
