@@ -11,7 +11,6 @@ author:
   - name: Florian Simatos
     url: 'https://pagespro.isae-supaero.fr/florian-simatos/'
     affiliation: '[ISAE-SUPAERO](https://www.isae-supaero.fr/), [Université de Toulouse](https://www.univ-toulouse.fr/)'
-date: last-modified
 description: |
   This document provides a dimension-reduction strategy in order to improve the performance of importance sampling in high dimensions.
 abstract: |
