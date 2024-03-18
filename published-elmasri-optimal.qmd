@@ -1493,9 +1493,9 @@ Tabresult=np.round(Tabresult,1)
 
 table=[["D'",Tabresult[0,0],Tabresult[0,1],Tabresult[0,2],"NA",
         Tabresult[0,4],Tabresult[0,5],"/"],
-      ["Relative error (\%)",Tabresult[1,0],Tabresult[1,1],
+      [r"Relative error (\%)",Tabresult[1,0],Tabresult[1,1],
        Tabresult[1,2],"NA",Tabresult[1,4],Tabresult[1,5],Tabresult[1,6]],
-    ["Coefficient of variation (\%)",Tabresult[2,0],Tabresult[2,1],
+    [r"Coefficient of variation (\%)",Tabresult[2,0],Tabresult[2,1],
      Tabresult[2,2],"NA",Tabresult[2,4],Tabresult[2,5],Tabresult[2,6]]]
 Markdown(tabulate(
   table, 
@@ -1928,9 +1928,9 @@ Tabresult=np.round(Tabresult,1)
 
 table=[["D'",Tabresult[0,0],Tabresult[0,1],Tabresult[0,2],Tabresult[0,3],
         Tabresult[0,4],Tabresult[0,5],"/"],
-      ["Relative error (\%)",Tabresult[1,0],Tabresult[1,1],
+      [r"Relative error (\%)",Tabresult[1,0],Tabresult[1,1],
        Tabresult[1,2],Tabresult[1,3],Tabresult[1,4],Tabresult[1,5],Tabresult[1,6]],
-    ["Coefficient of variation (\%)",Tabresult[2,0],Tabresult[2,1],
+    [r"Coefficient of variation (\%)",Tabresult[2,0],Tabresult[2,1],
      Tabresult[2,2],Tabresult[2,3],Tabresult[2,4],Tabresult[2,5],Tabresult[2,6]]]
 Markdown(tabulate(
   table, 
@@ -2335,9 +2335,9 @@ Tabresult=np.round(Tabresult,1)
 
 table=[["D'",Tabresult[0,0],Tabresult[0,1],Tabresult[0,2],Tabresult[0,3],
         Tabresult[0,4],Tabresult[0,5],"/"],
-      ["Relative error (\%)",Tabresult[1,0],Tabresult[1,1],
+      [r"Relative error (\%)",Tabresult[1,0],Tabresult[1,1],
        Tabresult[1,2],Tabresult[1,3],Tabresult[1,4],Tabresult[1,5],Tabresult[1,6]],
-    ["Coefficient of variation (\%)",Tabresult[2,0],Tabresult[2,1],
+    [r"Coefficient of variation (\%)",Tabresult[2,0],Tabresult[2,1],
      Tabresult[2,2],Tabresult[2,3],Tabresult[2,4],Tabresult[2,5],Tabresult[2,6]]]
 Markdown(tabulate(
   table, 
