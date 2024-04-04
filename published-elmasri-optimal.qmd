@@ -28,7 +28,7 @@ repo: optimal-projection-IS
 date: 11/03/2024
 date-modified: last-modified
 draft: false
-published: false
+published: true
 google-scholar: true
 citation:
   type: article-journal
