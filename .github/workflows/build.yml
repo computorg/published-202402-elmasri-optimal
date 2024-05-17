@@ -1,7 +1,5 @@
 name: build
 on:
-  schedule:
-    - cron: '0 0 * * 0' 
   push:
     branches:
       - master
@@ -29,6 +27,13 @@ jobs:
         with:
           tinytex: true
 
+      - name: register tinytex globally for diagram.lua
+        run: |
+          mkdir -p ~/.local/bin
+          ~/.TinyTeX/bin/x86_64-linux/tlmgr option sys_bin ~/.local/bin
+          ~/.TinyTeX/bin/x86_64-linux/tlmgr path add
+          ~/.TinyTeX/bin/x86_64-linux/tlmgr install libertinus-fonts
+  
       - name: Install Computo extension for Quarto
         run: |
             quarto add --no-prompt computorg/computo-quarto-extension
