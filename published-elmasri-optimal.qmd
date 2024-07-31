@@ -25,7 +25,7 @@ keywords:
 bibliography: references.bib
 github-user: computo
 repo: optimal-projection-IS
-date: 11/03/2024
+date: 03/11/2024
 date-modified: last-modified
 draft: false
 published: true
