@@ -23,8 +23,8 @@ keywords:
   - Kullback--Leibler divergence
   - Projection
 bibliography: references.bib
-github-user: computo
-repo: optimal-projection-IS
+github-user: computorg
+repo:     published-202402-elmasri-optimal
 date: 03/11/2024
 date-modified: last-modified
 draft: false
