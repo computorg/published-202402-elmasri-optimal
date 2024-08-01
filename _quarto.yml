@@ -1,5 +1,8 @@
 project:
-  title: "optimal-projection-IS"
+  title: "Optimal projection for parametric importance sampling in high dimensions"
+  type: website
+  render:
+    - published-202402-elmasri-optimal.qmd
 
 format:
   computo-html:
