@@ -2,14 +2,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.554">
+<meta name="generator" content="quarto-1.5.55">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Maxime El Masri">
 <meta name="author" content="Jérôme Morio">
 <meta name="author" content="Florian Simatos">
-<meta name="dcterms.date" content="2024-11-03">
+<meta name="dcterms.date" content="2024-03-11">
 <meta name="keywords" content="Rare event simulation, Parameter estimation, Importance sampling, Dimension reduction, Kullback–Leibler divergence, Projection">
 <meta name="description" content="This document provides a dimension-reduction strategy in order to improve the performance of importance sampling in high dimensions.">
 
@@ -39,7 +39,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -113,7 +113,7 @@ background: #034E79;
       }
 </style>
 
-  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"></script>
+  <script>window.backupDefine = window.define; window.define = undefined;</script><script src="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.js"></script>
   <script>document.addEventListener("DOMContentLoaded", function () {
  var mathElements = document.getElementsByClassName("math");
  var macros = [];
@@ -128,7 +128,7 @@ background: #034E79;
    });
 }}});
   </script>
-  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css">
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css">
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -164,10 +164,10 @@ window.Quarto = {
 <meta name="citation_author" content="Maxime El Masri">
 <meta name="citation_author" content="Jérôme Morio">
 <meta name="citation_author" content="Florian Simatos">
-<meta name="citation_publication_date" content="2024-11-03">
-<meta name="citation_cover_date" content="2024-11-03">
+<meta name="citation_publication_date" content="2024-03-11">
+<meta name="citation_cover_date" content="2024-03-11">
 <meta name="citation_year" content="2024">
-<meta name="citation_online_date" content="2024-11-03">
+<meta name="citation_online_date" content="2024-03-11">
 <meta name="citation_fulltext_html_url" content="https://computo.sfds.asso.fr/published-202402-elmasri-optimal/">
 <meta name="citation_pdf_url" content="https://computo.sfds.asso.fr/published-202402-elmasri-optimal/published-202312-elmasri-optimal.pdf">
 <meta name="citation_doi" content="10.57750/jjza-6j82">
@@ -195,7 +195,7 @@ window.Quarto = {
 <meta name="citation_reference" content="citation_title=Portfolio Credit Risk with Extremal Dependence: Asymptotic Analysis and Efficient Simulation;,citation_author=Achal Bassamboo;,citation_author=Sandeep Juneja;,citation_author=Assaf Zeevi;,citation_publication_date=2008-06;,citation_cover_date=2008-06;,citation_year=2008;,citation_issue=3;,citation_doi=10.1287/opre.1080.0513;,citation_issn=0030-364X, 1526-5463;,citation_volume=56;,citation_journal_title=Operations Research;">
 <meta name="citation_reference" content="citation_title=Curse-of-dimensionality revisited: Collapse of the particle filter in very large scale systems;,citation_abstract=It has been widely realized that Monte Carlo methods (approximation via a sample ensemble) may fail in large scale systems. This work offers some theoretical insight into this phenomenon in the context of the particle filter. We demonstrate that the maximum of the weights associated with the sample ensemble converges to one as both the sample size and the system dimension tends to infinity. Specifically, under fairly weak assumptions, if the ensemble size grows sub-exponentially in the cube root of the system dimension, the convergence holds for a single update step in state-space models with independent and identically distributed kernels. Further, in an important special case, more refined arguments show (and our simulations suggest) that the convergence to unity occurs unless the ensemble grows super-exponentially in the system dimension. The weight singularity is also established in models with more general multivariate likelihoods, e.g. Gaussian and Cauchy. Although presented in the context of atmospheric data assimilation for numerical weather prediction, our results are generally valid for high-dimensional particle filters.;,citation_author=Thomas Bengtsson;,citation_author=Peter Bickel;,citation_author=Bo Li;,citation_publication_date=2008;,citation_cover_date=2008;,citation_year=2008;,citation_doi=10.1214/193940307000000518;,citation_isbn=978-0-940600-74-4;,citation_inbook_title=Institute of Mathematical Statistics Collections;">
 <meta name="citation_reference" content="citation_title=Efficient computation of global sensitivity indices using sparse polynomial chaos expansions;,citation_abstract=Global sensitivity analysis aims at quantifying the relative importance of uncertain input variables onto the response of a mathematical model of a physical system. ANOVA-based indices such as the Sobol’ indices are well-known in this context. These indices are usually computed by direct Monte Carlo or quasi-Monte Carlo simulation, which may reveal hardly applicable for computationally demanding industrial models. In the present paper, sparse polynomial chaos (PC) expansions are introduced in order to compute sensitivity indices. An adaptive algorithm allows the analyst to build up a PC-based metamodel that only contains the significant terms whereas the PC coefficients are computed by leastsquare regression using a computer experimental design. The accuracy of the metamodel is assessed by leave-one-out cross validation. Due to the genuine orthogonality properties of the PC basis, ANOVAbased sensitivity indices are post-processed analytically. This paper also develops a bootstrap technique which eventually yields confidence intervals on the results. The approach is illustrated on various application examples up to 21 stochastic dimensions. Accurate results are obtained at a computational cost 2 orders of magnitude smaller than that associated with Monte Carlo simulation.;,citation_author=Géraud Blatman;,citation_author=Bruno Sudret;,citation_publication_date=2010-11;,citation_cover_date=2010-11;,citation_year=2010;,citation_issue=11;,citation_doi=10.1016/j.ress.2010.06.015;,citation_issn=09518320;,citation_volume=95;,citation_journal_title=Reliability Engineering &amp;amp;amp; System Safety;">
-<meta name="citation_reference" content="citation_title=Generalized Cross-Entropy Methods;,citation_abstract=The cross-entropy and minimum cross-entropy methods are well-known Monte Carlo simulation techniques for rare-event probability estimation and optimization. In this paper we investigate how these methods can be extended to provide a general non-parametric cross-entropy framework based on \varphi-divergence distance measures. We show how the \chi2 distance in particular yields a viable alternative to Kullback-Leibler distance. The theory is illustrated with various examples from density estimation, rareevent simulation and continuous multi-extremal optimization.;,citation_author=Z I Botev;,citation_author=D P Kroese;,citation_author=T Taimre;">
+<meta name="citation_reference" content="citation_title=Generalized Cross-Entropy Methods;,citation_abstract=The cross-entropy and minimum cross-entropy methods are well-known Monte Carlo simulation techniques for rare-event probability estimation and optimization. In this paper we investigate how these methods can be extended to provide a general non-parametric cross-entropy framework based on $\varphi$-divergence distance measures. We show how the $\chi$2 distance in particular yields a viable alternative to Kullback-Leibler distance. The theory is illustrated with various examples from density estimation, rareevent simulation and continuous multi-extremal optimization.;,citation_author=Z I Botev;,citation_author=D P Kroese;,citation_author=T Taimre;">
 <meta name="citation_reference" content="citation_title=Markov chain importance sampling with applications to rare event probability estimation;,citation_abstract=We present a versatile Monte Carlo method for estimating multidimensional integrals, with applications to rare-event probability estimation. The method fuses two distinct and popular Monte Carlo simulation methodsMarkov chain Monte Carlo and importance samplinginto a single algorithm. We show that for some applied numerical examples the proposed Markov Chain importance sampling algorithm performs better than methods based solely on importance sampling or MCMC.;,citation_author=Zdravko I. Botev;,citation_author=Pierre L’Ecuyer;,citation_author=Bruno Tuffin;,citation_publication_date=2013-03;,citation_cover_date=2013-03;,citation_year=2013;,citation_issue=2;,citation_doi=10.1007/s11222-011-9308-2;,citation_issn=0960-3174, 1573-1375;,citation_volume=23;,citation_journal_title=Statistics and Computing;">
 <meta name="citation_reference" content="citation_title=An Efficient Algorithm for Rare-event Probability Estimation, Combinatorial Optimization, and Counting;,citation_abstract=Although importance sampling is an established and effective sampling and estimation technique, it becomes unstable and unreliable for high-dimensional problems. The main reason is that the likelihood ratio in the importance sampling estimator degenerates when the dimension of the problem becomes large. Various remedies to this problem have been suggested, including heuristics such as resampling. Even so, the consensus is that for large-dimensional problems, likelihood ratios (and hence importance sampling) should be avoided. In this paper we introduce a new adaptive simulation approach that does away with likelihood ratios, while retaining the multi-level approach of the cross-entropy method. Like the latter, the method can be used for rare-event probability estimation, optimization, and counting. Moreover, the method allows one to sample exactly from the target distribution rather than asymptotically as in Markov chain Monte Carlo. Numerical examples demonstrate the effectiveness of the method for a variety of applications.;,citation_author=Zdravko I. Botev;,citation_author=Dirk P. Kroese;,citation_publication_date=2008-12;,citation_cover_date=2008-12;,citation_year=2008;,citation_issue=4;,citation_doi=10.1007/s11009-008-9073-7;,citation_issn=1387-5841, 1573-7713;,citation_volume=10;,citation_journal_title=Methodology and Computing in Applied Probability;">
 <meta name="citation_reference" content="citation_title=Global Likelihood Optimization Via the Cross-Entropy Method, with an Application to Mixture Models;,citation_abstract=Global likelihood maximization is an important aspect of many statistical analyses. Often the likelihood function is highly multi-extremal. This presents a significant challenge to standard search procedures, which often settle too quickly into an inferior local maximum. We present a new approach based on the cross-entropy (CE) method, and illustrate its use for the analysis of mixture models.;,citation_author=Z. Botev;,citation_author=D. P. Kroese;,citation_publication_date=2004;,citation_cover_date=2004;,citation_year=2004;,citation_doi=10.1109/WSC.2004.1371358;,citation_isbn=978-0-7803-8786-7;,citation_volume=1;,citation_conference_title=Proceedings of the 2004 Winter Simulation Conference, 2004.;,citation_conference=IEEE;">
@@ -210,8 +210,8 @@ window.Quarto = {
 <meta name="citation_reference" content="citation_title=Population Monte Carlo;,citation_author=O Cappé;,citation_author=A Guillin;,citation_author=J. M Marin;,citation_author=C. P Robert;,citation_publication_date=2004-12;,citation_cover_date=2004-12;,citation_year=2004;,citation_issue=4;,citation_doi=10.1198/106186004X12803;,citation_issn=1061-8600, 1537-2715;,citation_volume=13;,citation_journal_title=Journal of Computational and Graphical Statistics;">
 <meta name="citation_reference" content="citation_title=A COMPARISON OF CROSS-ENTROPY AND VARIANCE MINIMIZATION STRATEGIES;,citation_abstract=The variance minimization (VM) and cross-entropy (CE) methods are two versatile adaptive importance sampling procedures that have been successfully applied to a wide variety of difficult rare-event estimation problems. We compare these two methods via various examples where the optimal VM and CE importance densities can be obtained analytically. We find that in the cases studied both VM and CE methods prescribe the same importance sampling parameters, suggesting that the criterion of minimizing the CE distance is very close, if not asymptotically identical, to minimizing the variance of the associated importance sampling estimator.;,citation_author=Joshua C C Chan;,citation_author=Peter W Glynn;,citation_author=Dirk P Kroese;">
 <meta name="citation_reference" content="citation_title=Improved cross-entropy method for estimation;,citation_abstract=The cross-entropy (CE) method is an adaptive importance sampling procedure that has been successfully applied to a diverse range of complicated simulation problems. However, recent research has shown that in some highdimensional settings, the likelihood ratio degeneracy problem becomes severe and the importance sampling estimator obtained from the CE algorithm becomes unreliable. We consider a variation of the CE method whose performance does not deteriorate as the dimension of the problem increases. We then illustrate the algorithm via a highdimensional estimation problem in risk management.;,citation_author=Joshua C. C. Chan;,citation_author=Dirk P. Kroese;,citation_publication_date=2012-09;,citation_cover_date=2012-09;,citation_year=2012;,citation_issue=5;,citation_doi=10.1007/s11222-011-9275-7;,citation_issn=0960-3174, 1573-1375;,citation_volume=22;,citation_journal_title=Statistics and Computing;">
-<meta name="citation_reference" content="citation_title=Rare-event probability estimation with conditional Monte Carlo;,citation_abstract=Estimation of rare-event probabilities in high-dimensional settings via importance sampling is a difficult problem due to the degeneracy of the likelihood ratio. In fact, it is generally recommended that Monte Carlo estimators involving likelihood ratios should not be used in such settings. In view of this, we develop efficient algorithms based on conditional Monte Carlo to estimate rare-event probabilities in situations where the degeneracy problem is expected to be severe. By utilizing an asymptotic description of how the rare event occurs, we derive algorithms that involve generating random variables only from the nominal distributions, thus avoiding any likelihood ratio. We consider two settings that occur frequently in applied probability: systems involving bottleneck elements and models involving heavytailed random variables. We first consider the problem of estimating P(X1 + \cdot \cdot \cdot + Xn &amp;amp;amp;gt; \gamma ), where X1, . . . , Xn are independent but not identically distributed (ind) heavy-tailed random variables. Guided by insights obtained from this model, we then study a variety of more general settings. Specifically, we consider a complex bridge network and a generalization of the widely popular normal copula model used in managing portfolio credit risk, both of which involve hundreds of random variables. We show that the same conditioning idea, guided by an asymptotic description of the way in which the rare event happens, can be used to derive estimators that outperform existing ones.;,citation_author=Joshua C. C. Chan;,citation_author=Dirk P. Kroese;,citation_publication_date=2011-09;,citation_cover_date=2011-09;,citation_year=2011;,citation_issue=1;,citation_doi=10.1007/s10479-009-0539-y;,citation_issn=0254-5330, 1572-9338;,citation_volume=189;,citation_journal_title=Annals of Operations Research;">
-<meta name="citation_reference" content="citation_title=The sample size required in importance sampling;,citation_abstract=The goal of importance sampling is to estimate the expected value of a given function with respect to a probability measure \nu using a random sample of size n drawn from a different probability measure . If the two measures  and \nu are nearly singular with respect to each other, which is often the case in practice, the sample size required for accurate estimation is large. In this article it is shown that in a fairly general setting, a sample of size approximately exp(D(\nu||)) is necessary and sufficient for accurate estimation by importance sampling, where D(\nu||) is the KullbackLeibler divergence of  from \nu. In particular, the required sample size exhibits a kind of cut-off in the logarithmic scale. The theory is applied to obtain a general formula for the sample size required in importance sampling for one-parameter exponential families (Gibbs measures).;,citation_author=Sourav Chatterjee;,citation_author=Persi Diaconis;,citation_publication_date=2015-11;,citation_cover_date=2015-11;,citation_year=2015;,citation_fulltext_html_url=https://arxiv.org/abs/1511.01437;,citation_journal_title=arXiv:1511.01437 [physics, stat];">
+<meta name="citation_reference" content="citation_title=Rare-event probability estimation with conditional Monte Carlo;,citation_abstract=Estimation of rare-event probabilities in high-dimensional settings via importance sampling is a difficult problem due to the degeneracy of the likelihood ratio. In fact, it is generally recommended that Monte Carlo estimators involving likelihood ratios should not be used in such settings. In view of this, we develop efficient algorithms based on conditional Monte Carlo to estimate rare-event probabilities in situations where the degeneracy problem is expected to be severe. By utilizing an asymptotic description of how the rare event occurs, we derive algorithms that involve generating random variables only from the nominal distributions, thus avoiding any likelihood ratio. We consider two settings that occur frequently in applied probability: systems involving bottleneck elements and models involving heavytailed random variables. We first consider the problem of estimating P(X1 + $\cdot$ $\cdot$ $\cdot$ + Xn $&amp;amp;amp;gt;$ $\gamma$ ), where X1, . . . , Xn are independent but not identically distributed (ind) heavy-tailed random variables. Guided by insights obtained from this model, we then study a variety of more general settings. Specifically, we consider a complex bridge network and a generalization of the widely popular normal copula model used in managing portfolio credit risk, both of which involve hundreds of random variables. We show that the same conditioning idea, guided by an asymptotic description of the way in which the rare event happens, can be used to derive estimators that outperform existing ones.;,citation_author=Joshua C. C. Chan;,citation_author=Dirk P. Kroese;,citation_publication_date=2011-09;,citation_cover_date=2011-09;,citation_year=2011;,citation_issue=1;,citation_doi=10.1007/s10479-009-0539-y;,citation_issn=0254-5330, 1572-9338;,citation_volume=189;,citation_journal_title=Annals of Operations Research;">
+<meta name="citation_reference" content="citation_title=The sample size required in importance sampling;,citation_abstract=The goal of importance sampling is to estimate the expected value of a given function with respect to a probability measure $\nu$ using a random sample of size n drawn from a different probability measure . If the two measures  and $\nu$ are nearly singular with respect to each other, which is often the case in practice, the sample size required for accurate estimation is large. In this article it is shown that in a fairly general setting, a sample of size approximately exp(D($\nu$||)) is necessary and sufficient for accurate estimation by importance sampling, where D($\nu$||) is the KullbackLeibler divergence of  from $\nu$. In particular, the required sample size exhibits a kind of cut-off in the logarithmic scale. The theory is applied to obtain a general formula for the sample size required in importance sampling for one-parameter exponential families (Gibbs measures).;,citation_author=Sourav Chatterjee;,citation_author=Persi Diaconis;,citation_publication_date=2015-11;,citation_cover_date=2015-11;,citation_year=2015;,citation_fulltext_html_url=https://arxiv.org/abs/1511.01437;,citation_journal_title=arXiv:1511.01437 [physics, stat];">
 <meta name="citation_reference" content="citation_title=Active subspaces: Emerging ideas for dimension reduction in parameter studies;,citation_author=Paul G. Constantine;,citation_publication_date=2015;,citation_cover_date=2015;,citation_year=2015;,citation_isbn=978-1-61197-385-3;,citation_series_title=SIAM spotlights;">
 <meta name="citation_reference" content="citation_title=Global sensitivity metrics from active subspaces;,citation_abstract=Predictions from science and engineering models depend on several input parameters. Global sensitivity analysis quantifies the importance of each input parameter, which can lead to insight into the model and reduced computational cost; commonly used sensitivity metrics include Sobol’ total sensitivity indices and derivative-based global sensitivity measures. Active subspaces are part of an emerging set of tools for identifying important directions in a model’s input parameter space; these directions can be exploited to reduce the model’s dimension enabling otherwise infeasible parameter studies. In this paper, we develop global sensitivity metrics called activity scores from the active subspace, which yield insight into the important model parameters. We mathematically relate the activity scores to established sensitivity metrics, and we discuss computational methods to estimate the activity scores. We show two numerical examples with algebraic functions taken from simplified engineering models. For each model, we analyze the active subspace and discuss how to exploit the low-dimensional structure. We then show that input rankings produced by the activity scores are consistent with rankings produced by the standard metrics.;,citation_author=Paul G. Constantine;,citation_author=Paul Diaz;,citation_publication_date=2017-06;,citation_cover_date=2017-06;,citation_year=2017;,citation_doi=10.1016/j.ress.2017.01.013;,citation_issn=09518320;,citation_volume=162;,citation_journal_title=Reliability Engineering &amp;amp;amp; System Safety;">
 <meta name="citation_reference" content="citation_title=Accelerating MCMC with active subspaces;,citation_abstract=The Markov chain Monte Carlo (MCMC) method is the computational workhorse for Bayesian inverse problems. However, MCMC struggles in high-dimensional parameter spaces, since its iterates must sequentially explore the high-dimensional space. This struggle is compounded in physical applications when the nonlinear forward model is computationally expensive. One approach to accelerate MCMC is to reduce the dimension of the state space. Active subspaces are part of an emerging set of tools for subspace-based dimension reduction. An active subspace in a given inverse problem indicates a separation between a low-dimensional subspace that is informed by the data and its orthogonal complement that is constrained by the prior. With this information, one can run the sequential MCMC on the active variables while sampling independently according to the prior on the inactive variables. However, this approach to increase efficiency may introduce bias. We provide a bound on the Hellinger distance between the true posterior and its active subspaceexploiting approximation. And we demonstrate the active subspace-accelerated MCMC on two computational examples: (i) a two-dimensional parameter space with a quadratic forward model and one-dimensional active subspace and (ii) a 100-dimensional parameter space with a PDE-based forward model and a two-dimensional active subspace.;,citation_author=Paul G. Constantine;,citation_author=Carson Kent;,citation_author=Tan Bui-Thanh;,citation_publication_date=2016-01;,citation_cover_date=2016-01;,citation_year=2016;,citation_fulltext_html_url=https://arxiv.org/abs/1510.00024;,citation_issue=5;,citation_doi=10.1137/15M1042127;,citation_issn=1064-8275, 1095-7197;,citation_volume=38;,citation_journal_title=SIAM Journal on Scientific Computing;">
@@ -269,7 +269,7 @@ window.Quarto = {
 <meta name="citation_reference" content="citation_title=Active subspace uncertainty quantification for a polydomain ferroelectric phase-field model;,citation_abstract=Quantum-informed ferroelectric phase field models capable of predicting material behavior, are necessary for facilitating the development and production of many adaptive structures and intelligent systems. Uncertainty is present in these models, given the quantum scale at which calculations take place. A necessary analysis is to determine how the uncertainty in the response can be attributed to the uncertainty in the model inputs or parameters. A second analysis is to identify active subspaces within the original parameter space, which quantify directions in which the model response varies most dominantly, thus reducing sampling effort and computational cost. In this investigation, we identify an active subspace for a poly-domain ferroelectric phase-field model. Using the active variables as our independent variables, we then construct a surrogate model and perform Bayesian inference. Once we quantify the uncertainties in the active variables, we obtain uncertainties for the original parameters via an inverse mapping. The analysis provides insight into how active subspace methodologies can be used to reduce computational power needed to perform Bayesian inference on model parameters informed by experimental or simulated data.;,citation_author=Lider S. Leon;,citation_author=Ralph C. Smith;,citation_author=William S. Oates;,citation_author=Paul Miles;,citation_editor=Hani E. Naguib;,citation_publication_date=2018-03;,citation_cover_date=2018-03;,citation_year=2018;,citation_doi=10.1117/12.2297207;,citation_isbn=978-1-5106-1688-2 978-1-5106-1689-9;,citation_conference_title=Behavior and Mechanics of Multifunctional Materials and Composites XII;,citation_conference=SPIE;">
 <meta name="citation_reference" content="citation_title=Metropolized independent sampling with comparisons to rejection sampling and importance sampling;,citation_author=Jun S. Liu;,citation_publication_date=1996-06;,citation_cover_date=1996-06;,citation_year=1996;,citation_issue=2;,citation_doi=10.1007/BF00162521;,citation_issn=0960-3174, 1573-1375;,citation_volume=6;,citation_journal_title=Statistics and Computing;">
 <meta name="citation_reference" content="citation_title=Multivariate distribution models with prescribed marginals and covariances;,citation_abstract=Two multivariate distribution models consistent with prescribed marginal distributions and covariances are presented. The models are applicable to arbitrary number of random variables and are particularly suited for engineering applications. Conditions for validity of each model and applicable ranges of correlation coefficients between the variables are determined. Formulae are developed which facilitate evaluation of the model parameters in terms of the prescribed marginals and covariances. Potential uses of the two models in engineering are discussed.;,citation_author=Pei-Ling Liu;,citation_author=Armen Der Kiureghian;,citation_publication_date=1986;,citation_cover_date=1986;,citation_year=1986;,citation_issue=2;,citation_doi=10.1016/0266-8920(86)90033-0;,citation_issn=0266-8920;,citation_volume=1;,citation_journal_title=Probabilistic Engineering Mechanics;">
-<meta name="citation_reference" content="citation_title=Gaussian Approximations for Probability Measures on $Rd̂$;,citation_abstract=This paper concerns the approximation of probability measures on Rd with respect to the KullbackLeibler divergence. Given an admissible target measure, we show the existence of the best approximation, with respect to this divergence, from certain sets of Gaussian measures and Gaussian mixtures. The asymptotic behavior of such best approximations is then studied in the small parameter limit where the measure concentrates; this asympotic behavior is characterized using \Gamma-convergence. The theory developed is then applied to understand the frequentist consistency of Bayesian inverse problems in finite dimensions. For a fixed realization of additive observational noise, we show the asymptotic normality of the posterior measure in the small noise limit. Taking into account the randomness of the noise, we prove a BernsteinVon Mises type result for the posterior measure.;,citation_author=Yulong Lu;,citation_author=Andrew Stuart;,citation_author=Hendrik Weber;,citation_publication_date=2017-01;,citation_cover_date=2017-01;,citation_year=2017;,citation_issue=1;,citation_doi=10.1137/16M1105384;,citation_issn=2166-2525;,citation_volume=5;,citation_journal_title=SIAM/ASA Journal on Uncertainty Quantification;">
+<meta name="citation_reference" content="citation_title=Gaussian Approximations for Probability Measures on $Rd̂$;,citation_abstract=This paper concerns the approximation of probability measures on Rd with respect to the KullbackLeibler divergence. Given an admissible target measure, we show the existence of the best approximation, with respect to this divergence, from certain sets of Gaussian measures and Gaussian mixtures. The asymptotic behavior of such best approximations is then studied in the small parameter limit where the measure concentrates; this asympotic behavior is characterized using $\Gamma$-convergence. The theory developed is then applied to understand the frequentist consistency of Bayesian inverse problems in finite dimensions. For a fixed realization of additive observational noise, we show the asymptotic normality of the posterior measure in the small noise limit. Taking into account the randomness of the noise, we prove a BernsteinVon Mises type result for the posterior measure.;,citation_author=Yulong Lu;,citation_author=Andrew Stuart;,citation_author=Hendrik Weber;,citation_publication_date=2017-01;,citation_cover_date=2017-01;,citation_year=2017;,citation_issue=1;,citation_doi=10.1137/16M1105384;,citation_issn=2166-2525;,citation_volume=5;,citation_journal_title=SIAM/ASA Journal on Uncertainty Quantification;">
 <meta name="citation_reference" content="citation_title=Modified Cross-Entropy Method for Classification of Events in NILM Systems;,citation_abstract=Non-intrusive load monitoring is an algorithm or process that disaggregates the total power in a facility to identify consumption of individual appliances. In this paper, a new algorithm is proposed to classify events of appliance states based on modification of the Cross-Entropy method. The main contribution is a formulation and solution of the problem with the Cross-Entropy method as a constrained optimization problem. This new technique is called the Modified CrossEntropy (MCE) method. The proposed algorithm is simple, as it operates in real time, using low rate sampling of the active power. In addition, there is no need to train the system, or to use complex hardware. The algorithm is tested using the REDD and AMPds datasets, and the results are compared to several state-ofthe-art techniques.;,citation_author=Ram Machlev;,citation_author=Yoash Levron;,citation_author=Yuval Beck;,citation_publication_date=2018;,citation_cover_date=2018;,citation_year=2018;,citation_doi=10.1109/TSG.2018.2871620;,citation_issn=1949-3053, 1949-3061;,citation_journal_title=IEEE Transactions on Smart Grid;">
 <meta name="citation_reference" content="citation_title=Methods of structural safety;,citation_author=Henrik O Madsen;,citation_author=Steen Krenk;,citation_author=Niels Christian Lind;,citation_publication_date=2006;,citation_cover_date=2006;,citation_year=2006;">
 <meta name="citation_reference" content="citation_title=On the Convergence of the Cross-Entropy Method;,citation_abstract=The cross-entropy method is a relatively new method for combinatorial optimization. The idea of this method came from the simulation field and then was successfully applied to different combinatorial optimization problems. The method consists of an iterative stochastic procedure that makes use of the importance sampling technique. In this paper we prove the asymptotical convergence of some modifications of the cross-entropy method.;,citation_author=L. Margolin;,citation_publication_date=2005-02;,citation_cover_date=2005-02;,citation_year=2005;,citation_issue=1;,citation_doi=10.1007/s10479-005-5731-0;,citation_issn=0254-5330, 1572-9338;,citation_volume=134;,citation_journal_title=Annals of Operations Research;">
@@ -307,7 +307,7 @@ window.Quarto = {
 <meta name="citation_reference" content="citation_title=Simulation and the Monte Carlo method;,citation_author=Reuven Y. Rubinstein;,citation_author=Dirk P. Kroese;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_doi=10.1002/9781118631980;,citation_isbn=978-1-118-63220-8 978-1-118-63216-1;,citation_series_title=Wiley series in probability and statistics;">
 <meta name="citation_reference" content="citation_title=Simulation and the Monte Carlo method;,citation_author=Reuven Y. Rubinstein;,citation_author=Dirk P. Kroese;,citation_publication_date=2017;,citation_cover_date=2017;,citation_year=2017;,citation_doi=10.1002/9781118631980;,citation_isbn=978-1-118-63220-8 978-1-118-63216-1;,citation_inbook_title=undefined;,citation_series_title=Wiley series in probability and statistics;">
 <meta name="citation_reference" content="citation_title=On the estimation of the covariance eigenspectrum of array sample observations;,citation_abstract=In this paper, we propose an estimator of the eigenspectrum of the array observation covariance matrix that builds upon the well-known power method and is consistent for an arbitrarily large array dimension. Traditional estimators based on the eigendecomposition of the sample covariance matrix are known to be consistent provided that the number of observations grow to infinity with respect to any other dimension in the signal model. On the contrary, in order to avoid the loss in the estimation accuracy associated with practical finite sample-size situations, a generalization of the conventional implementation is derived that proves to be a very good approximation for a sample-size and an array dimension that are comparatively large. The proposed solution is applied to the construction of a subspace-based extension of the Capon source power estimator. For our purposes, we resort to the theory of the spectral analysis of large dimensional random matrices, or random matrix theory. As it is shown via numerical simulations, the new estimator turns out to allow for a significantly improved estimation accuracy in practical finite sample-support scenarios.;,citation_author=Francisco Rubio;,citation_author=Xavier Mestre;,citation_publication_date=2008-07;,citation_cover_date=2008-07;,citation_year=2008;,citation_doi=10.1109/SAM.2008.4606900;,citation_isbn=978-1-4244-2240-1;,citation_conference_title=2008 5th IEEE Sensor Array and Multichannel Signal Processing Workshop;,citation_conference=IEEE;">
-<meta name="citation_reference" content="citation_title=Importance Sampling and Necessary Sample Size: An Information Theory Approach;,citation_abstract=Importance sampling approximates expectations with respect to a target measure by using samples from a proposal measure. The performance of the method over large classes of test functions depends heavily on the closeness between both measures. We derive a general bound that needs to hold for importance sampling to be successful, and relates the f -divergence between the target and the proposal to the sample size. The bound is deduced from a new and simple information theory paradigm for the study of importance sampling. As examples of the general theory we give necessary conditions on the sample size in terms of the Kullback-Leibler and \chi2 divergences, and the total variation and Hellinger distances. Our approach is non-asymptotic, and its generality allows to tell apart the relative merits of these metrics. Unsurprisingly, the nonsymmetric divergences give sharper bounds than total variation or Hellinger. Our results extend existing necessary conditions and complement sufficient ones on the sample size required for importance sampling.;,citation_author=Daniel Sanz-Alonso;,citation_publication_date=2016-08;,citation_cover_date=2016-08;,citation_year=2016;,citation_fulltext_html_url=https://arxiv.org/abs/1608.08814;,citation_journal_title=arXiv:1608.08814 [stat];">
+<meta name="citation_reference" content="citation_title=Importance Sampling and Necessary Sample Size: An Information Theory Approach;,citation_abstract=Importance sampling approximates expectations with respect to a target measure by using samples from a proposal measure. The performance of the method over large classes of test functions depends heavily on the closeness between both measures. We derive a general bound that needs to hold for importance sampling to be successful, and relates the f -divergence between the target and the proposal to the sample size. The bound is deduced from a new and simple information theory paradigm for the study of importance sampling. As examples of the general theory we give necessary conditions on the sample size in terms of the Kullback-Leibler and $\chi$2 divergences, and the total variation and Hellinger distances. Our approach is non-asymptotic, and its generality allows to tell apart the relative merits of these metrics. Unsurprisingly, the nonsymmetric divergences give sharper bounds than total variation or Hellinger. Our results extend existing necessary conditions and complement sufficient ones on the sample size required for importance sampling.;,citation_author=Daniel Sanz-Alonso;,citation_publication_date=2016-08;,citation_cover_date=2016-08;,citation_year=2016;,citation_fulltext_html_url=https://arxiv.org/abs/1608.08814;,citation_journal_title=arXiv:1608.08814 [stat];">
 <meta name="citation_reference" content="citation_title=Particle efficient importance sampling;,citation_abstract=The efficient importance sampling (EIS) method is a general principle for the numerical evaluation of highdimensional integrals that uses the sequential structure of target integrands to build variance minimising importance samplers. Despite a number of successful applications in high dimensions, it is well known that importance sampling strategies are subject to an exponential growth in variance as the dimension of the integration increases. We solve this problem by recognising that the EIS framework has an offline sequential Monte Carlo interpretation. The particle EIS method is based on non-standard resampling weights that take into account the construction of the importance sampler as a sequential approximation to the state smoothing density. We apply the method for a range of univariate and bivariate stochastic volatility specifications. We also develop a new application of the EIS approach to state space models with Student’s t state innovations. Our results show that the particle EIS method strongly outperforms both the standard EIS method and particle filters for likelihood evaluation in high dimensions. We illustrate the efficiency of the method for Bayesian inference using the particle marginal MetropolisHastings and importance sampling squared algorithms.;,citation_author=Marcel Scharth;,citation_author=Robert Kohn;,citation_publication_date=2016-01;,citation_cover_date=2016-01;,citation_year=2016;,citation_issue=1;,citation_doi=10.1016/j.jeconom.2015.03.047;,citation_issn=03044076;,citation_volume=190;,citation_journal_title=Journal of Econometrics;">
 <meta name="citation_reference" content="citation_title=Benchmark study on reliability estimation in higher dimensions of structural systems  An overview;,citation_abstract=This work is concerned with a Benchmark study on reliability estimation of structural systems. The Benchmark study attempts to assess various recently proposed alternative procedures for reliability estimation with respect to their accuracy and computational efficiency. The emphasis of this study is on systems which include a large number of random variables. For this purpose three sample problems have been selected which cover a wide range of cases of interest in the engineering practice and involve linear and nonlinear systems with uncertainties in the material properties and/or the loading conditions. Here an overview of the Benchmark study is provided.;,citation_author=G. I. Schuëller;,citation_author=H. J. Pradlwarter;,citation_publication_date=2007-07;,citation_cover_date=2007-07;,citation_year=2007;,citation_issue=3;,citation_doi=10.1016/j.strusafe.2006.07.010;,citation_issn=01674730;,citation_volume=29;,citation_journal_title=Structural Safety;">
 <meta name="citation_reference" content="citation_title=Exact active subspace Metropolis-Hastings, with applications to the Lorenz-96 system;,citation_abstract=We consider the application of active subspaces to inform a MetropolisHastings algorithm, thereby aggressively reducing the computational dimension of the sampling problem. We show that the original formulation, as proposed by Constantine, Kent, and BuiThanh (SIAM J. Sci. Comput., 38(5):A2779A2805, 2016), possesses asymptotic bias. Using pseudo-marginal arguments, we develop an asymptotically unbiased variant. Our algorithm is applied to a synthetic multimodal target distribution as well as a Bayesian formulation of a parameter inference problem for a Lorenz-96 system.;,citation_author=Ingmar Schuster;,citation_author=Paul G. Constantine;,citation_author=T. J. Sullivan;,citation_publication_date=2017-12;,citation_cover_date=2017-12;,citation_year=2017;,citation_fulltext_html_url=https://arxiv.org/abs/1712.02749;,citation_journal_title=arXiv:1712.02749 [stat];">
@@ -396,14 +396,14 @@ ISSN 2824-7795</p>
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 3, 2024</p>
+        <p class="date">March 11, 2024</p>
       </div>
     </div>
                                     
       <div>
       <div class="quarto-title-meta-heading">Modified</div>
       <div class="quarto-title-meta-contents">
-        <p class="date-modified">May 17, 2024</p>
+        <p class="date-modified">July 31, 2024</p>
       </div>
     </div>
       
@@ -570,7 +570,7 @@ ISSN 2824-7795</p>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-l" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-l" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-l-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="published-elmasri-optimal_files/figure-html/fig-l-output-1.svg" class="img-fluid figure-img">
@@ -665,13 +665,13 @@ Figure&nbsp;1: Plot of the function <span class="math inline">\ell</span> given 
 <li><p><span class="math inline">{\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{mean}}</span> is obtained by choosing <span class="math inline">k = 1</span> and <span class="math inline">\mathbf{d}_1 = {\widehat{\mathbf{m}}}^* / \lVert {\widehat{\mathbf{m}}}^* \rVert</span>, where <span class="math inline">\widehat{\mathbf{m}}^*</span> given by <a href="#eq-hatm" class="quarto-xref">Equation&nbsp;8</a>.</p></li>
 </ol>
 <p>The matrices <span class="math inline">{\widehat{\mathbf{\Sigma}}^{\text{}}_\text{opt}}</span> and <span class="math inline">{\widehat{\mathbf{\Sigma}}^{\text{}}_\text{mean}}</span> use the estimation <span class="math inline">\widehat{\mathbf{\Sigma}}^*</span> with the optimal directions <span class="math inline">\mathbf{d}^*_i</span> or <span class="math inline">\mathbf{m}^*</span>, while the matrices <span class="math inline">{\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{opt}}</span> and <span class="math inline">{\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{mean}}</span> involve an estimation of these directions from <span class="math inline">\widehat{\mathbf{\Sigma}}^*</span>. By definition, <span class="math inline">\mathbf{\Sigma}^*</span> will give optimal results, while results for <span class="math inline">\widehat{\mathbf{\Sigma}}^*</span> will deteriorate as the dimension increases, which is the well-known behavior which we try to improve. Moreover, <span class="math inline">\mathbf{\Sigma}^*</span> and the projection directions <span class="math inline">\mathbf{d}^*_i</span> or <span class="math inline">\mathbf{m}^*</span>, are of course unknown in practice. For simulation comparison purpose, they could be determined analytically in simple test cases and otherwise we obtained them by a brute force Monte Carlo scheme with a very high simulation budget. Finally, we emphasize that Algorithm 1 corresponds to estimating and projecting on the <span class="math inline">\mathbf{d}^*_i</span>’s, and so the matrix <span class="math inline">\widehat{\mathbf{\Sigma}}^*_k</span> of Algorithm 1 is equal to the matrix <span class="math inline">{\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{opt}}</span>.</p>
-<div id="tbl-sigma" class="quarto-float anchored">
+<div id="tbl-sigma" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sigma-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;1: Presentation of the six covariance matrices considered in the numerical examples.
 </figcaption>
 <div aria-describedby="tbl-sigma-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
 <col style="width: 10%">
@@ -870,7 +870,7 @@ Table&nbsp;1: Presentation of the six covariance matrices considered in the nume
 <div aria-describedby="fig-eigsum-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
 <div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-eigsum" style="flex-basis: 45.0%;justify-content: flex-start;">
-<div id="fig-eigsum-1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-eigsum-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-eigsum-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="published-elmasri-optimal_files/figure-html/fig-eigsum-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-eigsum">
@@ -885,7 +885,7 @@ Table&nbsp;1: Presentation of the six covariance matrices considered in the nume
 <p>&nbsp;</p>
 </div>
 <div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-eigsum" style="flex-basis: 45.0%;justify-content: flex-start;">
-<div id="fig-eigsum-2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-eigsum-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-eigsum-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="published-elmasri-optimal_files/figure-html/fig-eigsum-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-eigsum">
@@ -1138,14 +1138,14 @@ Figure&nbsp;2: Partial KL divergence and spectrum for the function <span class="
 <span id="cb3-223"><a href="#cb3-223" aria-hidden="true" tabindex="-1"></a>           <span class="vs">r"$\widehat{\mathbf{\Sigma</span><span class="sc">}}</span><span class="vs">^{+d}_</span><span class="sc">{mean}</span><span class="vs">$"</span>, <span class="st">"vMFN"</span>],</span>
 <span id="cb3-224"><a href="#cb3-224" aria-hidden="true" tabindex="-1"></a>    tablefmt<span class="op">=</span><span class="st">"pipe"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="tbl-sum" class="cell quarto-float anchored" data-execution_count="3">
+<div id="tbl-sum" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="3">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-sum-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;2: Numerical comparison of the estimation of <span class="math inline">\mathcal{E} \approx 1.35\cdot 10^{-3}</span> considering the Gaussian model with the six covariance matrices defined in <a href="#sec-def_cov" class="quarto-xref">Section&nbsp;4.2</a> and the vFMN model, when <span class="math inline">\phi = \mathbb{I}_{{\varphi\geq 0}}</span> with <span class="math inline">\varphi</span> the linear function given by <a href="#eq-sum" class="quarto-xref">Equation&nbsp;10</a>. As explained in the text, <span class="math inline">{\widehat{\mathbf{\Sigma}}^{\text{}}_\text{mean}}</span> and <span class="math inline">{\widehat{\mathbf{\Sigma}}^{\text{}}_\text{opt}}</span> are actually equal in this case. The computational cost is <span class="math inline">N=2000</span>.
 </figcaption>
 <div aria-describedby="tbl-sum-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output cell-output-display cell-output-markdown" data-execution_count="3">
-<table class="do-not-create-environment cell table table-sm table-striped small">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 12%">
 <col style="width: 8%">
@@ -1361,7 +1361,7 @@ Table&nbsp;2: Numerical comparison of the estimation of <span class="math inline
 <div aria-describedby="fig-inefficiency-parab-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
 <div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-inefficiency-parab" style="flex-basis: 45.0%;justify-content: flex-start;">
-<div id="fig-inefficiency-parab-1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-inefficiency-parab-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-inefficiency-parab-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="published-elmasri-optimal_files/figure-html/fig-inefficiency-parab-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-inefficiency-parab">
@@ -1376,7 +1376,7 @@ Table&nbsp;2: Numerical comparison of the estimation of <span class="math inline
 <p>&nbsp;</p>
 </div>
 <div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-inefficiency-parab" style="flex-basis: 45.0%;justify-content: flex-start;">
-<div id="fig-inefficiency-parab-2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-inefficiency-parab-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-inefficiency-parab-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="published-elmasri-optimal_files/figure-html/fig-inefficiency-parab-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-inefficiency-parab">
@@ -1660,14 +1660,14 @@ Figure&nbsp;3: Partial KL divergence and spectrum for the function <span class="
 <span id="cb5-254"><a href="#cb5-254" aria-hidden="true" tabindex="-1"></a>           <span class="vs">r"$\widehat{\mathbf{\Sigma</span><span class="sc">}}</span><span class="vs">^{+d}_</span><span class="sc">{mean}</span><span class="vs">$"</span>, <span class="st">"vMFN"</span>],</span>
 <span id="cb5-255"><a href="#cb5-255" aria-hidden="true" tabindex="-1"></a>    tablefmt<span class="op">=</span><span class="st">"pipe"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="tbl-parabol" class="cell quarto-float anchored" data-execution_count="5">
+<div id="tbl-parabol" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="5">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-parabol-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;3: Numerical comparison of the estimation of <span class="math inline">\mathcal{E} \approx 1.51\cdot 10^{-3}</span> considering the Gaussian density with the six covariance matrices defined in <a href="#sec-def_cov" class="quarto-xref">Section&nbsp;4.2</a> and the vFMN model, when <span class="math inline">\phi = \mathbb{I}_{{\varphi\geq 0}}</span> with <span class="math inline">\varphi</span> the quadratic function given by <a href="#eq-parabol" class="quarto-xref">Equation&nbsp;11</a>. The computational cost is <span class="math inline">N=2000</span>.
 </figcaption>
 <div aria-describedby="tbl-parabol-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output cell-output-display cell-output-markdown" data-execution_count="5">
-<table class="do-not-create-environment cell table table-sm table-striped small">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 12%">
 <col style="width: 8%">
@@ -1870,7 +1870,7 @@ Table&nbsp;3: Numerical comparison of the estimation of <span class="math inline
 <div aria-describedby="fig-inefficiency-banana-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
 <div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-inefficiency-banana" style="flex-basis: 45.0%;justify-content: flex-start;">
-<div id="fig-inefficiency-banana-1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-inefficiency-banana-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-inefficiency-banana-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="published-elmasri-optimal_files/figure-html/fig-inefficiency-banana-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-inefficiency-banana">
@@ -1885,7 +1885,7 @@ Table&nbsp;3: Numerical comparison of the estimation of <span class="math inline
 <p>&nbsp;</p>
 </div>
 <div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-inefficiency-banana" style="flex-basis: 45.0%;justify-content: flex-start;">
-<div id="fig-inefficiency-banana-2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-inefficiency-banana-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-inefficiency-banana-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="published-elmasri-optimal_files/figure-html/fig-inefficiency-banana-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-inefficiency-banana">
@@ -2128,14 +2128,14 @@ Figure&nbsp;4: Partial KL divergence and spectrum for the banana shape example.
 <span id="cb7-219"><a href="#cb7-219" aria-hidden="true" tabindex="-1"></a>           <span class="vs">r"$\widehat{\mathbf{\Sigma</span><span class="sc">}}</span><span class="vs">^{+d}_</span><span class="sc">{mean}</span><span class="vs">$"</span>, <span class="st">"vMFN"</span>],</span>
 <span id="cb7-220"><a href="#cb7-220" aria-hidden="true" tabindex="-1"></a>    tablefmt<span class="op">=</span><span class="st">"pipe"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="tbl-banana" class="cell quarto-float anchored" data-execution_count="7">
+<div id="tbl-banana" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="7">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-banana-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;4: Numerical comparison of the estimation of <span class="math inline">\mathcal{E}=1</span> considering the Gaussian density with the six covariance matrices defined in <a href="#sec-def_cov" class="quarto-xref">Section&nbsp;4.2</a> and the vFMN model, <span class="math inline">\phi = h/f</span>. NA stands for non applicable, as explained in the text. The computational cost is <span class="math inline">N=2000</span>.
 </figcaption>
 <div aria-describedby="tbl-banana-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output cell-output-display cell-output-markdown" data-execution_count="7">
-<table class="do-not-create-environment cell table table-sm table-striped small">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 12%">
 <col style="width: 8%">
@@ -2368,7 +2368,7 @@ Table&nbsp;4: Numerical comparison of the estimation of <span class="math inline
 <div aria-describedby="fig-inefficiency-portfolio-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
 <div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-inefficiency-portfolio" style="flex-basis: 45.0%;justify-content: flex-start;">
-<div id="fig-inefficiency-portfolio-1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-inefficiency-portfolio-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-inefficiency-portfolio-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="published-elmasri-optimal_files/figure-html/fig-inefficiency-portfolio-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-inefficiency-portfolio">
@@ -2383,7 +2383,7 @@ Table&nbsp;4: Numerical comparison of the estimation of <span class="math inline
 <p>&nbsp;</p>
 </div>
 <div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-inefficiency-portfolio" style="flex-basis: 45.0%;justify-content: flex-start;">
-<div id="fig-inefficiency-portfolio-2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-inefficiency-portfolio-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-inefficiency-portfolio-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="published-elmasri-optimal_files/figure-html/fig-inefficiency-portfolio-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-inefficiency-portfolio">
@@ -2652,14 +2652,14 @@ Figure&nbsp;5: Partial KL divergence and spectrum for the function <span class="
 <span id="cb9-245"><a href="#cb9-245" aria-hidden="true" tabindex="-1"></a>           <span class="vs">r"$\widehat{\mathbf{\Sigma</span><span class="sc">}}</span><span class="vs">^{+d}_</span><span class="sc">{mean}</span><span class="vs">$"</span>, <span class="st">"vMFN"</span>],</span>
 <span id="cb9-246"><a href="#cb9-246" aria-hidden="true" tabindex="-1"></a>    tablefmt<span class="op">=</span><span class="st">"pipe"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="tbl-portfolio" class="cell quarto-float anchored" data-execution_count="9">
+<div id="tbl-portfolio" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="9">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-portfolio-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;5: Numerical comparison of the estimation of <span class="math inline">\mathcal{E} \approx 1.82 \cdot 10^{-3}</span> considering the Gaussian density with the six covariance matrices defined in <a href="#sec-def_cov" class="quarto-xref">Section&nbsp;4.2</a> and the vFMN model, <span class="math inline">\phi = \mathbb{I}_{{\varphi \geq 0}}</span> with <span class="math inline">\varphi</span> given by <a href="#eq-portfolio" class="quarto-xref">Equation&nbsp;13</a>. The computational cost is <span class="math inline">N=2000</span>.
 </figcaption>
 <div aria-describedby="tbl-portfolio-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output cell-output-display cell-output-markdown" data-execution_count="9">
-<table class="do-not-create-environment cell table table-sm table-striped small">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 12%">
 <col style="width: 8%">
@@ -2861,7 +2861,7 @@ Table&nbsp;5: Numerical comparison of the estimation of <span class="math inline
 <div aria-describedby="fig-inefficiency-kawai-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
 <div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-inefficiency-kawai" style="flex-basis: 45.0%;justify-content: flex-start;">
-<div id="fig-inefficiency-kawai-1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-inefficiency-kawai-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-inefficiency-kawai-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="published-elmasri-optimal_files/figure-html/fig-inefficiency-kawai-output-1.svg" class="img-fluid figure-img" data-ref-parent="fig-inefficiency-kawai">
@@ -2876,7 +2876,7 @@ Table&nbsp;5: Numerical comparison of the estimation of <span class="math inline
 <p>&nbsp;</p>
 </div>
 <div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-inefficiency-kawai" style="flex-basis: 45.0%;justify-content: flex-start;">
-<div id="fig-inefficiency-kawai-2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-inefficiency-kawai-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-inefficiency-kawai-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="published-elmasri-optimal_files/figure-html/fig-inefficiency-kawai-output-2.svg" class="img-fluid figure-img" data-ref-parent="fig-inefficiency-kawai">
@@ -3146,14 +3146,14 @@ Figure&nbsp;6: Partial KL divergence and spectrum for the function <span class="
 <span id="cb11-246"><a href="#cb11-246" aria-hidden="true" tabindex="-1"></a>           <span class="vs">r"$\widehat{\mathbf{\Sigma</span><span class="sc">}}</span><span class="vs">^{+d}_</span><span class="sc">{mean}</span><span class="vs">$"</span>, <span class="st">"vMFN"</span>],</span>
 <span id="cb11-247"><a href="#cb11-247" aria-hidden="true" tabindex="-1"></a>    tablefmt<span class="op">=</span><span class="st">"pipe"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="tbl-payoff" class="cell quarto-float anchored" data-execution_count="11">
+<div id="tbl-payoff" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="11">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-payoff-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;6: Numerical comparison of the estimation of <span class="math inline">\mathcal{E} \approx 18.7 \times 10^{-3}</span> considering the Gaussian density with the six covariance matrices defined in <a href="#sec-def_cov" class="quarto-xref">Section&nbsp;4.2</a> and the vFMN model, when <span class="math inline">\phi</span> is given by <a href="#eq-payoff" class="quarto-xref">Equation&nbsp;14</a>. The computational cost is <span class="math inline">N=2000</span>.
 </figcaption>
 <div aria-describedby="tbl-payoff-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output cell-output-display cell-output-markdown" data-execution_count="11">
-<table class="do-not-create-environment cell table table-sm table-striped small">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 12%">
 <col style="width: 8%">
@@ -3659,14 +3659,14 @@ g_\text{N}(\lVert {\bf x}\rVert, p, \omega) = \frac{2 p^p}{\Gamma(p) \omega^p} \
 <span id="cb12-230"><a href="#cb12-230" aria-hidden="true" tabindex="-1"></a>           <span class="vs">r"$\widehat{\mathbf{\Sigma</span><span class="sc">}}</span><span class="vs">^{+d}_</span><span class="sc">{mean}</span><span class="vs">$"</span>, <span class="st">"vMFN"</span>],</span>
 <span id="cb12-231"><a href="#cb12-231" aria-hidden="true" tabindex="-1"></a>    tablefmt<span class="op">=</span><span class="st">"pipe"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="tbl-mcmc" class="cell quarto-float anchored" data-execution_count="12">
+<div id="tbl-mcmc" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="12">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-mcmc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;7: Numerical comparison of the estimation of <span class="math inline">\mathcal{E} \approx 1.35\cdot 10^{-3}</span> considering the Gaussian model with the six covariance matrices defined in <a href="#sec-def_cov" class="quarto-xref">Section&nbsp;4.2</a> and the vFMN model, when <span class="math inline">\phi = \mathbb{I}_{{\varphi\geq 0}}</span> with <span class="math inline">\varphi</span> the linear function given by <a href="#eq-sum" class="quarto-xref">Equation&nbsp;10</a>. As explained in the text, the sample of <span class="math inline">g^*</span> is generated with MCMC instead of rejection sampling. The computational cost is <span class="math inline">N=2000</span>.
 </figcaption>
 <div aria-describedby="tbl-mcmc-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output cell-output-display cell-output-markdown" data-execution_count="12">
-<table class="do-not-create-environment cell table table-sm table-striped small">
+<table class="do-not-create-environment cell caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 12%">
 <col style="width: 8%">
@@ -3727,13 +3727,13 @@ Table&nbsp;7: Numerical comparison of the estimation of <span class="math inline
 </figure>
 </div>
 </div>
-</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{el masri2024,
+</div></section><section class="quarto-appendix-contents" id="quarto-reuse"><h2 class="anchored quarto-appendix-heading">Reuse</h2><div class="quarto-appendix-contents"><div><a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a></div></div></section><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@article{el_masri2024,
   author = {El Masri, Maxime and Morio, Jérôme and Simatos, Florian},
   publisher = {French Statistical Society},
   title = {Optimal Projection for Parametric Importance Sampling in High
     Dimensions},
   journal = {Computo},
-  date = {2024-11-03},
+  date = {2024-03-11},
   url = {https://computo.sfds.asso.fr/published-202402-elmasri-optimal/},
   doi = {10.57750/jjza-6j82},
   issn = {2824-7795},
@@ -3754,10 +3754,10 @@ Table&nbsp;7: Numerical comparison of the estimation of <span class="math inline
     generalizations, in particular the incorporation of such ideas in
     adaptive importance sampling schemes.}
 }
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-el masri2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-el_masri2024" class="csl-entry quarto-appendix-citeas" role="listitem">
 El Masri, Maxime, Jérôme Morio, and Florian Simatos. 2024.
 <span>“Optimal Projection for Parametric Importance Sampling in High
-Dimensions.”</span> <em>Computo</em>, November. <a href="https://doi.org/10.57750/jjza-6j82">https://doi.org/10.57750/jjza-6j82</a>.
+Dimensions.”</span> <em>Computo</em>, March. <a href="https://doi.org/10.57750/jjza-6j82">https://doi.org/10.57750/jjza-6j82</a>.
 </div></div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -3795,18 +3795,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -3838,7 +3827,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
   const viewSource = window.document.getElementById('quarto-view-source') ||
                      window.document.getElementById('quarto-code-tools-source');
   if (viewSource) {
@@ -3897,7 +3908,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -4252,7 +4263,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> references.bib</span></span>
 <span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a><span class="an">github-user:</span><span class="co"> computo</span></span>
 <span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a><span class="an">repo:</span><span class="co"> optimal-projection-IS</span></span>
-<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 11/03/2024</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a><span class="an">date:</span><span class="co"> 03/11/2024</span></span>
 <span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a><span class="an">date-modified:</span><span class="co"> last-modified</span></span>
 <span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a><span class="an">draft:</span><span class="co"> false</span></span>
 <span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a><span class="an">published:</span><span class="co"> true</span></span>
@@ -6939,7 +6950,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb13-2736"><a href="#cb13-2736" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-2737"><a href="#cb13-2737" aria-hidden="true" tabindex="-1"></a>::: {#refs}</span>
 <span id="cb13-2738"><a href="#cb13-2738" aria-hidden="true" tabindex="-1"></a>:::</span>
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <script>
