@@ -87,21 +87,21 @@ IS is an approach used to reduce the variance of the classical Monte Carlo estim
 	$$
 Indeed, for this choice we have $\phi L = \mathcal{E}$ and so $\widehat{\mathcal{E}}_N$ is actually the deterministic estimator $\mathcal{E}$. For this reason, $g^*$ is sometimes called zero-variance density, a terminology that we will adopt here. Of course, $g^*$ is only of theoretical interest as it depends on the unknown integral $\mathcal{E}$. However, it gives an idea of good choices for the auxiliary density $g$, and we will seek to approximate $g^*$ by an auxiliary density that minimizes a distance between $g^*$ and a given parametric family of densities.
 	
-In this paper, the parametric family of densities is the Gaussian family $\{g_{\mathbf{m}, \mathbf{\Sigma}}: \mathbf{m} \in \mathbb{R}^n, \mathbf{\Sigma} \in \mathcal{S}^+_n\}$, where $g_{\mathbf{m}, \mathbf{\Sigma}}$ denotes the Gaussian density with mean $\mathbf{m} \in \mathbb{R}^n$ and covariance matrix $\mathbf{\Sigma} \in \mathcal{S}^+_n$ with $\mathcal{S}^+_n \subset \mathbb{R}^{n \times n}$ the set of symmetric, positive-definite matrices:
+In this paper, the parametric family of densities is the Gaussian family $\{g_{\mathbf{m}, \Sigma}: \mathbf{m} \in \mathbb{R}^n, \Sigma \in \mathcal{S}^+_n\}$, where $g_{\mathbf{m}, \Sigma}$ denotes the Gaussian density with mean $\mathbf{m} \in \mathbb{R}^n$ and covariance matrix $\Sigma \in \mathcal{S}^+_n$ with $\mathcal{S}^+_n \subset \mathbb{R}^{n \times n}$ the set of symmetric, positive-definite matrices:
 	$$
-	g_{\mathbf{m},\mathbf{\Sigma}}(\mathbf{x})=\dfrac{1}{ (2\pi)^{n/2} \lvert \mathbf{\Sigma} \rvert^{1/2}} \exp\left(-\frac{1}{2}(\mathbf{x}-\mathbf{m})^\top\mathbf{\Sigma}^{-1}(\mathbf{x}-\mathbf{m})\right), \ \mathbf{x} \in \mathbb{R}^n.
+	g_{\mathbf{m},\Sigma}(\mathbf{x})=\dfrac{1}{ (2\pi)^{n/2} \lvert \Sigma \rvert^{1/2}} \exp\left(-\frac{1}{2}(\mathbf{x}-\mathbf{m})^\top\Sigma^{-1}(\mathbf{x}-\mathbf{m})\right), \ \mathbf{x} \in \mathbb{R}^n.
 	$$
-with $\lvert \mathbf{\Sigma} \rvert$ the determinant of $\mathbf{\Sigma}$. Moreover, we will consider the Kullback--Leibler (KL) divergence to measure a "distance" between $g^*$ and  $g_{\mathbf{m}, \mathbf{\Sigma}}$. Recall that for two densities $f$ and $h$, with $f$ absolutely continuous with respect to $h$, the KL divergence $D(f,h)$ between $f$ and $h$ is defined by: 
+with $\lvert \Sigma \rvert$ the determinant of $\Sigma$. Moreover, we will consider the Kullback--Leibler (KL) divergence to measure a "distance" between $g^*$ and  $g_{\mathbf{m}, \Sigma}$. Recall that for two densities $f$ and $h$, with $f$ absolutely continuous with respect to $h$, the KL divergence $D(f,h)$ between $f$ and $h$ is defined by: 
 	$$
 	D(f,h)=\mathbb{E}_{f}\left[\log \left( \frac{f(\mathbf{X})}{h(\mathbf{X})} \right) \right] = \int \log \left( \frac{f(\mathbf{x})}{h(\mathbf{x})} \right)f(\mathbf{x}) \textrm{d} \mathbf{x}.
 	$$
-Thus, our goal is to approximate $g^*$ by $g_{\mathbf{m}^*, \mathbf{\Sigma}^*}$ with the optimal mean vector $\mathbf{m}^*$ and the optimal covariance matrix $\mathbf{\Sigma}^*$ given by:
+Thus, our goal is to approximate $g^*$ by $g_{\mathbf{m}^*, \Sigma^*}$ with the optimal mean vector $\mathbf{m}^*$ and the optimal covariance matrix $\Sigma^*$ given by:
 	$$
-	(\mathbf{m}^*,\mathbf{\Sigma}^*) = \arg\min \left\{ D(g^*,g_{\mathbf{m},\mathbf{\Sigma}}): \mathbf{m} \in \mathbb{R}^n, \mathbf{\Sigma} \in \mathcal{S}_n^+ \right\}.
+	(\mathbf{m}^*,\Sigma^*) = \arg\min \left\{ D(g^*,g_{\mathbf{m},\Sigma}): \mathbf{m} \in \mathbb{R}^n, \Sigma \in \mathcal{S}_n^+ \right\}.
 	$$ {#eq-argminDkl}
-This optimization is in general convex and differentiable with respect to $\mathbf{m}$ and $\mathbf{\Sigma}$. Moreover, the solution of @eq-argminDkl can be computed analytically by cancelling the gradient. In the Gaussian case, it is thus proved that $\mathbf{m}^*$ and $\mathbf{\Sigma}^*$ are simply the mean and variance of the zero-variance density [@RubinsteinKroese_CrossentropyMethodUnified_2011v2], [@RubinsteinKroese_SimulationMonteCarlo_2017v2]:
+This optimization is in general convex and differentiable with respect to $\mathbf{m}$ and $\Sigma$. Moreover, the solution of @eq-argminDkl can be computed analytically by cancelling the gradient. In the Gaussian case, it is thus proved that $\mathbf{m}^*$ and $\Sigma^*$ are simply the mean and variance of the zero-variance density [@RubinsteinKroese_CrossentropyMethodUnified_2011v2], [@RubinsteinKroese_SimulationMonteCarlo_2017v2]:
 	$$
-	\mathbf{m}^*=\mathbb{E}_{g^*}(\mathbf{X}) \hspace{0.5cm} \text{ and } \hspace{0.5cm} \mathbf{\Sigma}^* = \textrm{Var}_{g^*} \left(\mathbf{X}\right).
+	\mathbf{m}^*=\mathbb{E}_{g^*}(\mathbf{X}) \hspace{0.5cm} \text{ and } \hspace{0.5cm} \Sigma^* = \textrm{Var}_{g^*} \left(\mathbf{X}\right).
 	$$ {#eq-mstar}
 
 
@@ -110,19 +110,19 @@ This optimization is in general convex and differentiable with respect to $\math
 	
 ## Projecting onto a low-dimensional subspace {#sec-proj} 
 	
-As $g^*$ is unknown, the optimal parameters $\mathbf{m}^*$ and $\mathbf{\Sigma}^*$ given by @eq-mstar are not directly computable. However, we can sample from the optimal density as it is known up to a multiplicative constant.
-Therefore, usual estimation schemes start with estimating $\mathbf{m}^*$ and $\mathbf{\Sigma}^*$, say through $\widehat{\mathbf{m}}^*$ and $\widehat{\mathbf{\Sigma}}^*$, respectively, and then use these approximations to estimate $\mathcal{E}$ through @eq-hatE with the auxiliary density $g_{\widehat{\mathbf{m}}^*, \widehat{\mathbf{\Sigma}}^*}$. Although the estimation of $\mathcal{E}$ with the auxiliary density $g_{\mathbf{m}^*, \mathbf{\Sigma}^*}$ usually provides very good results, it is well-known that in high dimensions, the additional error induced by the estimations of $\mathbf{m}^*$ and $\mathbf{\Sigma}^*$ severely degrades the accuracy of the final estimation [@PapaioannouEtAl_ImprovedCrossEntropybased_2019], [@UribeEtAl_CrossentropybasedImportanceSampling_2020]. The main problem lies in the estimation of $\mathbf{\Sigma}^*$ which, in dimension $n$, involves the estimation of a quadratic (in the dimension) number of terms, namely $n(n+1)/2$.
-Recently, the idea to overcome this problem by only evaluating variance terms in a small number of influential directions was explored in [@MasriEtAl_ImprovementCrossentropyMethod_2020] and [@UribeEtAl_CrossentropybasedImportanceSampling_2020]. In these two papers, the auxiliary covariance matrix $\mathbf{\Sigma}$ is modeled in the form
+As $g^*$ is unknown, the optimal parameters $\mathbf{m}^*$ and $\Sigma^*$ given by @eq-mstar are not directly computable. However, we can sample from the optimal density as it is known up to a multiplicative constant.
+Therefore, usual estimation schemes start with estimating $\mathbf{m}^*$ and $\Sigma^*$, say through $\widehat{\mathbf{m}}^*$ and $\widehat{\Sigma}^*$, respectively, and then use these approximations to estimate $\mathcal{E}$ through @eq-hatE with the auxiliary density $g_{\widehat{\mathbf{m}}^*, \widehat{\Sigma}^*}$. Although the estimation of $\mathcal{E}$ with the auxiliary density $g_{\mathbf{m}^*, \Sigma^*}$ usually provides very good results, it is well-known that in high dimensions, the additional error induced by the estimations of $\mathbf{m}^*$ and $\Sigma^*$ severely degrades the accuracy of the final estimation [@PapaioannouEtAl_ImprovedCrossEntropybased_2019], [@UribeEtAl_CrossentropybasedImportanceSampling_2020]. The main problem lies in the estimation of $\Sigma^*$ which, in dimension $n$, involves the estimation of a quadratic (in the dimension) number of terms, namely $n(n+1)/2$.
+Recently, the idea to overcome this problem by only evaluating variance terms in a small number of influential directions was explored in [@MasriEtAl_ImprovementCrossentropyMethod_2020] and [@UribeEtAl_CrossentropybasedImportanceSampling_2020]. In these two papers, the auxiliary covariance matrix $\Sigma$ is modeled in the form
 	$$
-	\mathbf{\Sigma} = \sum_{i=1}^k (v_i-1) \mathbf{d}_i \mathbf{d}_i^\top + I_n
+	\Sigma = \sum_{i=1}^k (v_i-1) \mathbf{d}_i \mathbf{d}_i^\top + I_n
 	$$ {#eq-Sigmak}
-where the $\mathbf{d}_i$'s are the $k$ orthonormal directions which are deemed influential. It is easy to check that $\mathbf{\Sigma}$ is the covariance matrix of the Gaussian vector
+where the $\mathbf{d}_i$'s are the $k$ orthonormal directions which are deemed influential. It is easy to check that $\Sigma$ is the covariance matrix of the Gaussian vector
 	$$ v^{1/2}_1 Y_1 \mathbf{d}_1 + \cdots + v^{1/2}_k Y_k \mathbf{d}_k + Y_{k+1} \mathbf{d}_{k+1} + \cdots + Y_n \mathbf{d}_n $$
-where the $Y_i$'s are i.i.d. standard normal random variables (one-dimensional), and the $n-k$ vectors $(\mathbf{d}_{k+1}, \ldots, \mathbf{d}_n)$ complete $(\mathbf{d}_1, \ldots, \mathbf{d}_k)$ into an orthonormal basis. In particular, $v_i$ is the variance in the direction of $\mathbf{d}_i$, i.e., $v_i = \mathbf{d}_i^\top \mathbf{\Sigma} \mathbf{d}_i$. In @eq-Sigmak, $k$ can be considered as the effective dimension in which variance terms are estimated. In other words, in [@MasriEtAl_ImprovementCrossentropyMethod_2020] and [@UribeEtAl_CrossentropybasedImportanceSampling_2020], the optimal variance parameter is not sought in $\mathcal{S}^+_n$ as in @eq-argminDkl, but rather in the subset of matrices of the form
+where the $Y_i$'s are i.i.d. standard normal random variables (one-dimensional), and the $n-k$ vectors $(\mathbf{d}_{k+1}, \ldots, \mathbf{d}_n)$ complete $(\mathbf{d}_1, \ldots, \mathbf{d}_k)$ into an orthonormal basis. In particular, $v_i$ is the variance in the direction of $\mathbf{d}_i$, i.e., $v_i = \mathbf{d}_i^\top \Sigma \mathbf{d}_i$. In @eq-Sigmak, $k$ can be considered as the effective dimension in which variance terms are estimated. In other words, in [@MasriEtAl_ImprovementCrossentropyMethod_2020] and [@UribeEtAl_CrossentropybasedImportanceSampling_2020], the optimal variance parameter is not sought in $\mathcal{S}^+_n$ as in @eq-argminDkl, but rather in the subset of matrices of the form
 	$$ \mathcal{L}_{n,k} = \left\{ \sum_{i=1}^k (\alpha_i-1) \frac{\mathbf{d}_i \mathbf{d}_i^\top}{\lVert \mathbf{d}_i \rVert^2} + I_n: \alpha_1, \ldots, \alpha_k >0 \ \text{ and the $\mathbf{d}_i$'s are orthogonal} \right\}. $$
 The relevant minimization problem thus becomes
 	$$ 
-	(\mathbf{m}^*_k, \mathbf{\Sigma}^*_k) = \arg\min \left\{ D(g^*,g_{\mathbf{m},\mathbf{\Sigma}}): \mathbf{m} \in \mathbb{R}^n, \ \mathbf{\Sigma} \in \mathcal{L}_{n,k} \right\}
+	(\mathbf{m}^*_k, \Sigma^*_k) = \arg\min \left\{ D(g^*,g_{\mathbf{m},\Sigma}): \mathbf{m} \in \mathbb{R}^n, \ \Sigma \in \mathcal{L}_{n,k} \right\}
 	$$ {#eq-argminDkl-k}
 instead of @eq-argminDkl, with the effective dimension $k$ being allowed to be adjusted dynamically. By restricting the space in which the variance is assessed, one seeks to limit the number of variance terms to be estimated. The idea is that if the directions are suitably chosen, then the improvement of the accuracy due to the smaller error in estimating the variance terms will compensate the fact that we consider less candidates for the covariance matrix.
 In [@MasriEtAl_ImprovementCrossentropyMethod_2020], the authors consider $k = 1$ and $\mathbf{d}_1 = \mathbf{m}^* / \lVert \mathbf{m}^* \rVert$. When $f$ is Gaussian, this choice is motivated by the fact that, due to the light tail of the Gaussian random variable and the reliability context, the variance should vary significantly in the direction of $\mathbf{m}^*$ and so estimating the variance in this direction can bring information. In @sec-mm, we use the techniques of the present paper to provide a stronger theoretical justification of this choice, see @thm-thm2 and the discussion following it. The method in [@UribeEtAl_CrossentropybasedImportanceSampling_2020] is more involved: $k$ is adjusted dynamically, while the directions $\mathbf{d}_i$ are the eigenvectors associated to the largest eigenvalues of a certain matrix. They span a low-dimensional subspace called Failure-Informed Subspace, and the authors in [@UribeEtAl_CrossentropybasedImportanceSampling_2020] prove that this choice minimizes an upper bound on the minimal KL divergence. In practice, this algorithm yields very accurate results. However, we will not consider it further in the present paper for two reasons. First, this algorithm is tailored for the reliability case where $\phi = \mathbb{I}_{\{\varphi \geq 0\}}$, with a function $\varphi: \mathbb{R}^n \to \mathbb{R}$, whereas our method is more general and applies to the general problem of estimating an integral (see for instance our test case of @sec-sub:payoff). Second, the algorithm in [@UribeEtAl_CrossentropybasedImportanceSampling_2020] requires the evaluation of the gradient of the function $\varphi$. However, this gradient is not always known and can be expensive to evaluate in high dimensions; in some cases, the function $\varphi$ is even not differentiable, as will be the case in our numerical example in @sec-sub:portfolio. 
@@ -134,7 +134,7 @@ The statement of our result involves the following function $\ell$, which is rep
 	\ell: x \in (0,\infty) \mapsto -\log(x) + x - 1.
 	$$ {#eq-l}
 In the following, $(\lambda, \mathbf{d}) \in \mathbb{R} \times \mathbb{R}^n$ is an eigenpair of a matrix $A$ if $A\mathbf{d} = \lambda \mathbf{d}$ and $\lVert \mathbf{d} \rVert = 1$. A diagonalizable matrix has $n$ distinct eigenpairs, say $((\lambda_i, \mathbf{d}_i), i = 1, \ldots, n)$, and we say that these eigenpairs are ranked in decreasing $\ell$-order if $\ell(\lambda_1) \geq \cdots \geq \ell(\lambda_n)$.
-In the rest of the article, we denote as $(\lambda^*_i, \mathbf{d}^*_i)$ the eigenpairs of $\mathbf{\Sigma}^*$ ranked in decreasing $\ell$-order and as $({\widehat{\lambda}}^*_i, \widehat{\mathbf{d}}^*_i)$ the eigenpairs of $\widehat{\mathbf{\Sigma}}^*$ ranked in decreasing $\ell$-order.
+In the rest of the article, we denote as $(\lambda^*_i, \mathbf{d}^*_i)$ the eigenpairs of $\Sigma^*$ ranked in decreasing $\ell$-order and as $({\widehat{\lambda}}^*_i, \widehat{\mathbf{d}}^*_i)$ the eigenpairs of $\widehat{\Sigma}^*$ ranked in decreasing $\ell$-order.
 
 ```{python}
 #| label: fig-l
@@ -178,18 +178,18 @@ plt.show()
 ```
 
 ## Main result of the paper {#sec-main-result-positioning} 
-The main result of the present paper is to compute the exact value for $\mathbf{\mathbf{\Sigma}}^*_k$ in @eq-argminDkl-k, which therefore paves the way for efficient high-dimensional estimation schemes. 
+The main result of the present paper is to compute the exact value for $\mathbf{\Sigma}^*_k$ in @eq-argminDkl-k, which therefore paves the way for efficient high-dimensional estimation schemes. 
 
 ::: {#thm-thm1}
-Let $(\lambda^*_i, \mathbf{d}^*_i)$ be the eigenpairs of $\mathbf{\Sigma}^*$ ranked in decreasing $\ell$-order. Then for $1 \leq k \leq n$, the solution $(\mathbf{m}^*_k, \mathbf{\Sigma}^*_k)$ to @eq-argminDkl-k is given by
+Let $(\lambda^*_i, \mathbf{d}^*_i)$ be the eigenpairs of $\Sigma^*$ ranked in decreasing $\ell$-order. Then for $1 \leq k \leq n$, the solution $(\mathbf{m}^*_k, \Sigma^*_k)$ to @eq-argminDkl-k is given by
 $$
-\mathbf{m}^*_k = \mathbf{m}^* \ \text{ and } \ \mathbf{\Sigma}^*_k = I_n + \sum_{i=1}^k \left( \lambda^*_i - 1 \right) \mathbf{d}^*_i (\mathbf{d}^*_i)^\top. 
+\mathbf{m}^*_k = \mathbf{m}^* \ \text{ and } \ \Sigma^*_k = I_n + \sum_{i=1}^k \left( \lambda^*_i - 1 \right) \mathbf{d}^*_i (\mathbf{d}^*_i)^\top. 
 $$ {#eq-Sigma-k}
 :::
 
-The proof of @thm-thm1 is detailed in [Appendix A](#sec-proof). For $k = 1$ for instance, the matrix $\mathbf{\Sigma}^*_1 = I_n + (\lambda_1^*-1) \mathbf{d}_1^* (\mathbf{d}_1^*)^\top$ with $(\lambda_1^*, \mathbf{d}_1^*)$ the eigenpair of $\mathbf{\Sigma}^*$ such as $\lambda_1^*$ is either the largest or the smallest eigenvalue of $\mathbf{\Sigma}^*$, depending on which one maximizes $\ell$.
+The proof of @thm-thm1 is detailed in [Appendix A](#sec-proof). For $k = 1$ for instance, the matrix $\Sigma^*_1 = I_n + (\lambda_1^*-1) \mathbf{d}_1^* (\mathbf{d}_1^*)^\top$ with $(\lambda_1^*, \mathbf{d}_1^*)$ the eigenpair of $\Sigma^*$ such as $\lambda_1^*$ is either the largest or the smallest eigenvalue of $\Sigma^*$, depending on which one maximizes $\ell$.
 
-This theoretical result therefore suggests to reduce dimension by computing the covariance matrix $\widehat{\mathbf{\Sigma}}^*$ and its eigenpairs, rank them in decreasing $\ell$-order and then use the $k$ first eigenpairs $(({\widehat{\lambda}}^*_i, {\widehat{\mathbf{d}}}^*_i), i = 1, \ldots, k)$ to build the covariance matrix $\widehat{\mathbf{\Sigma}}^*_k = \sum_{i=1}^k ({\widehat{\lambda}}^*_i-1) {\widehat{\mathbf{d}}}^*_i ({{\widehat{\mathbf{d}}}^*}_i)^\top + I_n$ and the corresponding auxiliary density. This scheme is summarized in Algorithm 1. The effective dimension $k$ is obtained by Algorithm 2, see @sec-choicek below. The proof of the theorem is shown in [Appendix A](#sec-proof).
+This theoretical result therefore suggests to reduce dimension by computing the covariance matrix $\widehat{\Sigma}^*$ and its eigenpairs, rank them in decreasing $\ell$-order and then use the $k$ first eigenpairs $(({\widehat{\lambda}}^*_i, {\widehat{\mathbf{d}}}^*_i), i = 1, \ldots, k)$ to build the covariance matrix $\widehat{\Sigma}^*_k = \sum_{i=1}^k ({\widehat{\lambda}}^*_i-1) {\widehat{\mathbf{d}}}^*_i ({{\widehat{\mathbf{d}}}^*}_i)^\top + I_n$ and the corresponding auxiliary density. This scheme is summarized in Algorithm 1. The effective dimension $k$ is obtained by Algorithm 2, see @sec-choicek below. The proof of the theorem is shown in [Appendix A](#sec-proof).
 
 
 ```{.pseudocode}
@@ -199,24 +199,24 @@ This theoretical result therefore suggests to reduce dimension by computing the 
 \State \textbf{Data}: Sample sizes $N$ and $M$
 \State \textbf{Result}: Estimation $\widehat{\mathcal{E}_N}$ of integral $\mathcal{E}$
 \State - Generate a sample $\mathbf{X}^*_1,\ldots,\mathbf{X}^*_M$  on $\mathbb{R}^n$ independently according to $g^*$
-\State - Estimate $\widehat{\mathbf{m}}^*$ and $\widehat{\mathbf{\Sigma}}^*$ defined in Equation 8 and Equation 9 with this sample
-\State - Compute the eigenpairs $(\widehat{\lambda}^*_i, \widehat{\mathbf{d}}^*_i)$ of $\widehat{\mathbf{\Sigma}}^*$ ranked in decreasing $\ell$-order
-\State - Compute the matrix $\widehat{\mathbf{\Sigma}}^*_k = \sum_{i=1}^k ({\widehat{\lambda}}^*_i-1) {\widehat{\mathbf{d}}}^*_i ({{\widehat{\mathbf{d}}}^*}_i)^\top + I_n$ with $k$ obtained by applying Algorithm 2 with input $({\widehat{\lambda}}^*_1, \ldots, {\widehat{\lambda}}^*_n)$
-\State - Generate a new sample $\mathbf{X}_1,\ldots,\mathbf{X}_N$ independently from $g' = g_{\widehat{\mathbf{m}}^*,\widehat{\mathbf{\Sigma}}^*_k}$
+\State - Estimate $\widehat{\mathbf{m}}^*$ and $\widehat{\Sigma}^*$ defined in Equation 8 and Equation 9 with this sample
+\State - Compute the eigenpairs $(\widehat{\lambda}^*_i, \widehat{\mathbf{d}}^*_i)$ of $\widehat{\Sigma}^*$ ranked in decreasing $\ell$-order
+\State - Compute the matrix $\widehat{\Sigma}^*_k = \sum_{i=1}^k ({\widehat{\lambda}}^*_i-1) {\widehat{\mathbf{d}}}^*_i ({{\widehat{\mathbf{d}}}^*}_i)^\top + I_n$ with $k$ obtained by applying Algorithm 2 with input $({\widehat{\lambda}}^*_1, \ldots, {\widehat{\lambda}}^*_n)$
+\State - Generate a new sample $\mathbf{X}_1,\ldots,\mathbf{X}_N$ independently from $g' = g_{\widehat{\mathbf{m}}^*,\widehat{\Sigma}^*_k}$
 \State - Return $\displaystyle \widehat{\mathcal{E}_N}=\frac{1}{N}\underset{i=1}{\overset{N}{\sum}} \phi(\mathbf{X}_i)\frac{f(\mathbf{X}_i)}{g'(\mathbf{X}_i)}$
 \end{algorithmic}
 \end{algorithm}
 ```
 
 ::: {.remark}
-Since the function $\ell$ is minimized at 1, eigenpairs with $\lambda^*_i =1$ are selected in the sum of @eq-Sigma-k once all other eigenpairs have been picked as the eigenpairs are $\ell$-ordered: in other words, if $\lambda^*_i = 1$ then $\lambda^*_j = 1$ for all $j \geq i$. Note also that the minimizer $1$ plays a special role as we are interested in covariance matrices of $\mathcal{L}_{n,k}$ which, once diagonalized, have mostly ones in the main diagonal (except for k values associated with the $\alpha_i$). As $k$ will be small (See @sec-choicek), typically $k = 1$ or $2$, this amounts to finding covariance matrices that are perturbations of the identity (this is relevant as we assume $f$ is standard Gaussian). Therefore, when approximating $\mathbf{\Sigma}^*$ by such matrices, we should first consider eigenvalues as different as possible from $1$ (with the discrepancy from 1 being measured by $\ell$).
+Since the function $\ell$ is minimized at 1, eigenpairs with $\lambda^*_i =1$ are selected in the sum of @eq-Sigma-k once all other eigenpairs have been picked as the eigenpairs are $\ell$-ordered: in other words, if $\lambda^*_i = 1$ then $\lambda^*_j = 1$ for all $j \geq i$. Note also that the minimizer $1$ plays a special role as we are interested in covariance matrices of $\mathcal{L}_{n,k}$ which, once diagonalized, have mostly ones in the main diagonal (except for k values associated with the $\alpha_i$). As $k$ will be small (See @sec-choicek), typically $k = 1$ or $2$, this amounts to finding covariance matrices that are perturbations of the identity (this is relevant as we assume $f$ is standard Gaussian). Therefore, when approximating $\Sigma^*$ by such matrices, we should first consider eigenvalues as different as possible from $1$ (with the discrepancy from 1 being measured by $\ell$).
 :::
 
 In the first step of Algorithm 1, we assume $g^*$ can be sampled independently. This is a reasonable assumption as classical techniques such as importance sampling with self-normalized weights or Markov Chain Monte Carlo (MCMC) can be applied in this case (see for instance [@ChanKroese_ImprovedCrossentropyMethod_2012], [@GraceEtAl_AutomatedStateDependentImportance_2014]). In this paper, we choose to apply a basic rejection method that yields perfect independent samples from $g^*$, possibly at the price of a high computational cost. As the primary goal of this paper is to understand whether the $\mathbf{d}^*_i$'s are indeed good projection directions, this cost will not be taken into account. Possible improvements to relax this assumption are discussed in the conclusion of the paper and in [Appendix C](#sec-MCMC).
 
 
 ## Choice of the number of dimensions $k$ {#sec-choicek} 
-The choice of the effective dimension $k$, i.e., the number of projection directions considered, is important. If it is close to $n$, then the matrix $\widehat{\mathbf{\Sigma}}^*_k$ will be close to $\widehat{\mathbf{\Sigma}}^*$ which is the situation we want to avoid in the first place. On the other hand, setting $k=1$ in all cases may be too simple and lead to suboptimal results. In practice, however this is often a good choice. In order to adapt $k$ dynamically, we consider a simple method based on the value of the KL divergence. Given the eigenvalues $\lambda_1, \ldots, \lambda_n$ ranked in decreasing $\ell$-order, we look for the maximal gap between two consecutive eigenvalues of the sequence $(\ell(\lambda_1), \ldots, \ell(\lambda_n))$. This allows to choose $k$ such that $\sum_{i=1}^k \ell(\lambda_i)$ is close to $\sum_{i=1}^n \ell(\lambda_i)$ which is equal, up to an additive constant, to the minimal KL divergence (shown in @lem-D). The precise method is described in Algorithm 2. 
+The choice of the effective dimension $k$, i.e., the number of projection directions considered, is important. If it is close to $n$, then the matrix $\widehat{\Sigma}^*_k$ will be close to $\widehat{\Sigma}^*$ which is the situation we want to avoid in the first place. On the other hand, setting $k=1$ in all cases may be too simple and lead to suboptimal results. In practice, however this is often a good choice. In order to adapt $k$ dynamically, we consider a simple method based on the value of the KL divergence. Given the eigenvalues $\lambda_1, \ldots, \lambda_n$ ranked in decreasing $\ell$-order, we look for the maximal gap between two consecutive eigenvalues of the sequence $(\ell(\lambda_1), \ldots, \ell(\lambda_n))$. This allows to choose $k$ such that $\sum_{i=1}^k \ell(\lambda_i)$ is close to $\sum_{i=1}^n \ell(\lambda_i)$ which is equal, up to an additive constant, to the minimal KL divergence (shown in @lem-D). The precise method is described in Algorithm 2. 
 
 ```{.pseudocode}
 \begin{algorithm}
@@ -234,7 +234,7 @@ The choice of the effective dimension $k$, i.e., the number of projection direct
 In [@MasriEtAl_ImprovementCrossentropyMethod_2020], the authors propose to project on the mean $\mathbf{m}^*$ of the optimal auxiliary density $g^*$. Numerically, this algorithm is shown to perform well, but only a very heuristic explanation based on the light tail of the Gaussian distribution is provided to motivate this choice. It turns out that the techniques used in the proof of @thm-thm1 can shed light on why projecting on $\mathbf{m}^*$ may indeed be a good idea. Let us first state our theoretical result, and then explain why it justifies the idea of projecting on $\mathbf{m}^*$.
     
 ::: {#thm-thm2}
-Consider $\mathbf{\Sigma} \in \mathcal{L}_{n,1}$ of the form $\mathbf{\Sigma} = I_n + (\alpha - 1) \mathbf{d} \mathbf{d}^\top$ with $\alpha > 0$ and $\lVert \mathbf{d} \rVert = 1$. Then the minimizer in $(\alpha, \mathbf{d})$ of the KL divergence between $f$ and $g_{\mathbf{m}^*, \mathbf{\Sigma}}$ is $(1+\lVert \mathbf{m}^*\rVert^2, \mathbf{m}^* / \lVert \mathbf{m}^* \rVert)$:
+Consider $\Sigma \in \mathcal{L}_{n,1}$ of the form $\Sigma = I_n + (\alpha - 1) \mathbf{d} \mathbf{d}^\top$ with $\alpha > 0$ and $\lVert \mathbf{d} \rVert = 1$. Then the minimizer in $(\alpha, \mathbf{d})$ of the KL divergence between $f$ and $g_{\mathbf{m}^*, \Sigma}$ is $(1+\lVert \mathbf{m}^*\rVert^2, \mathbf{m}^* / \lVert \mathbf{m}^* \rVert)$:
 		$$\left( 1+\lVert \mathbf{m}^*\rVert^2, \mathbf{m}^* / \lVert \mathbf{m}^* \rVert \right) = \arg \min_{\alpha, \mathbf{d}} \left\{ D(f, g_{\mathbf{m}^*, I_n + (\alpha - 1) \mathbf{d} \mathbf{d}^\top}): \alpha > 0, \ \lVert \mathbf{d} \rVert = 1 \right\}. $$
 :::
 The proof of @thm-thm2 is detailed in [Appendix A](#sec-proof). In other words, $\mathbf{m}^*$ appears as an optimal projection direction when one seeks to minimize the KL divergence between $f$ and the Gaussian density with mean $\mathbf{m}^*$ and covariance of the form $I_n + (\alpha - 1) \mathbf{d} \mathbf{d}^\top$. Let us now explain why this minimization problem is indeed relevant, and why choosing an auxiliary density which minimizes this KL divergence may indeed lead to an accurate estimation. The justification deeply relies on the recent results by [@Chatterjee18:0].
@@ -243,7 +243,7 @@ As mentioned above, in a reliability context where one seeks to estimate a small
 	
 However, in high dimensions, importance sampling is known to fail because of the weight degeneracy problem whereby $\max_i L_i / \sum_i L_i \approx 1$, with the $L_i$'s the unnormalized importance weights, or likelihood ratios: $L_i = f(\mathbf{X}_i) / g(\mathbf{X}_i)$ with the $\mathbf{X}_i$'s i.i.d. drawn according to $g$. Theorem $2.3$ in [@Chatterjee18:0] shows that the weight degeneracy problem is avoided if the empirical mean of the likelihood ratios is close to $1$, and for this, Theorem $1.1$ in [@Chatterjee18:0] shows that the sample size should be larger than $e^{D(f, g)}$. In other words, these results suggest that the KL divergence with $g^*$ governs the sample size for an accurate estimation of $p$, while the KL divergence with $f$ governs the weight degeneracy problem.
 	
-In light of these results, it becomes natural to consider the KL divergence with $f$ and not only $g^*$ [@OwenZhou_SafeEffectiveImportance_2000]. Of course, minimizing $D(f, g_{\mathbf{m}, \mathbf{\Sigma}})$ without constraints on $\mathbf{m}$ and $\mathbf{\Sigma}$ is trivial since $g_{\mathbf{m}, \mathbf{\Sigma}} = f$ for $\mathbf{m} = 0$ and $\mathbf{\Sigma} = I_n$. However, these choices are the ones we want to avoid in the first place, and so it makes sense to impose some constraints on $\mathbf{m}$ and $\mathbf{\Sigma}$. If one keeps in mind the other objective of getting close to $g^*$, then the choice $\mathbf{m} = \mathbf{m}^*$ becomes very natural, and we are led to considering the optimization problem of @thm-thm2 (when $\mathbf{\Sigma} \in \mathcal{L}_{n,1}$ is a rank-1 perturbation of the identity).
+In light of these results, it becomes natural to consider the KL divergence with $f$ and not only $g^*$ [@OwenZhou_SafeEffectiveImportance_2000]. Of course, minimizing $D(f, g_{\mathbf{m}, \Sigma})$ without constraints on $\mathbf{m}$ and $\Sigma$ is trivial since $g_{\mathbf{m}, \Sigma} = f$ for $\mathbf{m} = 0$ and $\Sigma = I_n$. However, these choices are the ones we want to avoid in the first place, and so it makes sense to impose some constraints on $\mathbf{m}$ and $\Sigma$. If one keeps in mind the other objective of getting close to $g^*$, then the choice $\mathbf{m} = \mathbf{m}^*$ becomes very natural, and we are led to considering the optimization problem of @thm-thm2 (when $\Sigma \in \mathcal{L}_{n,1}$ is a rank-1 perturbation of the identity).
 
 
 # Computational framework {#sec-num-results-framework} 
@@ -263,10 +263,10 @@ The precise numerical framework that we will consider to assess the efficiency o
 
 The number of samples $M$ and $N$ are respectively set to $M=500$ and $N=2000$. The computational cost to generate $M=500$ samples distributed from $g^*$ with rejection sampling is often unaffordable in practice; if $\mathcal{E}$ is a probability of order $10^{-p}$, then approximately $500\times10^p$ calls to $\phi$ are necessary for the generation of $\mathbf{X}^*_1,\ldots,\mathbf{X}^*_M$. Finally, whatever the auxiliary parametric density $g'$ computed from $\mathbf{X}^*_1,\ldots,\mathbf{X}^*_M$, the number of calls to $\phi$ for the estimation step stays constant and equal to $N$. The number of calls to $\phi$ for the whole procedure on a $10^{-p}$ probability estimation is about $500\times10^p+N$. A more realistic situation is considered in [Appendix C](#sec-MCMC) where MCMC is applied to generate samples from $g^*$. The resulting samples are dependent but the computational cost is significanlty reduced. The number of calls to $\phi$ with MCMC is then equal to $M$ which leads to a total computational cost of $M+N$ for the whole procedure.
 
-This procedure is then repeated $500$ times to provide a mean estimation $\widehat{\mathcal{E}}$ of $\mathcal{E}$. In the result tables, for each auxiliary density $g'$ we report the corresponding value for the relative error $\widehat{\mathcal{E}}/ \mathcal{E}-1$ and the coefficient of variation of the $500$ iterations (the empirical standard deviation divided by $\mathcal{E}$). As was established in the proof of @thm-thm1, the KL divergence is, up to an additive constant, equal to $D'(\mathbf{\Sigma}) = \log \lvert \mathbf{\Sigma} \rvert + \textrm{tr}(\mathbf{\Sigma}^* \mathbf{\Sigma}^{-1})$ which we will refer to as partial KL divergence. In the result tables, we also report thus the mean value of $D'(\mathbf{\Sigma})$ to analyse the relevance of the auxiliary density $g_{\widehat{\mathbf{m}}^*, \mathbf{\Sigma}}$ for six choices of covariance matrix $\mathbf{\Sigma}$. The next sections specify the different parameters of $g'$ for the Gaussian model and for the vMFN model we have considered in the simulations. 
+This procedure is then repeated $500$ times to provide a mean estimation $\widehat{\mathcal{E}}$ of $\mathcal{E}$. In the result tables, for each auxiliary density $g'$ we report the corresponding value for the relative error $\widehat{\mathcal{E}}/ \mathcal{E}-1$ and the coefficient of variation of the $500$ iterations (the empirical standard deviation divided by $\mathcal{E}$). As was established in the proof of @thm-thm1, the KL divergence is, up to an additive constant, equal to $D'(\Sigma) = \log \lvert \Sigma \rvert + \textrm{tr}(\Sigma^* \Sigma^{-1})$ which we will refer to as partial KL divergence. In the result tables, we also report thus the mean value of $D'(\Sigma)$ to analyse the relevance of the auxiliary density $g_{\widehat{\mathbf{m}}^*, \Sigma}$ for six choices of covariance matrix $\Sigma$. The next sections specify the different parameters of $g'$ for the Gaussian model and for the vMFN model we have considered in the simulations. 
 
 ## Choice of the auxiliary density $g'$ for the Gaussian model  {#sec-def_cov} 
-The goal is to get benchmark results to assess whether one can improve estimations of Gaussian IS auxiliary density by projecting the covariance matrix $\mathbf{\Sigma}^*$ in the proposed directions $\mathbf{d}^*_i$. The algorithm that we study here (Algorithms 1+2) aims more precisely at understanding whether:
+The goal is to get benchmark results to assess whether one can improve estimations of Gaussian IS auxiliary density by projecting the covariance matrix $\Sigma^*$ in the proposed directions $\mathbf{d}^*_i$. The algorithm that we study here (Algorithms 1+2) aims more precisely at understanding whether:
 
 - projecting can improve the situation with respect to the empirical covariance matrix;
 - the $\mathbf{d}^*_i$'s are good candidates, in particular compared to the choice $\mathbf{m}^*$ suggested in [@MasriEtAl_ImprovementCrossentropyMethod_2020];
@@ -278,29 +278,29 @@ $$
 $$ {#eq-hatm}
 In our numerical test cases, we will compare six different choices of Gaussian auxiliary distributions $g'$ with mean $\widehat{\mathbf{m}}^*$ and the following covariance matrices summarized in @tbl-sigma:
 
-1. $\mathbf{\Sigma}^*$: the optimal covariance matrix given by @eq-mstar;
+1. $\Sigma^*$: the optimal covariance matrix given by @eq-mstar;
 
-2. $\widehat{\mathbf{\Sigma}}^*$: the empirical estimation of $\mathbf{\Sigma}^*$ given by
+2. $\widehat{\Sigma}^*$: the empirical estimation of $\Sigma^*$ given by
 $$
-	\widehat{\mathbf{\Sigma}}^* = \frac{1}{M}\sum_{i=1}^M (\mathbf{X}_i^*-\widehat{\mathbf{m}}^*)(\mathbf{X}_i^*-\widehat{\mathbf{m}}^*)^\top.
+	\widehat{\Sigma}^* = \frac{1}{M}\sum_{i=1}^M (\mathbf{X}_i^*-\widehat{\mathbf{m}}^*)(\mathbf{X}_i^*-\widehat{\mathbf{m}}^*)^\top.
 $$ {#eq-hatSigma}
 
 The four other covariance matrices considered in the numerical simulations are of the form 
-	 $\sum_{i=1}^k (v_i-1) \mathbf{d}_i \mathbf{d}^\top_i + I_n$ where $v_i$ is the variance of $\widehat{\mathbf{\Sigma}}^*$ in the direction $\mathbf{d}_i$, $v_i = \mathbf{d}_i^\top \widehat{\mathbf{\Sigma}}^* \mathbf{d}_i$. The considered choice of $k$ and $\mathbf{d}_i$ gives the following covariance matrices:   
+	 $\sum_{i=1}^k (v_i-1) \mathbf{d}_i \mathbf{d}^\top_i + I_n$ where $v_i$ is the variance of $\widehat{\Sigma}^*$ in the direction $\mathbf{d}_i$, $v_i = \mathbf{d}_i^\top \widehat{\Sigma}^* \mathbf{d}_i$. The considered choice of $k$ and $\mathbf{d}_i$ gives the following covariance matrices:   
      
-3. ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{opt}}$ is obtained by choosing $\mathbf{d}_i = \mathbf{d}^*_i$ of @thm-thm1, which is supposed to be perfectly known from $\mathbf{\Sigma}^*$ and $k$ is computed with Algorithm 2;
+3. ${\widehat{\Sigma}^{\text{}}_\text{opt}}$ is obtained by choosing $\mathbf{d}_i = \mathbf{d}^*_i$ of @thm-thm1, which is supposed to be perfectly known from $\Sigma^*$ and $k$ is computed with Algorithm 2;
 
-4. ${\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{opt}}$ is obtained by choosing $\mathbf{d}_i = {\widehat{\mathbf{d}}}^*_i$ the $i$-th eigenvector of $\widehat{\mathbf{\Sigma}}^*$ (in $\ell$-order), which is an estimation of $\mathbf{d}^*_i$, and $k$ is computed with Algorithm 2;
+4. ${\widehat{\Sigma}^{\text{+d}}_\text{opt}}$ is obtained by choosing $\mathbf{d}_i = {\widehat{\mathbf{d}}}^*_i$ the $i$-th eigenvector of $\widehat{\Sigma}^*$ (in $\ell$-order), which is an estimation of $\mathbf{d}^*_i$, and $k$ is computed with Algorithm 2;
 
-5. ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{mean}}$ is obtained by choosing $k = 1$ and $\mathbf{d}_1 = \mathbf{m}^* / \lVert \mathbf{m}^* \rVert$;	
+5. ${\widehat{\Sigma}^{\text{}}_\text{mean}}$ is obtained by choosing $k = 1$ and $\mathbf{d}_1 = \mathbf{m}^* / \lVert \mathbf{m}^* \rVert$;	
 
-6. ${\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{mean}}$ is obtained by choosing $k = 1$ and $\mathbf{d}_1 = {\widehat{\mathbf{m}}}^* / \lVert {\widehat{\mathbf{m}}}^* \rVert$, where $\widehat{\mathbf{m}}^*$ given by @eq-hatm.  
+6. ${\widehat{\Sigma}^{\text{+d}}_\text{mean}}$ is obtained by choosing $k = 1$ and $\mathbf{d}_1 = {\widehat{\mathbf{m}}}^* / \lVert {\widehat{\mathbf{m}}}^* \rVert$, where $\widehat{\mathbf{m}}^*$ given by @eq-hatm.  
 
-The matrices ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{opt}}$ and ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{mean}}$ use the estimation $\widehat{\mathbf{\Sigma}}^*$ with the optimal directions $\mathbf{d}^*_i$ or $\mathbf{m}^*$, while the matrices ${\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{opt}}$ and ${\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{mean}}$ involve an estimation of these directions from $\widehat{\mathbf{\Sigma}}^*$. By definition, $\mathbf{\Sigma}^*$ will give optimal results, while results for $\widehat{\mathbf{\Sigma}}^*$ will deteriorate as the dimension increases, which is the well-known behavior which we try to improve. Moreover, $\mathbf{\Sigma}^*$ and the projection directions $\mathbf{d}^*_i$ or $\mathbf{m}^*$, are of course unknown in practice. For simulation comparison purpose, they could be determined analytically in simple test cases and otherwise we obtained them by a brute force Monte Carlo scheme with a very high simulation budget. Finally, we emphasize that Algorithm 1 corresponds to estimating and projecting on the $\mathbf{d}^*_i$'s, and so the matrix $\widehat{\mathbf{\Sigma}}^*_k$ of Algorithm 1 is equal to the matrix ${\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{opt}}$. 
+The matrices ${\widehat{\Sigma}^{\text{}}_\text{opt}}$ and ${\widehat{\Sigma}^{\text{}}_\text{mean}}$ use the estimation $\widehat{\Sigma}^*$ with the optimal directions $\mathbf{d}^*_i$ or $\mathbf{m}^*$, while the matrices ${\widehat{\Sigma}^{\text{+d}}_\text{opt}}$ and ${\widehat{\Sigma}^{\text{+d}}_\text{mean}}$ involve an estimation of these directions from $\widehat{\Sigma}^*$. By definition, $\Sigma^*$ will give optimal results, while results for $\widehat{\Sigma}^*$ will deteriorate as the dimension increases, which is the well-known behavior which we try to improve. Moreover, $\Sigma^*$ and the projection directions $\mathbf{d}^*_i$ or $\mathbf{m}^*$, are of course unknown in practice. For simulation comparison purpose, they could be determined analytically in simple test cases and otherwise we obtained them by a brute force Monte Carlo scheme with a very high simulation budget. Finally, we emphasize that Algorithm 1 corresponds to estimating and projecting on the $\mathbf{d}^*_i$'s, and so the matrix $\widehat{\Sigma}^*_k$ of Algorithm 1 is equal to the matrix ${\widehat{\Sigma}^{\text{+d}}_\text{opt}}$. 
 
-|   |$\mathbf{\Sigma}^*$|$\widehat{\mathbf{\Sigma}}^*$|${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{opt}}$|${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{mean}}$|${\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{opt}}$|${\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{mean}}$|
+|   |$\Sigma^*$|$\widehat{\Sigma}^*$|${\widehat{\Sigma}^{\text{}}_\text{opt}}$|${\widehat{\Sigma}^{\text{}}_\text{mean}}$|${\widehat{\Sigma}^{\text{+d}}_\text{opt}}$|${\widehat{\Sigma}^{\text{+d}}_\text{mean}}$|
 |-------|---|---|---|---|---|---|---|
-|Initial covariance matrix|$\mathbf{\Sigma}^*$|$\widehat{\mathbf{\Sigma}}^*$|$\widehat{\mathbf{\Sigma}}^*$|$\widehat{\mathbf{\Sigma}}^*$|$\widehat{\mathbf{\Sigma}}^*$|$\widehat{\mathbf{\Sigma}}^*$|
+|Initial covariance matrix|$\Sigma^*$|$\widehat{\Sigma}^*$|$\widehat{\Sigma}^*$|$\widehat{\Sigma}^*$|$\widehat{\Sigma}^*$|$\widehat{\Sigma}^*$|
 |Projection directions (exact or estimated)|-|-|Exact|Exact|Estimated|Estimated|
 |Choice for the projection direction|None|None|Opt|Mean|Opt|Mean|
 :  Presentation of the six covariance matrices considered in the numerical examples. {#tbl-sigma}
@@ -314,31 +314,31 @@ We consider a test case where all computations can be made exactly. This is a cl
 $$
 	\varphi: \mathbf{x}=(x_1,\ldots,x_n)\in\mathbb{R}^n \mapsto\underset{j=1}{\overset{n}{\sum}} x_j-3\sqrt{n}.
 $${#eq-sum}
-The quantity of interest $\mathcal{E}$ is defined as $\mathcal{E}=\int_{\mathbb{R}^n} \phi(\mathbf{x}) f(\mathbf{x}) \textrm{d}\mathbf{x} = \mathbb{P}_f(\varphi(\mathbf{X})\geq 0)\simeq 1.35\cdot 10^{-3}$ for all $n$ where the density $f$ is the standard $n$-dimensional Gaussian distribution. Here, the zero-variance density is $g^*(\mathbf{x})=\dfrac{f(\mathbf{x})\mathbb{I}_{\{\varphi(\mathbf{x})\geq 0\}}}{\mathcal{E}}$, and the optimal parameters $\mathbf{m}^*$ and $\mathbf{\Sigma}^*$ in @eq-mstar can be computed exactly, namely $\mathbf{m}^* = \alpha \textbf{1}$ with $\alpha = e^{-9/2}/(\mathcal{E}(2\pi)^{1/2})$ and $\textbf{1} = \frac{1}{\sqrt n} (1,\ldots,1) \in \mathbb{R}^n$ the normalized constant vector, and $\mathbf{\Sigma}^* =(v-1) \mathbf{1} \mathbf{1}^\top + I_n$ with $v=3\alpha-\alpha^2+1$.
+The quantity of interest $\mathcal{E}$ is defined as $\mathcal{E}=\int_{\mathbb{R}^n} \phi(\mathbf{x}) f(\mathbf{x}) \textrm{d}\mathbf{x} = \mathbb{P}_f(\varphi(\mathbf{X})\geq 0)\simeq 1.35\cdot 10^{-3}$ for all $n$ where the density $f$ is the standard $n$-dimensional Gaussian distribution. Here, the zero-variance density is $g^*(\mathbf{x})=\dfrac{f(\mathbf{x})\mathbb{I}_{\{\varphi(\mathbf{x})\geq 0\}}}{\mathcal{E}}$, and the optimal parameters $\mathbf{m}^*$ and $\Sigma^*$ in @eq-mstar can be computed exactly, namely $\mathbf{m}^* = \alpha \textbf{1}$ with $\alpha = e^{-9/2}/(\mathcal{E}(2\pi)^{1/2})$ and $\textbf{1} = \frac{1}{\sqrt n} (1,\ldots,1) \in \mathbb{R}^n$ the normalized constant vector, and $\Sigma^* =(v-1) \mathbf{1} \mathbf{1}^\top + I_n$ with $v=3\alpha-\alpha^2+1$.
 
 ###  Evolution of the partial KL divergence and spectrum
-@fig-eigsum-1 represents the evolution as the dimension varies between $5$ and $100$ of the partial KL divergence $D'$ for three different choices of covariance matrix: the optimal matrix $\mathbf{\Sigma}^*$, its empirical estimation $\widehat{\mathbf{\Sigma}}^*$ and the estimation $\widehat{\mathbf{\Sigma}}^*_k$ of the optimal lower-dimensional covariance matrix. We can notice that the partial KL divergence for $\widehat{\mathbf{\Sigma}}^*$ grows much faster than the other two, and that the partial KL divergence for $\widehat{\mathbf{\Sigma}}^*_k$ remains very close to the optimal value $D'(\mathbf{\Sigma}^*)$. As the KL divergence is a proxy for the efficiency of the auxiliary density (it is for instance closely related to the number of samples required for a given precision [@Chatterjee18:0]), this suggests that using $\widehat{\mathbf{\Sigma}}^*_k$ will provide results close to optimal.
+@fig-eigsum-1 represents the evolution as the dimension varies between $5$ and $100$ of the partial KL divergence $D'$ for three different choices of covariance matrix: the optimal matrix $\Sigma^*$, its empirical estimation $\widehat{\Sigma}^*$ and the estimation $\widehat{\Sigma}^*_k$ of the optimal lower-dimensional covariance matrix. We can notice that the partial KL divergence for $\widehat{\Sigma}^*$ grows much faster than the other two, and that the partial KL divergence for $\widehat{\Sigma}^*_k$ remains very close to the optimal value $D'(\Sigma^*)$. As the KL divergence is a proxy for the efficiency of the auxiliary density (it is for instance closely related to the number of samples required for a given precision [@Chatterjee18:0]), this suggests that using $\widehat{\Sigma}^*_k$ will provide results close to optimal.
 
-We now check this claim. As $\mathbf{\Sigma}^* = (v-1) \textbf{1} \textbf{1}^\top + I_n$, its eigenpairs are $(v, \textbf{1})$ and $(1,\mathbf{d}_i)$ where the $\mathbf{d}_i$'s form an orthonormal basis of the space orthogonal to the space spanned by $\textbf{1}$. In particular, $(v, \textbf{1})$ is the largest (in $\ell$-order) eigenpair of $\mathbf{\Sigma}^*$ and $\mathbf{\Sigma}^*_k = \mathbf{\Sigma}^*$ for any $k \geq 1$.
+We now check this claim. As $\Sigma^* = (v-1) \textbf{1} \textbf{1}^\top + I_n$, its eigenpairs are $(v, \textbf{1})$ and $(1,\mathbf{d}_i)$ where the $\mathbf{d}_i$'s form an orthonormal basis of the space orthogonal to the space spanned by $\textbf{1}$. In particular, $(v, \textbf{1})$ is the largest (in $\ell$-order) eigenpair of $\Sigma^*$ and $\Sigma^*_k = \Sigma^*$ for any $k \geq 1$.
 
-In practice, we do not use this theoretical knowledge and $\mathbf{\Sigma}^*$, $\mathbf{\Sigma}^*_k$ and the eigenpairs are estimated. The six covariance matrices introduced in @sec-def_cov and in which we are interested are as follows:
+In practice, we do not use this theoretical knowledge and $\Sigma^*$, $\Sigma^*_k$ and the eigenpairs are estimated. The six covariance matrices introduced in @sec-def_cov and in which we are interested are as follows:
 
-- $\mathbf{\Sigma}^* = (v-1) \textbf{1} \textbf{1}^\top + I_n$;
-- $\widehat{\mathbf{\Sigma}}^*$ given by @eq-hatSigma;
-- ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{opt}}$ and ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{mean}}$ are equal and given by $(\widehat \lambda-1) \textbf{1} \textbf{1}^\top + I_n$ with $\widehat{\lambda} = \textbf{1}^\top \widehat{\mathbf{\Sigma}}^* \textbf{1}$. This amounts to assuming that the projection direction $\textbf{1}$ is perfectly known, whereas the variance in this direction is estimated;
-- ${\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{opt}} = (\widehat{\lambda} - 1) \widehat{\mathbf{d}} {\widehat{\mathbf{d}}}^\top + I_n$ with $(\widehat{\lambda}, \widehat{\mathbf{d}})$ the smallest eigenpair of $\widehat{\mathbf{\Sigma}}^*$. The difference with the previous case is that we do not assume anymore that the optimal projection direction $\textbf{1}$ is known, and so it needs to be estimated;
-- ${\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{mean}} = (\widehat{\lambda} - 1) \frac{\widehat{\mathbf{m}}^* {(\widehat{\mathbf{m}}^*)}^\top}{\lVert \widehat{\mathbf{m}}^* \rVert^2} + I_n$ with $\widehat{\mathbf{m}}^*$ given by @eq-hatm and $\widehat{\lambda} = \frac{{(\widehat{\mathbf{m}}^*)}^\top \widehat{\mathbf{\Sigma}}^* \widehat{\mathbf{m}}^*}{\lVert \widehat{\mathbf{m}}^* \rVert^2}$. Here we assume that $\mathbf{m}^*$ is a good projection direction, but is unknown and therefore needs to be estimated.
+- $\Sigma^* = (v-1) \textbf{1} \textbf{1}^\top + I_n$;
+- $\widehat{\Sigma}^*$ given by @eq-hatSigma;
+- ${\widehat{\Sigma}^{\text{}}_\text{opt}}$ and ${\widehat{\Sigma}^{\text{}}_\text{mean}}$ are equal and given by $(\widehat \lambda-1) \textbf{1} \textbf{1}^\top + I_n$ with $\widehat{\lambda} = \textbf{1}^\top \widehat{\Sigma}^* \textbf{1}$. This amounts to assuming that the projection direction $\textbf{1}$ is perfectly known, whereas the variance in this direction is estimated;
+- ${\widehat{\Sigma}^{\text{+d}}_\text{opt}} = (\widehat{\lambda} - 1) \widehat{\mathbf{d}} {\widehat{\mathbf{d}}}^\top + I_n$ with $(\widehat{\lambda}, \widehat{\mathbf{d}})$ the smallest eigenpair of $\widehat{\Sigma}^*$. The difference with the previous case is that we do not assume anymore that the optimal projection direction $\textbf{1}$ is known, and so it needs to be estimated;
+- ${\widehat{\Sigma}^{\text{+d}}_\text{mean}} = (\widehat{\lambda} - 1) \frac{\widehat{\mathbf{m}}^* {(\widehat{\mathbf{m}}^*)}^\top}{\lVert \widehat{\mathbf{m}}^* \rVert^2} + I_n$ with $\widehat{\mathbf{m}}^*$ given by @eq-hatm and $\widehat{\lambda} = \frac{{(\widehat{\mathbf{m}}^*)}^\top \widehat{\Sigma}^* \widehat{\mathbf{m}}^*}{\lVert \widehat{\mathbf{m}}^* \rVert^2}$. Here we assume that $\mathbf{m}^*$ is a good projection direction, but is unknown and therefore needs to be estimated.
 
 Note that in the particularly simple case considered here, both $\widehat{\mathbf{m}}^* / \lVert \widehat{\mathbf{m}}^* \rVert$ and $\widehat{\mathbf{d}}$ are estimators of $\textbf{1}$ but they are obtained by different methods. In the next example we will consider a case where $\mathbf{m}^*$ is not an optimal projection direction as given by @thm-thm1.
 
-@fig-eigsum-2 represents the images by $\ell$ of the eigenvalues of $\mathbf{\Sigma}^*$ and $\widehat{\mathbf{\Sigma}}^*$. This picture carries a very important insight. We notice that the estimation of most eigenvalues is poor: indeed, all the blue crosses except the leftmost one are meant to be estimator of $1$, whereas we see that they are more or less uniformly spread around $1$. This means that the variance terms in the corresponding directions are poorly estimated, which could be the explanation on why the use of $\widehat{\mathbf{\Sigma}}^*$ gives an inaccurate estimation. But what we remark also is that the function $\ell$ is quite flat around one: as a consequence, although the eigenvalues offer significant variability, this variability is smoothed by the action of $\ell$. Indeed, the images of the eigenvalues by $\ell$ take values between $0$ and $0.8$ and have smaller variability. Moreover, $\ell(x)$ increases sharply as $x$ approaches $0$ and thus efficiently distinguishes between the two leftmost estimated eigenvalues and is able to separate them.
+@fig-eigsum-2 represents the images by $\ell$ of the eigenvalues of $\Sigma^*$ and $\widehat{\Sigma}^*$. This picture carries a very important insight. We notice that the estimation of most eigenvalues is poor: indeed, all the blue crosses except the leftmost one are meant to be estimator of $1$, whereas we see that they are more or less uniformly spread around $1$. This means that the variance terms in the corresponding directions are poorly estimated, which could be the explanation on why the use of $\widehat{\Sigma}^*$ gives an inaccurate estimation. But what we remark also is that the function $\ell$ is quite flat around one: as a consequence, although the eigenvalues offer significant variability, this variability is smoothed by the action of $\ell$. Indeed, the images of the eigenvalues by $\ell$ take values between $0$ and $0.8$ and have smaller variability. Moreover, $\ell(x)$ increases sharply as $x$ approaches $0$ and thus efficiently distinguishes between the two leftmost estimated eigenvalues and is able to separate them.
 
 ```{python}
 #| label: fig-eigsum
 #| fig-cap: 'Partial KL divergence and spectrum for the function $\phi = \mathbb{I}_{\varphi \geq 0}$ with $\varphi$ the linear function given by @eq-sum.'
 #| fig-subcap:
-#|   - 'Evolution of the partial KL divergence as the dimension increases, with the optimal covariance matrix $\mathbf{\Sigma}^*$ (red squares), the sample covariance $\widehat{\mathbf{\Sigma}}^*$ (blue circles), and the projected covariance $\widehat{\mathbf{\Sigma}}^*_k$ (black dots).'
-#|   - 'Computation of $\ell(\lambda_i)$ for the eigenvalues of $\mathbf{\Sigma}^*$ (red squares) and $\widehat{\mathbf{\Sigma}}^*$ (blue crosses) in dimension $n = 100$.'
+#|   - 'Evolution of the partial KL divergence as the dimension increases, with the optimal covariance matrix $\Sigma^*$ (red squares), the sample covariance $\widehat{\Sigma}^*$ (blue circles), and the projected covariance $\widehat{\Sigma}^*_k$ (black dots).'
+#|   - 'Computation of $\ell(\lambda_i)$ for the eigenvalues of $\Sigma^*$ (red squares) and $\widehat{\Sigma}^*$ (blue crosses) in dimension $n = 100$.'
 #| layout:
 #|   - - 45
 #|     - -10
@@ -416,9 +416,9 @@ for d in range(5,n+1,5):
     DKLstar[int((d-5)/5)]=np.log(np.linalg.det(Sigstar))+d
 
 #### plot of partial KL divergence
-plt.plot(range(5,105,5),DKL,'bo',label=r"$D'(\widehat{\mathbf{\Sigma}}^*)$")
-plt.plot(range(5,105,5),DKLstar,'rs',label=r"$D'(\mathbf{\Sigma}^*)$")
-plt.plot(range(5,105,5),DKLp,'k.',label=r"$D'(\widehat{\mathbf{\Sigma}}^*_k)$")
+plt.plot(range(5,105,5),DKL,'bo',label=r"$D'(\widehat{\Sigma}^*)$")
+plt.plot(range(5,105,5),DKLstar,'rs',label=r"$D'(\Sigma^*)$")
+plt.plot(range(5,105,5),DKLp,'k.',label=r"$D'(\widehat{\Sigma}^*_k)$")
 
 plt.grid()
 plt.xlabel('Dimension',fontsize=16)
@@ -448,23 +448,23 @@ for tickLabel in plt.gca().get_xticklabels() + plt.gca().get_yticklabels():
     tickLabel.set_fontsize(16)
 
 plt.plot(Table_eigv[:,0],Table_eigv[:,1],'bx',\
-        label=r"Eigenvalues of $\widehat{\mathbf{\Sigma}}^*$")
+        label=r"Eigenvalues of $\widehat{\Sigma}^*$")
 plt.plot(Table_eigv_st[:,0],Table_eigv_st[:,1],'rs',\
-         label=r"Eigenvalues of $\mathbf{\Sigma}^*$")
+         label=r"Eigenvalues of $\Sigma^*$")
 plt.legend(fontsize=16)
 plt.show()
 ```
 
 ###  Numerical results
-We report in @tbl-sum the numerical results for the six different matrices and the vMFN model for the dimension $n=100$. The column $\mathbf{\Sigma}^*$ gives the optimal results, while the column $\widehat{\mathbf{\Sigma}}^*$ corresponds to the results that we are trying to improve. Comparing these two columns, we notice as expected that the estimation of $\mathcal{E}$ with $\widehat{\mathbf{\Sigma}}^*$ is significantly degraded. Compared to the first column $\mathbf{\Sigma}^*$, the third and fourth columns with ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{opt}} =  {\widehat{\mathbf{\Sigma}}^{\text{}}_\text{mean}}$ correspond to the best projection direction $\textbf{1}$ (as for $\mathbf{\Sigma}^*$) but estimating the variance in this direction (instead of the true variance) with $\textbf{1}^\top \widehat{\mathbf{\Sigma}}^* \textbf{1}$. This choice performs very well, with numerical results similar to the optimal ones. This can be understood since in this case, both ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{opt}}$ and $\mathbf{\Sigma}^*$ are of the form $\alpha \textbf{1} \textbf{1}^\top + I_n$ and so estimating ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{opt}}$ requires only a one-dimensional estimation (namely, the estimation of $\alpha$). Next, the last two columns ${\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{opt}}$ and ${\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{mean}}$ highlight the impact of having to estimate the projection directions in addition to the variance since these two matrices are of the form $\widehat \alpha \widehat{\textbf{1}} {\widehat{\textbf{1}}}^\top + I_n$ with both $\widehat{\alpha}$ (the variance term) and $\widehat{\textbf{1}}$ (the direction) being estimated. We observe that these matrices yield results which are close to optimal and greatly improve the estimation obtained using $\widehat{\mathbf{\Sigma}}^*$. 
+We report in @tbl-sum the numerical results for the six different matrices and the vMFN model for the dimension $n=100$. The column $\Sigma^*$ gives the optimal results, while the column $\widehat{\Sigma}^*$ corresponds to the results that we are trying to improve. Comparing these two columns, we notice as expected that the estimation of $\mathcal{E}$ with $\widehat{\Sigma}^*$ is significantly degraded. Compared to the first column $\Sigma^*$, the third and fourth columns with ${\widehat{\Sigma}^{\text{}}_\text{opt}} =  {\widehat{\Sigma}^{\text{}}_\text{mean}}$ correspond to the best projection direction $\textbf{1}$ (as for $\Sigma^*$) but estimating the variance in this direction (instead of the true variance) with $\textbf{1}^\top \widehat{\Sigma}^* \textbf{1}$. This choice performs very well, with numerical results similar to the optimal ones. This can be understood since in this case, both ${\widehat{\Sigma}^{\text{}}_\text{opt}}$ and $\Sigma^*$ are of the form $\alpha \textbf{1} \textbf{1}^\top + I_n$ and so estimating ${\widehat{\Sigma}^{\text{}}_\text{opt}}$ requires only a one-dimensional estimation (namely, the estimation of $\alpha$). Next, the last two columns ${\widehat{\Sigma}^{\text{+d}}_\text{opt}}$ and ${\widehat{\Sigma}^{\text{+d}}_\text{mean}}$ highlight the impact of having to estimate the projection directions in addition to the variance since these two matrices are of the form $\widehat \alpha \widehat{\textbf{1}} {\widehat{\textbf{1}}}^\top + I_n$ with both $\widehat{\alpha}$ (the variance term) and $\widehat{\textbf{1}}$ (the direction) being estimated. We observe that these matrices yield results which are close to optimal and greatly improve the estimation obtained using $\widehat{\Sigma}^*$. 
 
-Moreover, we observe that ${\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{mean}}$ gives better results than ${\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{opt}}$. We suggest that this is because $\widehat{\mathbf{m}}^* / \lVert \widehat{\mathbf{m}}^* \rVert$ is a better estimator of $\textbf{1}$ than the eigenvector of $\widehat{\mathbf{\Sigma}}^*$. Indeed, evaluating $\widehat{\mathbf{m}}^*$ requires the estimation of $n$ parameters, whereas $\widehat{\mathbf{\Sigma}}^*$ needs around $n^2/2$ parameters to estimate, so the eigenvector is finally more noisy than the mean vector.  In the last column, we present the vMFN estimation that is slightly more efficicent than the estimation obtained with ${\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{mean}}$.
+Moreover, we observe that ${\widehat{\Sigma}^{\text{+d}}_\text{mean}}$ gives better results than ${\widehat{\Sigma}^{\text{+d}}_\text{opt}}$. We suggest that this is because $\widehat{\mathbf{m}}^* / \lVert \widehat{\mathbf{m}}^* \rVert$ is a better estimator of $\textbf{1}$ than the eigenvector of $\widehat{\Sigma}^*$. Indeed, evaluating $\widehat{\mathbf{m}}^*$ requires the estimation of $n$ parameters, whereas $\widehat{\Sigma}^*$ needs around $n^2/2$ parameters to estimate, so the eigenvector is finally more noisy than the mean vector.  In the last column, we present the vMFN estimation that is slightly more efficicent than the estimation obtained with ${\widehat{\Sigma}^{\text{+d}}_\text{mean}}$.
 	
 Thus, the proposed idea improves significantly the probability estimation in high dimensions. But we see that the method taken in [@MasriEtAl_ImprovementCrossentropyMethod_2020] with the projection $\mathbf{m}^*$ is at least as much efficient in this example where we need only a one-dimensional projection. The next case shows that the projection on more than one direction can outperform the one-dimensional projection on $\mathbf{m}^*$. 
 
 ```{python}
 #| label: tbl-sum
-#| tbl-cap: 'Numerical comparison of the estimation of $\mathcal{E} \approx 1.35\cdot 10^{-3}$ considering the Gaussian model with the six covariance matrices defined in @sec-def_cov and the vFMN model, when $\phi = \mathbb{I}_{\{\varphi\geq 0\}}$ with $\varphi$ the linear function given by @eq-sum. As explained in the text, ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{mean}}$ and ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{opt}}$ are actually equal in this case. The computational cost is $N=2000$.'
+#| tbl-cap: 'Numerical comparison of the estimation of $\mathcal{E} \approx 1.35\cdot 10^{-3}$ considering the Gaussian model with the six covariance matrices defined in @sec-def_cov and the vFMN model, when $\phi = \mathbb{I}_{\{\varphi\geq 0\}}$ with $\varphi$ the linear function given by @eq-sum. As explained in the text, ${\widehat{\Sigma}^{\text{}}_\text{mean}}$ and ${\widehat{\Sigma}^{\text{}}_\text{opt}}$ are actually equal in this case. The computational cost is $N=2000$.'
 ###########################################################################
 # Table 2. Numerical comparison on test case 1
 ###########################################################################
@@ -685,9 +685,9 @@ table=[["D'",Tabresult[0,0],Tabresult[0,1],Tabresult[0,2],Tabresult[0,3],
 
 Markdown(tabulate(
   table, 
-  headers=["", r"$\mathbf{\Sigma}^*$", r"$\widehat{\mathbf{\Sigma}}^*$", r"$\widehat{\mathbf{\Sigma}}_{opt}$",
-           r"$\widehat{\mathbf{\Sigma}}_{mean}$", r"${\widehat{\mathbf{\Sigma}}^{+d}_{opt}}$",
-           r"$\widehat{\mathbf{\Sigma}}^{+d}_{mean}$", "vMFN"],
+  headers=["", r"$\Sigma^*$", r"$\widehat{\Sigma}^*$", r"$\widehat{\Sigma}_{opt}$",
+           r"$\widehat{\Sigma}_{mean}$", r"${\widehat{\Sigma}^{+d}_{opt}}$",
+           r"$\widehat{\Sigma}^{+d}_{mean}$", "vMFN"],
     tablefmt="pipe"))
 ```
 
@@ -697,12 +697,12 @@ The second test case is again a probability estimation, i.e., it is of the form 
 $$
 	\varphi: \mathbf{x}=(x_1,\ldots,x_n) \in \mathbb{R}^n \mapsto x_1 - 25 x_2^2 - 30 x_3^2 - 1.
 $$ {#eq-parabol}
-		The quantity of interest $\mathcal{E}$ is defined as $\mathcal{E}=\int_{\mathbb{R}^n} \phi(\mathbf{x}) f(\mathbf{x}) \textrm{d}\mathbf{x} = \mathbb{P}_f(\varphi(\mathbf{X})\geq 0)$ for all $n$ where the density $f$ is the standard $n$-dimensional Gaussian distribution. This function is motivated in part because $\mathbf{m}^*$ and $\mathbf{d}^*_1$ are different and also because Algorithm 2 chooses two projection directions. Thus, this is an example where ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{mean}}$ and ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{opt}}$ are significantly different.
+		The quantity of interest $\mathcal{E}$ is defined as $\mathcal{E}=\int_{\mathbb{R}^n} \phi(\mathbf{x}) f(\mathbf{x}) \textrm{d}\mathbf{x} = \mathbb{P}_f(\varphi(\mathbf{X})\geq 0)$ for all $n$ where the density $f$ is the standard $n$-dimensional Gaussian distribution. This function is motivated in part because $\mathbf{m}^*$ and $\mathbf{d}^*_1$ are different and also because Algorithm 2 chooses two projection directions. Thus, this is an example where ${\widehat{\Sigma}^{\text{}}_\text{mean}}$ and ${\widehat{\Sigma}^{\text{}}_\text{opt}}$ are significantly different.
 
 ###  Evolution of the partial KL divergence and spectrum
-We check on @fig-inefficiency-parab-1 that the partial KL divergence obeys the same behavior as for the previous example, namely the one associated with $\widehat{\mathbf{\Sigma}}^*$ increases much faster than the ones associated with $\mathbf{\Sigma}^*$ and $\widehat{\mathbf{\Sigma}}^*_k$, which again suggests that projecting can improve the situation. Since the function $\varphi$ only depends on the first three variables and is even in $x_2$ and $x_3$, one gets that $\mathbf{m}^* = \alpha 
-	\textbf{e}_1$ with $\alpha = \mathbb{E}(X_1 \mid X_1 \geq 25 X^2_2 + 30 X^2_3 + 1) \approx 1.9$ (here and in the sequel, $\textbf{e}_i$ denotes the $i$th canonical vector of $\mathbb{R}^n$, i.e., all its coordinates are $0$ except the $i$-th one which is equal to one), and that $\mathbf{\Sigma}^*$ is diagonal with
-$$ \mathbf{\Sigma}^* =
+We check on @fig-inefficiency-parab-1 that the partial KL divergence obeys the same behavior as for the previous example, namely the one associated with $\widehat{\Sigma}^*$ increases much faster than the ones associated with $\Sigma^*$ and $\widehat{\Sigma}^*_k$, which again suggests that projecting can improve the situation. Since the function $\varphi$ only depends on the first three variables and is even in $x_2$ and $x_3$, one gets that $\mathbf{m}^* = \alpha 
+	\textbf{e}_1$ with $\alpha = \mathbb{E}(X_1 \mid X_1 \geq 25 X^2_2 + 30 X^2_3 + 1) \approx 1.9$ (here and in the sequel, $\textbf{e}_i$ denotes the $i$th canonical vector of $\mathbb{R}^n$, i.e., all its coordinates are $0$ except the $i$-th one which is equal to one), and that $\Sigma^*$ is diagonal with
+$$ \Sigma^* =
 	\begin{pmatrix}
 	\lambda_1 & 0 & 0 & 0 & \cdots & 0 \\
 	0 & \lambda_2 & 0 & 0 & \cdots & 0 \\
@@ -712,9 +712,9 @@ $$ \mathbf{\Sigma}^* =
 	0 & 0 & 0 & 0 & \cdots & 1 \\
 	\end{pmatrix}. 
  $$
-Note that the off-diagonal elements of the submatrix $(\mathbf{\Sigma}^*_{ij})_{1 \leq i, j \leq 3}$ are indeed $0$ since they result from integrating an odd function of an odd random variable with an even conditioning. For instance, if $F(x) = \mathbb{P}(30 X^2_3 + 1 \leq x)$, then by conditioning on $(X_1, X_3)$ we obtain
+Note that the off-diagonal elements of the submatrix $(\Sigma^*_{ij})_{1 \leq i, j \leq 3}$ are indeed $0$ since they result from integrating an odd function of an odd random variable with an even conditioning. For instance, if $F(x) = \mathbb{P}(30 X^2_3 + 1 \leq x)$, then by conditioning on $(X_1, X_3)$ we obtain
 $$
-	\mathbf{\Sigma}^*_{12} = \mathbb{E} \left( (X_1 - \alpha) X_2 \mid X_1 - 25 X_2^2 \geq 30 X^2_3 + 1 \right)\\
+	\Sigma^*_{12} = \mathbb{E} \left( (X_1 - \alpha) X_2 \mid X_1 - 25 X_2^2 \geq 30 X^2_3 + 1 \right)\\
 	 = \frac{1}{\mathcal{E}} \mathbb{E} \left[ (X_1 - \alpha) \mathbb{E} \left( X_2 F(X_1 - 25 X^2_2) \mid X_1 \right) \right]
 $$
 	which is $0$ as $x_2 F(x_1 - x^2_2)$ is an odd function of $x_2$ for fixed $x_1$, and $X_2$ has an even density. 
@@ -725,8 +725,8 @@ We can numerically compute $\lambda_1 \approx 0.28$, $\lambda_2 \approx 0.009$ a
 #| label: fig-inefficiency-parab
 #| fig-cap: 'Partial KL divergence and spectrum for the function $\phi = \mathbb{I}_{\varphi \geq 0}$ with $\varphi$ given by @eq-parabol. in dimension $n=100$. Left: same behavior as for the first test case. Right: we now have two eigenvalues that stand out, and the behavior of $\ell$ is such that Algorithm 2 selects $k = 2$ which corresponds to the leftmost two.'
 #| fig-subcap:
-#|   - 'Evolution of the partial KL divergence as the dimension increases, with the optimal covariance matrix $\mathbf{\Sigma}^*$ (red squares), the sample covariance $\widehat{\mathbf{\Sigma}}^*$ (blue circles), and the projected covariance $\widehat{\mathbf{\Sigma}}^*_k$ (black dots).'
-#|   - 'Computation of $\ell(\lambda_i)$ for the eigenvalues of $\mathbf{\Sigma}^*$ (red squares) and $\widehat{\mathbf{\Sigma}}^*$ (blue crosses) in dimension $n = 100$.'
+#|   - 'Evolution of the partial KL divergence as the dimension increases, with the optimal covariance matrix $\Sigma^*$ (red squares), the sample covariance $\widehat{\Sigma}^*$ (blue circles), and the projected covariance $\widehat{\Sigma}^*_k$ (black dots).'
+#|   - 'Computation of $\ell(\lambda_i)$ for the eigenvalues of $\Sigma^*$ (red squares) and $\widehat{\Sigma}^*$ (blue crosses) in dimension $n = 100$.'
 #| layout:
 #|   - - 45
 #|     - -10
@@ -820,9 +820,9 @@ for d in range(5,n+1,5):
     DKLstar[int((d-5)/5)]=np.log(np.linalg.det(Sigstar))+d
 
 #### plot of partial KL divergence
-plt.plot(range(5,105,5),DKL,'bo',label=r"$D'(\widehat{\mathbf{\Sigma}}^*)$")
-plt.plot(range(5,105,5),DKLstar,'rs',label=r"$D'(\mathbf{\Sigma}^*)$")
-plt.plot(range(5,105,5),DKLp,'k.',label=r"$D'(\widehat{\mathbf{\Sigma}}^*_k)$")
+plt.plot(range(5,105,5),DKL,'bo',label=r"$D'(\widehat{\Sigma}^*)$")
+plt.plot(range(5,105,5),DKLstar,'rs',label=r"$D'(\Sigma^*)$")
+plt.plot(range(5,105,5),DKLp,'k.',label=r"$D'(\widehat{\Sigma}^*_k)$")
 
 plt.grid()
 plt.xlabel('Dimension',fontsize=16)
@@ -852,20 +852,20 @@ for tickLabel in plt.gca().get_xticklabels() + plt.gca().get_yticklabels():
     tickLabel.set_fontsize(16)
 
 plt.plot(Table_eigv[:,0],Table_eigv[:,1],'bx',\
-         label=r"Eigenvalues of $\widehat{\mathbf{\Sigma}}^*$")
+         label=r"Eigenvalues of $\widehat{\Sigma}^*$")
 plt.plot(Table_eigv_st[:,0],Table_eigv_st[:,1],'rs',\
-         label=r"Eigenvalues of $\mathbf{\Sigma}^*$")
+         label=r"Eigenvalues of $\Sigma^*$")
 plt.legend(fontsize=16)
 plt.show()
 ```
 
 ###  Numerical results
-The numerical results of our simulations are presented in @tbl-parabol. We remark as before that, when using $\widehat{\mathbf{\Sigma}}^*$, the accuracy quickly deteriorates as the dimension increases as shows the coefficient of variation of $396 \%$ in dimension $n = 100$. In contrast, ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{opt}}$ leads to very accurate results, which remain close to optimal up to the same dimension $n = 100$. This behavior is to compare with the evolution of the relative KL divergence: contrary to $\widehat{\mathbf{\Sigma}}^*$, ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{opt}}$ gives a partial KL divergence close to optimal in dimension $n = 100$. This confirms that the KL divergence is indeed a good proxy to assess the relevance of an auxiliary density.
+The numerical results of our simulations are presented in @tbl-parabol. We remark as before that, when using $\widehat{\Sigma}^*$, the accuracy quickly deteriorates as the dimension increases as shows the coefficient of variation of $396 \%$ in dimension $n = 100$. In contrast, ${\widehat{\Sigma}^{\text{}}_\text{opt}}$ leads to very accurate results, which remain close to optimal up to the same dimension $n = 100$. This behavior is to compare with the evolution of the relative KL divergence: contrary to $\widehat{\Sigma}^*$, ${\widehat{\Sigma}^{\text{}}_\text{opt}}$ gives a partial KL divergence close to optimal in dimension $n = 100$. This confirms that the KL divergence is indeed a good proxy to assess the relevance of an auxiliary density.
 
-It is also interesting to note that the direction $\mathbf{m}^*$ improves the situation compared to not projecting (column ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{mean}}$ compared to $\widehat{\mathbf{\Sigma}}^*$), but using ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{opt}}$ gives significantly better results. Thus, this confirms our theoretical result that the $\mathbf{d}^*_i$'s are good directions on which to project. 
+It is also interesting to note that the direction $\mathbf{m}^*$ improves the situation compared to not projecting (column ${\widehat{\Sigma}^{\text{}}_\text{mean}}$ compared to $\widehat{\Sigma}^*$), but using ${\widehat{\Sigma}^{\text{}}_\text{opt}}$ gives significantly better results. Thus, this confirms our theoretical result that the $\mathbf{d}^*_i$'s are good directions on which to project. 
 	
-Finally, we notice that performing estimations of the projection directions instead of taking the true ones (columns ${\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{opt}}$ vs ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{opt}}$) slightly degrades the situation, making the coefficient of variation increase even if the accuracy remains satisfactory.
-	The vMFN model is also not really adapted to this example as it gives results similar to ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{mean}}$. Gaussian density family are more able to fit $g^*$ than vMFN parametric model in this test case.
+Finally, we notice that performing estimations of the projection directions instead of taking the true ones (columns ${\widehat{\Sigma}^{\text{+d}}_\text{opt}}$ vs ${\widehat{\Sigma}^{\text{}}_\text{opt}}$) slightly degrades the situation, making the coefficient of variation increase even if the accuracy remains satisfactory.
+	The vMFN model is also not really adapted to this example as it gives results similar to ${\widehat{\Sigma}^{\text{}}_\text{mean}}$. Gaussian density family are more able to fit $g^*$ than vMFN parametric model in this test case.
 
 ```{python}
 #| label: tbl-parabol
@@ -1120,15 +1120,15 @@ table=[["D'",Tabresult[0,0],Tabresult[0,1],Tabresult[0,2],Tabresult[0,3],
 
 Markdown(tabulate(
   table, 
-  headers=["", r"$\mathbf{\Sigma}^*$", r"$\widehat{\mathbf{\Sigma}}^*$",
-	   r"$\widehat{\mathbf{\Sigma}}_{opt}$",
-           r"$\widehat{\mathbf{\Sigma}}_{mean}$", r"${\widehat{\mathbf{\Sigma}}^{+d}_{opt}}$",
-           r"$\widehat{\mathbf{\Sigma}}^{+d}_{mean}$", "vMFN"],
+  headers=["", r"$\Sigma^*$", r"$\widehat{\Sigma}^*$",
+	   r"$\widehat{\Sigma}_{opt}$",
+           r"$\widehat{\Sigma}_{mean}$", r"${\widehat{\Sigma}^{+d}_{opt}}$",
+           r"$\widehat{\Sigma}^{+d}_{mean}$", "vMFN"],
     tablefmt="pipe"))
 ```
 
 ::: {.remark}
-For the two test cases studied so far, projecting $\widehat{\mathbf{\Sigma}}^*$ in the Failure-Informed Subspace (FIS) of [@UribeEtAl_CrossentropybasedImportanceSampling_2020] (see the introduction) would outperform our method with $\widehat{\mathbf{\Sigma}}^*_k$, leading to results close to those obtained with $\mathbf{\Sigma}^*$. However, computing the FIS relies on the knowledge of the gradient of the function $\varphi$, which is straightforward to compute in these two test cases, and the method of [@UribeEtAl_CrossentropybasedImportanceSampling_2020] can be applied because they are rare-event problems (i.e., $\phi$ is of the form $\phi = \mathbb{I}_{\{\varphi \geq 0\}}$). In the next section we present other applications where the evaluation of the FIS is not feasible since either the function is not differentiable (test case of @sec-sub:portfolio) or the example is not a rare event simulation problem (test cases of @sec-sub:banana and @sec-sub:payoff).
+For the two test cases studied so far, projecting $\widehat{\Sigma}^*$ in the Failure-Informed Subspace (FIS) of [@UribeEtAl_CrossentropybasedImportanceSampling_2020] (see the introduction) would outperform our method with $\widehat{\Sigma}^*_k$, leading to results close to those obtained with $\Sigma^*$. However, computing the FIS relies on the knowledge of the gradient of the function $\varphi$, which is straightforward to compute in these two test cases, and the method of [@UribeEtAl_CrossentropybasedImportanceSampling_2020] can be applied because they are rare-event problems (i.e., $\phi$ is of the form $\phi = \mathbb{I}_{\{\varphi \geq 0\}}$). In the next section we present other applications where the evaluation of the FIS is not feasible since either the function is not differentiable (test case of @sec-sub:portfolio) or the example is not a rare event simulation problem (test cases of @sec-sub:banana and @sec-sub:payoff).
 :::
 
 ## Test case 3: banana shape distribution   {#sec-sub:banana}
@@ -1136,8 +1136,8 @@ The third test case we consider is the integration of the banana shape distribut
 $$
 	h(\mathbf{x}) = g_{{\bf 0},C}(x_1,x_2+b(x_1^2-\sigma^2),x_3,\dots,x_n).
 $$ {#eq-banana}
- The term $g_{{\bf 0},C}$ represents the pdf of a Gaussian distribution of mean ${\bf 0}$ and diagaonal covariance matrix $C=\text{diag}(\sigma^2,1,\dots,1)$. The value of $b$ and $\sigma^2$ are respectively set to $b=800$ and $\sigma^2=0.0025$. We choose $\phi$ such that the optimal IS density $g^*$ is equal to $h$, i.e., we choose $\phi = h/f$ so that the integral $\mathcal{E}$ that we are trying to estimate is equal to $\mathcal{E} = \int \phi f = 1$. This choice is made in order to have an optimal covariance matrix $\mathbf{\Sigma}^*$ whose two largest eigenvalues (in $\ell$-order) correspond to the smallest and largest eigenvalues, as can be seen in @fig-inefficiency-banana-2. More formally, the optimal value of the Gaussian parameters are given by $\mathbf{m}^*={\bf 0}$ and $\mathbf{\Sigma}^*$ is diagonal with
-$$ \mathbf{\Sigma}^* =
+ The term $g_{{\bf 0},C}$ represents the pdf of a Gaussian distribution of mean ${\bf 0}$ and diagonal covariance matrix $C=\text{diag}(\sigma^2,1,\dots,1)$. The value of $b$ and $\sigma^2$ are respectively set to $b=800$ and $\sigma^2=0.0025$. We choose $\phi$ such that the optimal IS density $g^*$ is equal to $h$, i.e., we choose $\phi = h/f$ so that the integral $\mathcal{E}$ that we are trying to estimate is equal to $\mathcal{E} = \int \phi f = 1$. This choice is made in order to have an optimal covariance matrix $\Sigma^*$ whose two largest eigenvalues (in $\ell$-order) correspond to the smallest and largest eigenvalues, as can be seen in @fig-inefficiency-banana-2. More formally, the optimal value of the Gaussian parameters are given by $\mathbf{m}^*={\bf 0}$ and $\Sigma^*$ is diagonal with
+$$ \Sigma^* =
 	\begin{pmatrix}
 	0.0025 & 0 & 0 & 0 & \cdots & 0 \\
 	0 & 9 & 0 & 0 & \cdots & 0 \\
@@ -1147,16 +1147,16 @@ $$ \mathbf{\Sigma}^* =
 	0 & 0 & 0 & 0 & \cdots & 1 \\
 	\end{pmatrix}.
 $$
-The evolution of the KL partial divergence is given in @fig-inefficiency-banana-1. As the optimal mean $\mathbf{m}^*$ is equal to ${\bf 0}$, we cannot project on $\mathbf{m}^*$ and so the matrix ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{mean}}$ is not defined. However, the numerical estimation $\widehat{\mathbf{m}}^*$ will not be equal to $0$ and so the approach proposed in [@MasriEtAl_ImprovementCrossentropyMethod_2020] with ${\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{mean}}$ is still applicable numerically.
+The evolution of the KL partial divergence is given in @fig-inefficiency-banana-1. As the optimal mean $\mathbf{m}^*$ is equal to ${\bf 0}$, we cannot project on $\mathbf{m}^*$ and so the matrix ${\widehat{\Sigma}^{\text{}}_\text{mean}}$ is not defined. However, the numerical estimation $\widehat{\mathbf{m}}^*$ will not be equal to $0$ and so the approach proposed in [@MasriEtAl_ImprovementCrossentropyMethod_2020] with ${\widehat{\Sigma}^{\text{+d}}_\text{mean}}$ is still applicable numerically.
 
-The simulation results for the different covariance matrices and the vMFN density are given in @tbl-banana. The matrices ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{opt}}$ and ${\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{opt}}$ perform very well for the estimation of $\mathcal{E}$ with an accuracy of the same order as the optimal covariance matrix $\mathbf{\Sigma}^*$. The effect of estimating the $k=2$ main projection directions does not affect much the estimation performance as ${\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{opt}}$ is still efficient compared to ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{opt}}$. The estimation results with ${\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{mean}}$ are not really accurate and this choice is in fact roughly equivalent to choosing a random projection direction. The vMFN parametric model is not adapted to this test case as the vMFN estimate is not close to 1.
+The simulation results for the different covariance matrices and the vMFN density are given in @tbl-banana. The matrices ${\widehat{\Sigma}^{\text{}}_\text{opt}}$ and ${\widehat{\Sigma}^{\text{+d}}_\text{opt}}$ perform very well for the estimation of $\mathcal{E}$ with an accuracy of the same order as the optimal covariance matrix $\Sigma^*$. The effect of estimating the $k=2$ main projection directions does not affect much the estimation performance as ${\widehat{\Sigma}^{\text{+d}}_\text{opt}}$ is still efficient compared to ${\widehat{\Sigma}^{\text{}}_\text{opt}}$. The estimation results with ${\widehat{\Sigma}^{\text{+d}}_\text{mean}}$ are not really accurate and this choice is in fact roughly equivalent to choosing a random projection direction. The vMFN parametric model is not adapted to this test case as the vMFN estimate is not close to 1.
 
 ```{python}
 #| label: fig-inefficiency-banana
 #| fig-cap: Partial KL divergence and spectrum for the banana shape example.
 #| fig-subcap:
-#|   - 'Evolution of the partial KL divergence as the dimension increases, with the optimal covariance matrix $\mathbf{\Sigma}^*$ (red saquares), the sample covariance $\widehat{\mathbf{\Sigma}}^*$ (blue circles), and the projected covariance $\widehat{\mathbf{\Sigma}}^*_k$ (black dots).'
-#|   - 'Computation of $\ell(\lambda_i)$ for the eigenvalues of $\mathbf{\Sigma}^*$ (red squares) and $\widehat{\mathbf{\Sigma}}^*$ (blue crosses) in dimension $n = 100$ for the banana shape example of @eq-banana.'
+#|   - 'Evolution of the partial KL divergence as the dimension increases, with the optimal covariance matrix $\Sigma^*$ (red saquares), the sample covariance $\widehat{\Sigma}^*$ (blue circles), and the projected covariance $\widehat{\Sigma}^*_k$ (black dots).'
+#|   - 'Computation of $\ell(\lambda_i)$ for the eigenvalues of $\Sigma^*$ (red squares) and $\widehat{\Sigma}^*$ (blue crosses) in dimension $n = 100$ for the banana shape example of @eq-banana.'
 #| layout:
 #|   - - 45
 #|     - -10
@@ -1239,9 +1239,9 @@ for d in range(5,n+1,5):
     DKLstar[int((d-5)/5)]=np.log(np.linalg.det(Sigstar))+d
 
 #### plot of partial KL divergence
-plt.plot(range(5,n+1,5),DKL,'bo',label=r"$D'(\widehat{\mathbf{\Sigma}}^*)$")
-plt.plot(range(5,n+1,5),DKLstar,'rs',label=r"$D'(\mathbf{\Sigma}^*)$")
-plt.plot(range(5,n+1,5),DKLp,'k.',label=r"$D'(\widehat{\mathbf{\Sigma}}^*_k)$")
+plt.plot(range(5,n+1,5),DKL,'bo',label=r"$D'(\widehat{\Sigma}^*)$")
+plt.plot(range(5,n+1,5),DKLstar,'rs',label=r"$D'(\Sigma^*)$")
+plt.plot(range(5,n+1,5),DKLp,'k.',label=r"$D'(\widehat{\Sigma}^*_k)$")
 
 
 
@@ -1273,9 +1273,9 @@ for tickLabel in plt.gca().get_xticklabels() + plt.gca().get_yticklabels():
     tickLabel.set_fontsize(16)
 
 plt.plot(Table_eigv[:,0],Table_eigv[:,1],'bx',\
-         label=r"Eigenvalues of $\widehat{\mathbf{\Sigma}}^*$")
+         label=r"Eigenvalues of $\widehat{\Sigma}^*$")
 plt.plot(Table_eigv_st[:,0],Table_eigv_st[:,1],'rs',\
-         label=r"Eigenvalues of $\mathbf{\Sigma}^*$")
+         label=r"Eigenvalues of $\Sigma^*$")
 plt.legend(fontsize=16)
 plt.show()
 ```
@@ -1499,10 +1499,10 @@ table=[["D'",Tabresult[0,0],Tabresult[0,1],Tabresult[0,2],"NA",
      Tabresult[2,2],"NA",Tabresult[2,4],Tabresult[2,5],Tabresult[2,6]]]
 Markdown(tabulate(
   table, 
-  headers=["", r"$\mathbf{\Sigma}^*$", r"$\widehat{\mathbf{\Sigma}}^*$",
-	   r"$\widehat{\mathbf{\Sigma}}_{opt}$",
-           r"$\widehat{\mathbf{\Sigma}}_{mean}$", r"${\widehat{\mathbf{\Sigma}}^{+d}_{opt}}$",
-           r"$\widehat{\mathbf{\Sigma}}^{+d}_{mean}$", "vMFN"],
+  headers=["", r"$\Sigma^*$", r"$\widehat{\Sigma}^*$",
+	   r"$\widehat{\Sigma}_{opt}$",
+           r"$\widehat{\Sigma}_{mean}$", r"${\widehat{\Sigma}^{+d}_{opt}}$",
+           r"$\widehat{\Sigma}^{+d}_{mean}$", "vMFN"],
     tablefmt="pipe"))
 ```
 
@@ -1516,14 +1516,14 @@ $$ {#eq-portfolio}
 	$$ \Psi(x_1, x_2, x_j) = \left( q x_1 + 3 (1-q^2)^{1/2}x_j \right) \left[ F_\Gamma^{-1} \left( F_{\mathcal{N}}({x_2}) \right) \right]^{-1/2}, $$
 where $F_\Gamma$ and $F_{\mathcal{N}}$ are the cumulative distribution functions of $\text{Gamma}(6,6)$ and $\mathcal{N}(0,1)$ random variables respectively. The constant $b$ is choosen such that the probability is of the order of $10^{-3}$ in all dimension, then we have $b=0.45$ when $n\leq 30$, $b=0.3$ when $30< n\leq 70$, and $b=0.25$ when $n> 70$.
 
-The reference value of this probability $\mathcal{E}$ is reported in @tbl-portfolio for dimension $n=100$. The optimal parameters $\mathbf{m}^*$ and $\mathbf{\Sigma}^*$ cannot be computed analytically, but they are accurately estimated by Monte Carlo with a large sample. It turns out that $\mathbf{m}^*$ and the first eigenvector $\mathbf{d}^*_1$ of $\mathbf{\Sigma}^*$ are numerically indistinguishable and that Algorithm 2 selects $k=1$ projection direction, so that numerically, the choices ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{opt}}$ and ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{mean}}$ are indistinguishable and gives the same estimation results. Actually, the fact that these two estimators behave similarly does not seem to come from the fact that $\mathbf{m}^*$ and $\mathbf{d}^*$ are close: this relation can be broken for instance by a simple translation argument (see remark after @tbl-payoff), but even then they behave similarly. The KL partial divergence and the spectrum with the associated $\ell$-order are presented respectively in @fig-inefficiency-portfolio-1 and in  @fig-inefficiency-portfolio-2.
+The reference value of this probability $\mathcal{E}$ is reported in @tbl-portfolio for dimension $n=100$. The optimal parameters $\mathbf{m}^*$ and $\Sigma^*$ cannot be computed analytically, but they are accurately estimated by Monte Carlo with a large sample. It turns out that $\mathbf{m}^*$ and the first eigenvector $\mathbf{d}^*_1$ of $\Sigma^*$ are numerically indistinguishable and that Algorithm 2 selects $k=1$ projection direction, so that numerically, the choices ${\widehat{\Sigma}^{\text{}}_\text{opt}}$ and ${\widehat{\Sigma}^{\text{}}_\text{mean}}$ are indistinguishable and gives the same estimation results. Actually, the fact that these two estimators behave similarly does not seem to come from the fact that $\mathbf{m}^*$ and $\mathbf{d}^*$ are close: this relation can be broken for instance by a simple translation argument (see remark after @tbl-payoff), but even then they behave similarly. The KL partial divergence and the spectrum with the associated $\ell$-order are presented respectively in @fig-inefficiency-portfolio-1 and in  @fig-inefficiency-portfolio-2.
 
 ```{python}
 #| label: fig-inefficiency-portfolio
 #| fig-cap: 'Partial KL divergence and spectrum for the function $\phi = \mathbb{I}_{\varphi \geq 0}$ with $\varphi$ the function given by @eq-portfolio.'
 #| fig-subcap:
-#|   - 'Evolution of the partial KL divergence as the dimension increases, with the optimal covariance matrix $\mathbf{\Sigma}^*$ (red squares), the sample covariance $\widehat{\mathbf{\Sigma}}^*$ (blue circles), and the projected covariance $\widehat{\mathbf{\Sigma}}^*_k$ (black dots).'
-#|   - 'Computation of $\ell(\lambda_i)$ for the eigenvalues of $\mathbf{\Sigma}^*$ (red squares) and $\widehat{\mathbf{\Sigma}}^*$ (blue crosses) in dimension $n = 100$  for the large portfolio losses of @eq-portfolio.'
+#|   - 'Evolution of the partial KL divergence as the dimension increases, with the optimal covariance matrix $\Sigma^*$ (red squares), the sample covariance $\widehat{\Sigma}^*$ (blue circles), and the projected covariance $\widehat{\Sigma}^*_k$ (black dots).'
+#|   - 'Computation of $\ell(\lambda_i)$ for the eigenvalues of $\Sigma^*$ (red squares) and $\widehat{\Sigma}^*$ (blue crosses) in dimension $n = 100$  for the large portfolio losses of @eq-portfolio.'
 #| layout:
 #|   - - 45
 #|     - -10
@@ -1651,9 +1651,9 @@ for d in range(5,n+1,5):
     DKLstar[int((d-5)/5)]=np.log(np.linalg.det(Sigstar))+d+2
 
 #### plot of partial KL divergence
-plt.plot(range(5,n+1,5),DKL,'bo',label=r"$D'(\widehat{\mathbf{\Sigma}}^*)$")
-plt.plot(range(5,n+1,5),DKLstar,'rs',label=r"$D'(\mathbf{\Sigma}^*)$")
-plt.plot(range(5,n+1,5),DKLp,'k.',label=r"$D'(\widehat{\mathbf{\Sigma}}^*_k)$")
+plt.plot(range(5,n+1,5),DKL,'bo',label=r"$D'(\widehat{\Sigma}^*)$")
+plt.plot(range(5,n+1,5),DKLstar,'rs',label=r"$D'(\Sigma^*)$")
+plt.plot(range(5,n+1,5),DKLp,'k.',label=r"$D'(\widehat{\Sigma}^*_k)$")
 
 plt.grid()
 plt.xlabel('Dimension',fontsize=16)
@@ -1683,9 +1683,9 @@ for tickLabel in plt.gca().get_xticklabels() + plt.gca().get_yticklabels():
     tickLabel.set_fontsize(16)
 
 plt.plot(Table_eigv[:,0],Table_eigv[:,1],'bx',\
-         label=r"Eigenvalues of $\widehat{\mathbf{\Sigma}}^*$")
+         label=r"Eigenvalues of $\widehat{\Sigma}^*$")
 plt.plot(Table_eigv_st[:,0],Table_eigv_st[:,1],'rs',\
-         label=r"Eigenvalues of $\mathbf{\Sigma}^*$")
+         label=r"Eigenvalues of $\Sigma^*$")
 plt.legend(fontsize=16)
 plt.show()
 ```
@@ -1934,33 +1934,33 @@ table=[["D'",Tabresult[0,0],Tabresult[0,1],Tabresult[0,2],Tabresult[0,3],
      Tabresult[2,2],Tabresult[2,3],Tabresult[2,4],Tabresult[2,5],Tabresult[2,6]]]
 Markdown(tabulate(
   table, 
-  headers=["", r"$\mathbf{\Sigma}^*$", r"$\widehat{\mathbf{\Sigma}}^*$",
-	   r"$\widehat{\mathbf{\Sigma}}_{opt}$", 
-           r"$\widehat{\mathbf{\Sigma}}_{mean}$",
-	   r"${\widehat{\mathbf{\Sigma}}^{+d}_{opt}}$",
-           r"$\widehat{\mathbf{\Sigma}}^{+d}_{mean}$", "vMFN"],
+  headers=["", r"$\Sigma^*$", r"$\widehat{\Sigma}^*$",
+	   r"$\widehat{\Sigma}_{opt}$", 
+           r"$\widehat{\Sigma}_{mean}$",
+	   r"${\widehat{\Sigma}^{+d}_{opt}}$",
+           r"$\widehat{\Sigma}^{+d}_{mean}$", "vMFN"],
     tablefmt="pipe"))
 ```
 
-The results of @tbl-portfolio show similar trends as for the first test case of @sec-sub:sum. First, projecting seems indeed a relevant idea, as using ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{opt}}$ or ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{mean}}$ greatly improves the situation compared to $\widehat{\mathbf{\Sigma}}^*$. This is particularly salient as $\widehat{\mathbf{\Sigma}}^*$ yields an important bias and coefficient of variation, whereas projecting on $\mathbf{d}^*_1$ or $\mathbf{m}^*$ yields a more accurate estimation. This improvement is still true even when the projection directions are estimated. Finally, ${\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{opt}}$ seems to behave better than ${\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{mean}}$. 
+The results of @tbl-portfolio show similar trends as for the first test case of @sec-sub:sum. First, projecting seems indeed a relevant idea, as using ${\widehat{\Sigma}^{\text{}}_\text{opt}}$ or ${\widehat{\Sigma}^{\text{}}_\text{mean}}$ greatly improves the situation compared to $\widehat{\Sigma}^*$. This is particularly salient as $\widehat{\Sigma}^*$ yields an important bias and coefficient of variation, whereas projecting on $\mathbf{d}^*_1$ or $\mathbf{m}^*$ yields a more accurate estimation. This improvement is still true even when the projection directions are estimated. Finally, ${\widehat{\Sigma}^{\text{+d}}_\text{opt}}$ seems to behave better than ${\widehat{\Sigma}^{\text{+d}}_\text{mean}}$. 
 
-## Application 2: discretized Asian payoff {#sec-sub:payoff}
+boldsymùbol.## Application 2: discretized Asian payoff {#sec-sub:payoff}
 
 Our last numerical experiment is a mathematical finance example coming from [@Kawai_OptimizingAdaptiveImportance_2018], representing a discrete approximation of a standard Asian payoff under the Black--Scholes model.
 	The goal is to estimate the integral $\mathcal{E}=\int_{\mathbb{R}^n} \phi(\mathbf{x}) f(\mathbf{x}) \textrm{d}\mathbf{x}$  with $f$ the standard $n$-dimensional Gaussian distribution and the following function $\phi$: 
 $$
 	\phi: \mathbf{x}=(x_1,\ldots,x_n) \mapsto e^{-rT}\left[\frac{S_0}{n} \sum_{i=1}^n \exp\left( i \left(r-\frac{\sigma^2}{2}\right)\frac{T}{n}+\sigma \sqrt{\frac{T}{n}} \sum_{k=1}^{i} x_k \right)-K\right]_+
 $$ {#eq-payoff}
-	where $[y]_+=\max(y,0)$, for a real number $y$. The constants are taken from [@Kawai_OptimizingAdaptiveImportance_2018]: $S_0=50$, $r=0.05, T=0.5, \sigma=0.1, K=55$, where they test the function for dimension $n=16$. In our contribution, we test this example in dimension $100$. Concerning $\mathbf{m}^*$ and the $\mathbf{d}^*_i$'s, the situation is the same as in the previous example: they are not available analytically but can be estimated numerically by Monte Carlo with a large simulation budget. And again, it turns out that $\mathbf{m}^*$ and the first eigenvector $\mathbf{d}^*_1$ of $\mathbf{\Sigma}^*$ are numerically indistinguishable and that Algorithm 2 selects $k=1$ projection direction, so that ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{opt}}$ and ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{mean}}$ yield results that are numerically indistinguishable. The KL partial divergence and the spectrum with the associated $\ell$-order are respectively presented in @fig-inefficiency-kawai-1 and @fig-inefficiency-kawai-2. 
+	where $[y]_+=\max(y,0)$, for a real number $y$. The constants are taken from [@Kawai_OptimizingAdaptiveImportance_2018]: $S_0=50$, $r=0.05, T=0.5, \sigma=0.1, K=55$, where they test the function for dimension $n=16$. In our contribution, we test this example in dimension $100$. Concerning $\mathbf{m}^*$ and the $\mathbf{d}^*_i$'s, the situation is the same as in the previous example: they are not available analytically but can be estimated numerically by Monte Carlo with a large simulation budget. And again, it turns out that $\mathbf{m}^*$ and the first eigenvector $\mathbf{d}^*_1$ of $\Sigma^*$ are numerically indistinguishable and that Algorithm 2 selects $k=1$ projection direction, so that ${\widehat{\Sigma}^{\text{}}_\text{opt}}$ and ${\widehat{\Sigma}^{\text{}}_\text{mean}}$ yield results that are numerically indistinguishable. The KL partial divergence and the spectrum with the associated $\ell$-order are respectively presented in @fig-inefficiency-kawai-1 and @fig-inefficiency-kawai-2. 
 
-The results of this example are given in @tbl-payoff. The insight gained in the previous examples is confirmed. Projecting on $\mathbf{m}^*$ or $\mathbf{d}^*_1$ in dimension $n = 100$ enables to reach convergence and stongly reduces (compared to $\widehat{\mathbf{\Sigma}}^*$) the coefficient of variation from $559\%$ to nearly $2\%$. Moreover, this improvement goes through even when projection directions are estimated, with again ${\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{mean}}$ behaving better than ${\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{opt}}$.
+The results of this example are given in @tbl-payoff. The insight gained in the previous examples is confirmed. Projecting on $\mathbf{m}^*$ or $\mathbf{d}^*_1$ in dimension $n = 100$ enables to reach convergence and strongly reduces (compared to $\widehat{\Sigma}^*$) the coefficient of variation from $559\%$ to nearly $2\%$. Moreover, this improvement goes through even when projection directions are estimated, with again ${\widehat{\Sigma}^{\text{+d}}_\text{mean}}$ behaving better than ${\widehat{\Sigma}^{\text{+d}}_\text{opt}}$.
 
 ```{python}
 #| label: fig-inefficiency-kawai
 #| fig-cap: Partial KL divergence and spectrum for the function $\phi$ given in @eq-payoff.
 #| fig-subcap:
-#|   - 'Evolution of the partial KL divergence as the dimension increases, with the optimal covariance matrix $\mathbf{\Sigma}^*$ (red squares), the sample covariance $\widehat{\mathbf{\Sigma}}^*$ (blue circles), and the projected covariance $\widehat{\mathbf{\Sigma}}^*_k$ (black dots).'
-#|   - 'Computation of $\ell(\lambda_i)$ for the eigenvalues of $\mathbf{\Sigma}^*$ (red squares) and $\widehat{\mathbf{\Sigma}}^*$ (blue crosses) in dimension $n = 100$ for the Asian payoff example of @eq-payoff'
+#|   - 'Evolution of the partial KL divergence as the dimension increases, with the optimal covariance matrix $\Sigma^*$ (red squares), the sample covariance $\widehat{\Sigma}^*$ (blue circles), and the projected covariance $\widehat{\Sigma}^*_k$ (black dots).'
+#|   - 'Computation of $\ell(\lambda_i)$ for the eigenvalues of $\Sigma^*$ (red squares) and $\widehat{\Sigma}^*$ (blue crosses) in dimension $n = 100$ for the Asian payoff example of @eq-payoff'
 #| layout:
 #|   - - 45
 #|     - -10
@@ -2056,9 +2056,9 @@ for d in range(5,n+1,5):
     DKLstar[int((d-5)/5)]=np.log(np.linalg.det(Sigstar))+d
 
 #### plot of partial KL divergence
-plt.plot(range(5,n+1,5),DKL,'bo',label=r"$D'(\widehat{\mathbf{\Sigma}}^*)$")
-plt.plot(range(5,n+1,5),DKLstar,'rs',label=r"$D'(\mathbf{\Sigma}^*)$")
-plt.plot(range(5,n+1,5),DKLp,'k.',label=r"$D'(\widehat{\mathbf{\Sigma}}^*_k)$")
+plt.plot(range(5,n+1,5),DKL,'bo',label=r"$D'(\widehat{\Sigma}^*)$")
+plt.plot(range(5,n+1,5),DKLstar,'rs',label=r"$D'(\Sigma^*)$")
+plt.plot(range(5,n+1,5),DKLp,'k.',label=r"$D'(\widehat{\Sigma}^*_k)$")
 
 plt.grid()
 plt.xlabel('Dimension',fontsize=16)
@@ -2088,9 +2088,9 @@ for tickLabel in plt.gca().get_xticklabels() + plt.gca().get_yticklabels():
     tickLabel.set_fontsize(16)
 
 plt.plot(Table_eigv[:,0],Table_eigv[:,1],'bx',\
-         label=r"Eigenvalues of $\widehat{\mathbf{\Sigma}}^*$")
+         label=r"Eigenvalues of $\widehat{\Sigma}^*$")
 plt.plot(Table_eigv_st[:,0],Table_eigv_st[:,1],'rs',\
-         label=r"Eigenvalues of $\mathbf{\Sigma}^*$")
+         label=r"Eigenvalues of $\Sigma^*$")
 plt.legend(fontsize=16)
 plt.show()
 ```
@@ -2341,27 +2341,27 @@ table=[["D'",Tabresult[0,0],Tabresult[0,1],Tabresult[0,2],Tabresult[0,3],
      Tabresult[2,2],Tabresult[2,3],Tabresult[2,4],Tabresult[2,5],Tabresult[2,6]]]
 Markdown(tabulate(
   table, 
-  headers=["", r"$\mathbf{\Sigma}^*$", r"$\widehat{\mathbf{\Sigma}}^*$",
-	   r"$\widehat{\mathbf{\Sigma}}_{opt}$",
-           r"$\widehat{\mathbf{\Sigma}}_{mean}$", r"${\widehat{\mathbf{\Sigma}}^{+d}_{opt}}$",
-           r"$\widehat{\mathbf{\Sigma}}^{+d}_{mean}$", "vMFN"],
+  headers=["", r"$\Sigma^*$", r"$\widehat{\Sigma}^*$",
+	   r"$\widehat{\Sigma}_{opt}$",
+           r"$\widehat{\Sigma}_{mean}$", r"${\widehat{\Sigma}^{+d}_{opt}}$",
+           r"$\widehat{\Sigma}^{+d}_{mean}$", "vMFN"],
     tablefmt="pipe"))
 ```
 
 ::: {.remark}
-As already mentioned, the two directions $\mathbf{m}^*$ and $\mathbf{d}^*_1$ are numerically indistinguishable in the two examples of @sec-sub:portfolio and @sec-sub:payoff. However, we do not believe this relation to be highly relevant. For instance, this symmetry can be broken by changing $\phi$ into $\phi' = \phi(\cdot - \mu)$ and $f$ into $f' = f(\cdot - \mu)$ for some $\mu \in \mathbb{R}^n$. Since $g^* \propto \phi f$, this amounts to translating $g^*$ which thus changes $\mathbf{m}^*$ into ${\mathbf{m}^*}' = \mathbf{m}^* + \mu$, but which does not change the covariance matrix (and therefore its leading eigenvector $\mathbf{d}^*_1$) which is translation-invariant. Note that this translation does not affect the integral $\mathcal{E} = \int \phi' f' = \int \phi f$, and so this modification leads to a new estimator $\widehat{\mathcal{E}}_\mu$ of the same quantity $\mathcal{E}$. However, it can be shown that $\widehat{\mathcal{E}}_\mu$ and $\widehat{\mathcal{E}}$ (the estimators considered throughout the paper) have the same law so that this translation, although it does break the relation $\mathbf{m}^* \approx \mathbf{d}^*_1$, does not change the law of the estimators. This suggests that, if the estimators based on ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{opt}}$ and ${\widehat{\mathbf{\Sigma}}^{\text{}}_\text{mean}}$ do behave similarly on these examples, this is not due to the fact that $\mathbf{m}^*$ and $\mathbf{d}^*_1$ are close but rather to @thm-thm1 and @thm-thm2. However, the fact that $\mathbf{m}^*$ and $\mathbf{d}^*_1$ are close bears some insight into the importance of the quality of the estimation of the projection direction as we now elaborate in the conclusion.
+As already mentioned, the two directions $\mathbf{m}^*$ and $\mathbf{d}^*_1$ are numerically indistinguishable in the two examples of @sec-sub:portfolio and @sec-sub:payoff. However, we do not believe this relation to be highly relevant. For instance, this symmetry can be broken by changing $\phi$ into $\phi' = \phi(\cdot - \mu)$ and $f$ into $f' = f(\cdot - \mu)$ for some $\mu \in \mathbb{R}^n$. Since $g^* \propto \phi f$, this amounts to translating $g^*$ which thus changes $\mathbf{m}^*$ into ${\mathbf{m}^*}' = \mathbf{m}^* + \mu$, but which does not change the covariance matrix (and therefore its leading eigenvector $\mathbf{d}^*_1$) which is translation-invariant. Note that this translation does not affect the integral $\mathcal{E} = \int \phi' f' = \int \phi f$, and so this modification leads to a new estimator $\widehat{\mathcal{E}}_\mu$ of the same quantity $\mathcal{E}$. However, it can be shown that $\widehat{\mathcal{E}}_\mu$ and $\widehat{\mathcal{E}}$ (the estimators considered throughout the paper) have the same law so that this translation, although it does break the relation $\mathbf{m}^* \approx \mathbf{d}^*_1$, does not change the law of the estimators. This suggests that, if the estimators based on ${\widehat{\Sigma}^{\text{}}_\text{opt}}$ and ${\widehat{\Sigma}^{\text{}}_\text{mean}}$ do behave similarly on these examples, this is not due to the fact that $\mathbf{m}^*$ and $\mathbf{d}^*_1$ are close but rather to @thm-thm1 and @thm-thm2. However, the fact that $\mathbf{m}^*$ and $\mathbf{d}^*_1$ are close bears some insight into the importance of the quality of the estimation of the projection direction as we now elaborate in the conclusion.
 :::
 
 # Conclusion {#sec-Ccl}
 	
-The goal of this paper is to assess the efficiency of projection methods in order to overcome the curse of dimensionality for importance sampling. Based on a new theoretical result (@thm-thm1), we propose to project on the subspace spanned by the eigenvectors $\mathbf{d}^*_i$'s corresponding to the largest eigenvalues of the optimal covariance matrix $\mathbf{\Sigma}^*$, where eigenvalues are ranked based on their image by some explicit function $\ell$. Our numerical results show that if the $\mathbf{d}^*_i$'s were perfectly known, then projecting on them would greatly improve the final estimation compared to using the empirical estimation of the covariance matrix and actually lead to results which are comparable to those obtained with the optimal covariance matrix. Moreover, we show that this improvement goes through when one estimates the $\mathbf{d}^*_i$'s by computing the eigenpairs of $\widehat{\mathbf{\Sigma}}^*$.
+The goal of this paper is to assess the efficiency of projection methods in order to overcome the curse of dimensionality for importance sampling. Based on a new theoretical result (@thm-thm1), we propose to project on the subspace spanned by the eigenvectors $\mathbf{d}^*_i$'s corresponding to the largest eigenvalues of the optimal covariance matrix $\Sigma^*$, where eigenvalues are ranked based on their image by some explicit function $\ell$. Our numerical results show that if the $\mathbf{d}^*_i$'s were perfectly known, then projecting on them would greatly improve the final estimation compared to using the empirical estimation of the covariance matrix and actually lead to results which are comparable to those obtained with the optimal covariance matrix. Moreover, we show that this improvement goes through when one estimates the $\mathbf{d}^*_i$'s by computing the eigenpairs of $\widehat{\Sigma}^*$.
 	
 These theoretical and numerical results show that the $\mathbf{d}^*_i$'s of @thm-thm1 are good directions in which to estimate variance terms. With the insight gained, we see several ways to extend our results. Two in particular stand out:
 
 - study different ways of estimating the eigenpairs $(\lambda^*_i, \mathbf{d}^*_i)$;
 - incorporate this method in adaptive importance sampling schemes, in particular the cross-entropy method [@RubinsteinKroese_SimulationMonteCarlo_2017].
 
-For the first point, remember that we made the choice to estimate the eigenpairs of $\mathbf{\Sigma}^*$ by computing the eigenpairs of $\widehat{\mathbf{\Sigma}}^*$. Moreover, in the numerical examples of @sec-sub:sum, @sec-sub:portfolio and @sec-sub:payoff where $\mathbf{m}^*$ and $\mathbf{d}^*_1$ are equal or indistinguishable, we saw that ${\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{mean}}$ performed better than ${\widehat{\mathbf{\Sigma}}^{\text{+d}}_\text{opt}}$ and we conjecture that this is because $\widehat{\mathbf{m}}$ is a better estimator than $\widehat{\mathbf{d}}^*_1$ (recall that $\mathbf{m}^* = \mathbf{d}^*_1$ for the example of @sec-sub:sum, while in @sec-sub:portfolio and @sec-sub:payoff they are numerically indistinguishable and so, for all practical purposes, $\widehat{\mathbf{m}}^*$ and $\widehat{\mathbf{d}}^*_1$ can be considered estimators of the same direction). This suggests that improving the estimation of the $\mathbf{d}^*_i$'s can indeed improve the final estimation of $\mathcal{E}$. Possible ways to do so consist in adapting existing results on the estimation of covariance matrices (for instance [@LedoitWolf_WellconditionedEstimatorLargedimensional_2004]) or even directly results on the estimation of eigenvalues of covariance matrices such as [@Benaych-Georges11:0], [@Mestre_ImprovedEstimationEigenvalues_2008], [@Mestre_AsymptoticBehaviorSample_2008], [@Nadakuditi08:0], which we plan to do in future work. Moreover, it would be interesting to relax the assumption that one can sample from $g^*$ in order to estimate $\widehat{\mathbf{\Sigma}}^*$. For the second point, we plan to investigate how the idea of the present paper can improve the efficiency of adaptive importance sampling schemes in high dimensions. In this case, there is an additional difficulty, namely the introduction of likelihood ratios can lead to the problem of weight degeneracy which is another reason why performance of such schemes degrades in high dimensions [@BengtssonEtAl_CurseofdimensionalityRevisitedCollapse_2008}].
+For the first point, remember that we made the choice to estimate the eigenpairs of $\Sigma^*$ by computing the eigenpairs of $\widehat{\Sigma}^*$. Moreover, in the numerical examples of @sec-sub:sum, @sec-sub:portfolio and @sec-sub:payoff where $\mathbf{m}^*$ and $\mathbf{d}^*_1$ are equal or indistinguishable, we saw that ${\widehat{\Sigma}^{\text{+d}}_\text{mean}}$ performed better than ${\widehat{\Sigma}^{\text{+d}}_\text{opt}}$ and we conjecture that this is because $\widehat{\mathbf{m}}$ is a better estimator than $\widehat{\mathbf{d}}^*_1$ (recall that $\mathbf{m}^* = \mathbf{d}^*_1$ for the example of @sec-sub:sum, while in @sec-sub:portfolio and @sec-sub:payoff they are numerically indistinguishable and so, for all practical purposes, $\widehat{\mathbf{m}}^*$ and $\widehat{\mathbf{d}}^*_1$ can be considered estimators of the same direction). This suggests that improving the estimation of the $\mathbf{d}^*_i$'s can indeed improve the final estimation of $\mathcal{E}$. Possible ways to do so consist in adapting existing results on the estimation of covariance matrices (for instance [@LedoitWolf_WellconditionedEstimatorLargedimensional_2004]) or even directly results on the estimation of eigenvalues of covariance matrices such as [@Benaych-Georges11:0], [@Mestre_ImprovedEstimationEigenvalues_2008], [@Mestre_AsymptoticBehaviorSample_2008], [@Nadakuditi08:0], which we plan to do in future work. Moreover, it would be interesting to relax the assumption that one can sample from $g^*$ in order to estimate $\widehat{\Sigma}^*$. For the second point, we plan to investigate how the idea of the present paper can improve the efficiency of adaptive importance sampling schemes in high dimensions. In this case, there is an additional difficulty, namely the introduction of likelihood ratios can lead to the problem of weight degeneracy which is another reason why performance of such schemes degrades in high dimensions [@BengtssonEtAl_CurseofdimensionalityRevisitedCollapse_2008}].
 	
 We note finally that it would be interesting to consider multimodal failure functions $\phi$. Indeed, with unimodal functions, the light tail of the Gaussian random variable implies that the conditional variance decreases which explains why, in all our numerical examples with an indicator function, the highest eigenvalues ranked in $\ell$-order are simply the smallest eigenvalues. However, for multimodal failure functions, we may expect the conditional variance to increase and that the highest eigenvalues ranked in $\ell$-order are actually the largest ones. For multimodal problems, one may want to consider different parametric families of auxiliary densities, and so it would be interesting to see whether @thm-thm1 can be extended to more general cases.
 	
@@ -2372,10 +2372,10 @@ The first author was enrolled in a PhD program co-funded by ISAE-SUPAERO and ONE
 We begin with a preliminary lemma.
 
 ::: {#lem-D}
-Let $f$ be the density of the standard Gaussian vector in dimension $n$, $\phi: \mathbb{R}^n \to \mathbb{R}_+$ and $g_* = f \phi / \mathcal{E}$ with $\mathcal{E} = \int f \phi$. Then for any $\mathbf{m}$ and any $\mathbf{\Sigma}$ of the form $\mathbf{\Sigma} = I_n + \sum_i (\alpha_i - 1) \mathbf{d}_i \mathbf{d}_i^\top$ with $\alpha_i > 0$ and the $\mathbf{d}_i$'s orthonormal, we have
+Let $f$ be the density of the standard Gaussian vector in dimension $n$, $\phi: \mathbb{R}^n \to \mathbb{R}_+$ and $g_* = f \phi / \mathcal{E}$ with $\mathcal{E} = \int f \phi$. Then for any $\mathbf{m}$ and any $\Sigma$ of the form $\Sigma = I_n + \sum_i (\alpha_i - 1) \mathbf{d}_i \mathbf{d}_i^\top$ with $\alpha_i > 0$ and the $\mathbf{d}_i$'s orthonormal, we have
 $$
 \begin{aligned}
- D(g^*, g_{\mathbf{m}, \mathbf{\Sigma}}) =&  \frac{1}{2} \sum_i \left( \log \alpha_i - \left(1 - \frac{1}{\alpha_i} \right) \mathbf{d}_i^\top \mathbf{\Sigma}^* \mathbf{d}_i \right) + \frac{1}{2} (\mathbf{m} - \mathbf{m}^*)^\top \mathbf{\Sigma}^{-1} (\mathbf{m} - \mathbf{m}^*)\\
+ D(g^*, g_{\mathbf{m}, \Sigma}) =&  \frac{1}{2} \sum_i \left( \log \alpha_i - \left(1 - \frac{1}{\alpha_i} \right) \mathbf{d}_i^\top \Sigma^* \mathbf{d}_i \right) + \frac{1}{2} (\mathbf{m} - \mathbf{m}^*)^\top \Sigma^{-1} (\mathbf{m} - \mathbf{m}^*)\\
  &- \frac{1}{2} \lVert \mathbf{m}^* \rVert^2 - \log \mathcal{E} + \mathbb{E}_{g^*}(\log \phi(\mathbf{X})).
 \end{aligned}
 $$ {#eq-D}
@@ -2385,30 +2385,30 @@ $$ {#eq-D}
 
 ## Proof of @lem-D
 
-For any $\mathbf{m} \in \mathbb{R}^n$ and $\mathbf{\Sigma} \in \mathcal{S}^+_n$, we have by definition
-$$ D(g^*, g_{\mathbf{m}, \mathbf{\Sigma}}) = \mathbb{E}_{g^*} \left( \log \left( \frac{g^*(\mathbf{X})}{g_{\mathbf{m}, \mathbf{\Sigma}}(\mathbf{X})} \right) \right) = \mathbb{E}_{g^*} \left( \log \left( \frac{\frac{\phi(\mathbf{X}) e^{-\frac{1}{2} \lVert \mathbf{X} \rVert^2}}{\mathcal{E}(2\pi)^{n/2}}}{ \frac{e^{-\frac{1}{2} (\mathbf{X} - \mathbf{m})^\top \mathbf{\Sigma}^{-1} (\mathbf{X} - \mathbf{m})}}{(2\pi)^{n/2} \lvert \mathbf{\Sigma} \rvert^{1/2}} } \right) \right) $$
+For any $\mathbf{m} \in \mathbb{R}^n$ and $\Sigma \in \mathcal{S}^+_n$, we have by definition
+$$ D(g^*, g_{\mathbf{m}, \Sigma}) = \mathbb{E}_{g^*} \left( \log \left( \frac{g^*(\mathbf{X})}{g_{\mathbf{m}, \Sigma}(\mathbf{X})} \right) \right) = \mathbb{E}_{g^*} \left( \log \left( \frac{\frac{\phi(\mathbf{X}) e^{-\frac{1}{2} \lVert \mathbf{X} \rVert^2}}{\mathcal{E}(2\pi)^{n/2}}}{ \frac{e^{-\frac{1}{2} (\mathbf{X} - \mathbf{m})^\top \Sigma^{-1} (\mathbf{X} - \mathbf{m})}}{(2\pi)^{n/2} \lvert \Sigma \rvert^{1/2}} } \right) \right) $$
 and so
 $$
 \begin{aligned}
-D(g^*, g_{\mathbf{m}, \mathbf{\Sigma}}) = &- \frac{1}{2} \mathbb{E}_{g^*}(\lVert \mathbf{X} \rVert^2) + \frac{1}{2} \mathbb{E}_{g^*} \left( (\mathbf{X} - \mathbf{m})^\top \mathbf{\Sigma}^{-1} (\mathbf{X} - \mathbf{m}) \right)\\
-& + \frac{1}{2} \log \lvert \mathbf{\Sigma} \rvert - \log \mathcal{E} + \mathbb{E}_{g^*}(\log \phi(\mathbf{X})).
+D(g^*, g_{\mathbf{m}, \Sigma}) = &- \frac{1}{2} \mathbb{E}_{g^*}(\lVert \mathbf{X} \rVert^2) + \frac{1}{2} \mathbb{E}_{g^*} \left( (\mathbf{X} - \mathbf{m})^\top \Sigma^{-1} (\mathbf{X} - \mathbf{m}) \right)\\
+& + \frac{1}{2} \log \lvert \Sigma \rvert - \log \mathcal{E} + \mathbb{E}_{g^*}(\log \phi(\mathbf{X})).
 \end{aligned}
 $$
 Because $\mathbb{E}_{g^*}(\mathbf{X}) = \mathbf{m}^*$, we have $\mathbb{E}_{g^*}(\lVert \mathbf{X} \rVert^2) = \mathbb{E}_{g^*}(\lVert \mathbf{X} - \mathbf{m}^* \rVert^2) + \lVert \mathbf{m}^* \rVert^2$ and
 $$
-\mathbb{E}_{g^*} \left( (\mathbf{X} - \mathbf{m})^\top \mathbf{\Sigma}^{-1} (\mathbf{X} - \mathbf{m}) \right) = \mathbb{E}_{g^*} \left( (\mathbf{X} - \mathbf{m}^*)^\top \mathbf{\Sigma}^{-1} (\mathbf{X} - \mathbf{m}^*) \right)\\
-+ (\mathbf{m} - \mathbf{m}^*)^\top \mathbf{\Sigma}^{-1} (\mathbf{m} - \mathbf{m}^*).
+\mathbb{E}_{g^*} \left( (\mathbf{X} - \mathbf{m})^\top \Sigma^{-1} (\mathbf{X} - \mathbf{m}) \right) = \mathbb{E}_{g^*} \left( (\mathbf{X} - \mathbf{m}^*)^\top \Sigma^{-1} (\mathbf{X} - \mathbf{m}^*) \right)\\
++ (\mathbf{m} - \mathbf{m}^*)^\top \Sigma^{-1} (\mathbf{m} - \mathbf{m}^*).
 $$
 In the following derivations, we use the linearity of the trace and of the expectation, which make these two operators commute, as well as the identity $a^\top b = \textrm{tr}(a b^\top)$ for any two vectors $a$ and $b$. With this caveat, we obtain
 $$
-\mathbb{E}_{g^*}\left[ \lVert \mathbf{X} - \mathbf{m}^* \rVert^2 \right] = \mathbb{E}_{g^*} \left[ \textrm{tr}((\mathbf{X} - \mathbf{m}^*) (\mathbf{X} - \mathbf{m}^*)^\top) \right] = \textrm{tr} (\mathbf{\Sigma}^*) 
+\mathbb{E}_{g^*}\left[ \lVert \mathbf{X} - \mathbf{m}^* \rVert^2 \right] = \mathbb{E}_{g^*} \left[ \textrm{tr}((\mathbf{X} - \mathbf{m}^*) (\mathbf{X} - \mathbf{m}^*)^\top) \right] = \textrm{tr} (\Sigma^*) 
 $$
-and we obtain with similar arguments $\mathbb{E}_{g^*}( (\mathbf{X} - \mathbf{m}^*)^\top \mathbf{\Sigma}^{-1} (\mathbf{X} - \mathbf{m}^*) ) = \textrm{tr} ( \mathbf{\Sigma}^{-1} \mathbf{\Sigma}^*)$. Consider now $\mathbf{\Sigma} = I_n + \sum_i (\alpha_i - 1) \mathbf{d}_i \mathbf{d}_i^\top$ with $\alpha_i > 0$ and the $\mathbf{d}_i$'s orthonormal. Then the eigenvalues of $\mathbf{\Sigma}$ potentially different from $1$ are the $\alpha_i$'s ($\alpha_i$ is the eigenvalue associated with $\mathbf{d}_i$), so that
-$$\log \lvert \mathbf{\Sigma} \rvert = \sum_i \log \alpha_i. 
+and we obtain with similar arguments $\mathbb{E}_{g^*}( (\mathbf{X} - \mathbf{m}^*)^\top \Sigma^{-1} (\mathbf{X} - \mathbf{m}^*) ) = \textrm{tr} ( \Sigma^{-1} \Sigma^*)$. Consider now $\Sigma = I_n + \sum_i (\alpha_i - 1) \mathbf{d}_i \mathbf{d}_i^\top$ with $\alpha_i > 0$ and the $\mathbf{d}_i$'s orthonormal. Then the eigenvalues of $\Sigma$ potentially different from $1$ are the $\alpha_i$'s ($\alpha_i$ is the eigenvalue associated with $\mathbf{d}_i$), so that
+$$\log \lvert \Sigma \rvert = \sum_i \log \alpha_i. 
 $$
-Moreover, we have $\mathbf{\Sigma}^{-1} = I_n - \sum_i \beta_i \mathbf{d}_i \mathbf{d}_i^\top$ with $\beta_i = 1 - 1/\alpha_i$ and so
+Moreover, we have $\Sigma^{-1} = I_n - \sum_i \beta_i \mathbf{d}_i \mathbf{d}_i^\top$ with $\beta_i = 1 - 1/\alpha_i$ and so
 $$
-\textrm{tr}(\mathbf{\Sigma}^{-1} \mathbf{\Sigma}^*) = \textrm{tr}(\mathbf{\Sigma}^*) - \sum_i \beta_i \mathbf{d}_i^\top \mathbf{\Sigma}^* \mathbf{d}_i. 
+\textrm{tr}(\Sigma^{-1} \Sigma^*) = \textrm{tr}(\Sigma^*) - \sum_i \beta_i \mathbf{d}_i^\top \Sigma^* \mathbf{d}_i. 
 $$
 Gathering the previous relation, we finally obtain the desired result.
 :::
@@ -2417,13 +2417,13 @@ Gathering the previous relation, we finally obtain the desired result.
 
 ## Proof of @thm-thm1
 
-From @eq-D we see that the only dependency of $D(g^*, g_{\mathbf{m}, \mathbf{\Sigma}})$ in $\mathbf{m}$ is in the quadratic term $(\mathbf{m} - \mathbf{m}^*)^\top \mathbf{\Sigma}^{-1} (\mathbf{m} - \mathbf{m}^*)$. As $\mathbf{\Sigma}$ is definite positive, this term is $\geq 0$, and so it is minimized for $\mathbf{m} = \mathbf{m}^*$. Next, we see that the derivative in $\alpha_i$ is given by (here and in the sequel, we see $D(g^*, g_{\mathbf{m}, \mathbf{\Sigma}})$ as a function of $\mathbf{v} = (\alpha_i)_i$ and $\mathbf{d} = (\mathbf{d}_i)_i$)
-	$$ \dfrac{\partial D}{\partial \alpha_i}(\mathbf{v}, \mathbf{d}) = \dfrac{1}{\alpha_i} - \frac{1}{\alpha_i^2} \mathbf{d}_i^\top \mathbf{\Sigma}^* \mathbf{d}_i = \frac{1}{\alpha_i^2} \left( \alpha_i - \mathbf{d}_i^\top \mathbf{\Sigma}^* \mathbf{d}_i \right). $$
-Thus, for fixed $\mathbf{d}$, $D$ is decreasing in $\alpha_i$ for $\alpha_i < \mathbf{d}_i^\top \mathbf{\Sigma}^* \mathbf{d}_i$ and then increasing for $\alpha_i > \mathbf{d}_i^\top \mathbf{\Sigma}^* \mathbf{d}_i$, which shows that, for fixed $\mathbf{d}$, it is minimized for $\alpha_i = \mathbf{d}_i^\top \mathbf{\Sigma}^* \mathbf{d}_i$. For this value (and $\mathbf{m} = \mathbf{m}^*$) we have
+From @eq-D we see that the only dependency of $D(g^*, g_{\mathbf{m}, \Sigma})$ in $\mathbf{m}$ is in the quadratic term $(\mathbf{m} - \mathbf{m}^*)^\top \Sigma^{-1} (\mathbf{m} - \mathbf{m}^*)$. As $\Sigma$ is definite positive, this term is $\geq 0$, and so it is minimized for $\mathbf{m} = \mathbf{m}^*$. Next, we see that the derivative in $\alpha_i$ is given by (here and in the sequel, we see $D(g^*, g_{\mathbf{m}, \Sigma})$ as a function of $\mathbf{v} = (\alpha_i)_i$ and $\mathbf{d} = (\mathbf{d}_i)_i$)
+	$$ \dfrac{\partial D}{\partial \alpha_i}(\mathbf{v}, \mathbf{d}) = \dfrac{1}{\alpha_i} - \frac{1}{\alpha_i^2} \mathbf{d}_i^\top \Sigma^* \mathbf{d}_i = \frac{1}{\alpha_i^2} \left( \alpha_i - \mathbf{d}_i^\top \Sigma^* \mathbf{d}_i \right). $$
+Thus, for fixed $\mathbf{d}$, $D$ is decreasing in $\alpha_i$ for $\alpha_i < \mathbf{d}_i^\top \Sigma^* \mathbf{d}_i$ and then increasing for $\alpha_i > \mathbf{d}_i^\top \Sigma^* \mathbf{d}_i$, which shows that, for fixed $\mathbf{d}$, it is minimized for $\alpha_i = \mathbf{d}_i^\top \Sigma^* \mathbf{d}_i$. For this value (and $\mathbf{m} = \mathbf{m}^*$) we have
 $$ 
-D(g^*, g_{\mathbf{m}^*, \mathbf{\Sigma}}) = \sum_{i=1}^k \left[ \log(\mathbf{d}_i^\top \mathbf{\Sigma}^* \mathbf{d}_i) + 1 - \mathbf{d}_i^\top \mathbf{\Sigma}^* \mathbf{d}_i \right] + C = -\sum_{i=1}^k \ell(\mathbf{d}_i^\top \mathbf{\Sigma}^* \mathbf{d}_i) + C
+D(g^*, g_{\mathbf{m}^*, \Sigma}) = \sum_{i=1}^k \left[ \log(\mathbf{d}_i^\top \Sigma^* \mathbf{d}_i) + 1 - \mathbf{d}_i^\top \Sigma^* \mathbf{d}_i \right] + C = -\sum_{i=1}^k \ell(\mathbf{d}_i^\top \Sigma^* \mathbf{d}_i) + C
 $$ {#eq-Dell}
-with $C = - \frac{1}{2} \lVert \mathbf{m}^* \rVert^2 - \log \mathcal{E} + \mathbb{E}_{g^*}(\log \phi(\mathbf{X}))$ independent from the $\mathbf{d}_i$'s. Since $\ell$ is decreasing and then increasing, it is clear from this expression that in order to minimize $D$, one must choose the $\mathbf{d}_i$'s in order to either maximize or minimize $\mathbf{d}_i^\top \mathbf{\Sigma}^* \mathbf{d}_i$, whichever maximizes $\ell$. Since the variational characterization of eigenvalues shows that eigenvectors precisely solve this problem, we get the desired result.
+with $C = - \frac{1}{2} \lVert \mathbf{m}^* \rVert^2 - \log \mathcal{E} + \mathbb{E}_{g^*}(\log \phi(\mathbf{X}))$ independent from the $\mathbf{d}_i$'s. Since $\ell$ is decreasing and then increasing, it is clear from this expression that in order to minimize $D$, one must choose the $\mathbf{d}_i$'s in order to either maximize or minimize $\mathbf{d}_i^\top \Sigma^* \mathbf{d}_i$, whichever maximizes $\ell$. Since the variational characterization of eigenvalues shows that eigenvectors precisely solve this problem, we get the desired result.
 :::
 
 
@@ -2431,17 +2431,17 @@ with $C = - \frac{1}{2} \lVert \mathbf{m}^* \rVert^2 - \log \mathcal{E} + \mathb
 
 ## Proof of @thm-thm2
 
-In @eq-D, the $\mathbf{m}^*$ and the $\mathbf{\Sigma}^*$ that appear in the right-hand side are the mean and variance of the density $g^*$ considered in the first argument of the Kullback--Leibler divergence. In particular, if we apply @eq-D with $\phi \equiv 1$, we have $g^* = f$, and the $\mathbf{m}^*$ and $\mathbf{\Sigma}^*$ of the right-hand side become $0$ and $I_n$, respectively, so that
+In @eq-D, the $\mathbf{m}^*$ and the $\Sigma^*$ that appear in the right-hand side are the mean and variance of the density $g^*$ considered in the first argument of the Kullback--Leibler divergence. In particular, if we apply @eq-D with $\phi \equiv 1$, we have $g^* = f$, and the $\mathbf{m}^*$ and $\Sigma^*$ of the right-hand side become $0$ and $I_n$, respectively, so that
 $$ 
- D(f, g_{\mathbf{m}, \mathbf{\Sigma}}) =  \frac{1}{2} \sum_i \left( \log \alpha_i - \left(1 - \frac{1}{\alpha_i} \right) \right) + \frac{1}{2} \mathbf{m}^\top \mathbf{\Sigma}^{-1} \mathbf{m}. 
+ D(f, g_{\mathbf{m}, \Sigma}) =  \frac{1}{2} \sum_i \left( \log \alpha_i - \left(1 - \frac{1}{\alpha_i} \right) \right) + \frac{1}{2} \mathbf{m}^\top \Sigma^{-1} \mathbf{m}. 
 $$
-Now, if we consider $\mathbf{m} = \mathbf{m}^*$ and $\mathbf{\Sigma} = I + (\alpha - 1) \mathbf{d} \mathbf{d}^\top$, we obtain (using $\mathbf{\Sigma}^{-1} = I - (1-1/\alpha) \mathbf{d} \mathbf{d}^\top$ as mentioned in the proof of @lem-D)
+Now, if we consider $\mathbf{m} = \mathbf{m}^*$ and $\Sigma = I + (\alpha - 1) \mathbf{d} \mathbf{d}^\top$, we obtain (using $\Sigma^{-1} = I - (1-1/\alpha) \mathbf{d} \mathbf{d}^\top$ as mentioned in the proof of @lem-D)
 $$
-D(f, g_{\mathbf{m}^*, \mathbf{\Sigma}}) =  \frac{1}{2} \left( \log \alpha - \left(1 - \frac{1}{\alpha} \right) \left( 1 + (\mathbf{d}^\top \mathbf{m}^*)^2 \right) \right) + \frac{1}{2} \lVert \mathbf{m}^* \rVert^2.
+D(f, g_{\mathbf{m}^*, \Sigma}) =  \frac{1}{2} \left( \log \alpha - \left(1 - \frac{1}{\alpha} \right) \left( 1 + (\mathbf{d}^\top \mathbf{m}^*)^2 \right) \right) + \frac{1}{2} \lVert \mathbf{m}^* \rVert^2.
 $$
-Then the function $x \mapsto \log x + (1/x-1)\gamma$ is minimized for $x = \gamma$ where it takes the value $-\ell(\gamma)$: $D(f, g_{\mathbf{m}^*, \mathbf{\Sigma}})$ is therefore minimized for $\alpha = 1 + (\mathbf{d}^\top \mathbf{m}^*)^2$ and for this value, we have
+Then the function $x \mapsto \log x + (1/x-1)\gamma$ is minimized for $x = \gamma$ where it takes the value $-\ell(\gamma)$: $D(f, g_{\mathbf{m}^*, \Sigma})$ is therefore minimized for $\alpha = 1 + (\mathbf{d}^\top \mathbf{m}^*)^2$ and for this value, we have
 $$
-D(f, g_{\mathbf{m}^*, \mathbf{\Sigma}}) =  - \frac{1}{2} \ell(1 + (\mathbf{d}^\top \mathbf{m}^*)^2) + \frac{1}{2} \lVert \mathbf{m}^* \rVert^2. 
+D(f, g_{\mathbf{m}^*, \Sigma}) =  - \frac{1}{2} \ell(1 + (\mathbf{d}^\top \mathbf{m}^*)^2) + \frac{1}{2} \lVert \mathbf{m}^* \rVert^2. 
 $$
 As $\ell$ is increasing in $[1, \infty)$, this last quantity is minimized by maximizing $(\mathbf{d}^\top \mathbf{m}^*)^2$, which is obtained for $\mathbf{d} = \mathbf{m}^* / \lVert \mathbf{m}^* \rVert$. The result is proved.
 :::
@@ -2702,9 +2702,9 @@ table=[["D'",Tabresult[0,0],Tabresult[0,1],Tabresult[0,2],Tabresult[0,3],
 
 Markdown(tabulate(
   table, 
-  headers=["", r"$\mathbf{\Sigma}^*$", r"$\widehat{\mathbf{\Sigma}}^*$", r"$\widehat{\mathbf{\Sigma}}_{opt}$",
-           r"$\widehat{\mathbf{\Sigma}}_{mean}$", r"${\widehat{\mathbf{\Sigma}}^{+d}_{opt}}$",
-           r"$\widehat{\mathbf{\Sigma}}^{+d}_{mean}$", "vMFN"],
+  headers=["", r"$\Sigma^*$", r"$\widehat{\Sigma}^*$", r"$\widehat{\Sigma}_{opt}$",
+           r"$\widehat{\Sigma}_{mean}$", r"${\widehat{\Sigma}^{+d}_{opt}}$",
+           r"$\widehat{\Sigma}^{+d}_{mean}$", "vMFN"],
     tablefmt="pipe"))
 ```
 
