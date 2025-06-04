@@ -1,0 +1,14 @@
+/.quarto/
+DS_Store
+.Rhistory
+/.luarc.json
+/.quarto/
+/*_files
+/*_cache
+/_freeze
+_extensions/
+.Rprofile
+published-202402-elmasri-optimal.html
+published-202402-elmasri-optimal.pdf
+_environment
+/.micromamba/
