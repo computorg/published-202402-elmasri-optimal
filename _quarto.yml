@@ -1,6 +1,7 @@
 project:
   render:
-    - published-202402-elmasri-optimal.qmd
+    - main.qmd
+    - README.qmd
 
 title: Optimal projection for parametric importance sampling in high dimensions
 author:
@@ -30,8 +31,7 @@ github-user: computorg
 repo: published-202402-elmasri-optimal
 date: 03/11/2024
 date-modified: last-modified
-draft: false
-published: true
+status: published
 google-scholar: true
 citation:
   type: article-journal
