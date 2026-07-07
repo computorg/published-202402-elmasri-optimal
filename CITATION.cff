@@ -1,0 +1,40 @@
+cff-version: 1.2.0
+message: If you use or cite this article, please use the metadata provided in 'preferred-citation'.
+title: Optimal projection for parametric importance sampling in high dimensions
+authors:
+- family-names: Masri
+  given-names: Maxime El
+  orcid: https://orcid.org/0000-0002-9127-4503
+  affiliation: ONERA/DTIS, ISAE-SUPAERO, Université de Toulouse
+- family-names: Morio
+  given-names: Jérôme
+  orcid: https://orcid.org/0000-0002-8811-8956
+  affiliation: ONERA/DTIS, Université de Toulouse
+- family-names: Simatos
+  given-names: Florian
+  affiliation: ISAE-SUPAERO, Université de Toulouse
+url: https://computo-journal.org/published-202402-elmasri-optimal/
+preferred-citation:
+  type: article
+  title: Optimal projection for parametric importance sampling in high dimensions
+  authors:
+  - family-names: Masri
+    given-names: Maxime El
+    orcid: https://orcid.org/0000-0002-9127-4503
+    affiliation: ONERA/DTIS, ISAE-SUPAERO, Université de Toulouse
+  - family-names: Morio
+    given-names: Jérôme
+    orcid: https://orcid.org/0000-0002-8811-8956
+    affiliation: ONERA/DTIS, Université de Toulouse
+  - family-names: Simatos
+    given-names: Florian
+    affiliation: ISAE-SUPAERO, Université de Toulouse
+  journal: Computo
+  issn: 2824-7795
+  url: https://computo-journal.org/published-202402-elmasri-optimal/
+  publisher:
+    name: French Statistical Society
+  doi: 10.57750/jjza-6j82
+  year: 2024
+doi: 10.57750/jjza-6j82
+date-released: '2024-02-01'
