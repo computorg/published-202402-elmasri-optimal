@@ -33,7 +33,7 @@ related-identifiers:
     identifier: "2107.06091"
 github-user: computorg
 repo: published-202402-elmasri-optimal
-date: 03/11/2024
+date: 2024-03-11
 date-modified: last-modified
 status: published
 google-scholar: true
@@ -44,6 +44,7 @@ citation:
   publisher: "French Statistical Society"
   issn: "2824-7795"
   url: "https://computo-journal.org/published-202402-elmasri-optimal/"
+  issued: "2024-03-11"
 format:
   computo-html: default
   computo-pdf: default
