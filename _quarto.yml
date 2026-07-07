@@ -27,6 +27,10 @@ keywords:
   - Kullback--Leibler divergence
   - Projection
 bibliography: references.bib
+related-identifiers:
+  - relation: IsVersionOf
+    type: arXiv
+    identifier: "2107.06091"
 github-user: computorg
 repo: published-202402-elmasri-optimal
 date: 03/11/2024
