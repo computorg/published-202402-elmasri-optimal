@@ -1887,7 +1887,7 @@ Markdown(tabulate(
 
 The results of @tbl-portfolio show similar trends as for the first test case of @sec-sub:sum. First, projecting seems indeed a relevant idea, as using ${\widehat{\Sigma}^{\text{}}_\text{opt}}$ or ${\widehat{\Sigma}^{\text{}}_\text{mean}}$ greatly improves the situation compared to $\widehat{\Sigma}^*$. This is particularly salient as $\widehat{\Sigma}^*$ yields an important bias and coefficient of variation, whereas projecting on $\mathbf{d}^*_1$ or $\mathbf{m}^*$ yields a more accurate estimation. This improvement is still true even when the projection directions are estimated. Finally, ${\widehat{\Sigma}^{\text{+d}}_\text{opt}}$ seems to behave better than ${\widehat{\Sigma}^{\text{+d}}_\text{mean}}$. 
 
-boldsymùbol.## Application 2: discretized Asian payoff {#sec-sub:payoff}
+## Application 2: discretized Asian payoff {#sec-sub:payoff}
 
 Our last numerical experiment is a mathematical finance example coming from [@Kawai_OptimizingAdaptiveImportance_2018], representing a discrete approximation of a standard Asian payoff under the Black--Scholes model.
 	The goal is to estimate the integral $\mathcal{E}=\int_{\mathbb{R}^n} \phi(\mathbf{x}) f(\mathbf{x}) \textrm{d}\mathbf{x}$  with $f$ the standard $n$-dimensional Gaussian distribution and the following function $\phi$: 
