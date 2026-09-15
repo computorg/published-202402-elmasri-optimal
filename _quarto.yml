@@ -44,6 +44,7 @@ citation:
   publisher: "French Statistical Society"
   issn: "2824-7795"
   url: "https://computo-journal.org/published-202402-elmasri-optimal/"
+  pdf-url: "https://computo-journal.org/published-202402-elmasri-optimal/main.pdf"
   issued: "2024-03-11"
 format:
   computo-html: default
